@@ -38,7 +38,7 @@ public class Main extends Application {
         text1.setFill(Color.rgb(37,36,34));
 
         Text text2 = new Text();
-        text2.setText("Eind");
+        text2.setText("Einde");
         text2.setX(940);
         text2.setY(311);
         text2.setStyle("-fx-font-family: Inconsolata; -fx-font-size: 48");
