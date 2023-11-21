@@ -22,11 +22,9 @@ public class Main extends Application {
         Image icon = new Image("file:src/main/resources/images/icon.png");
         stage.getIcons().add(icon);
         stage.setTitle("Hollandse Baan");
-        stage.setWidth(1680);
-        stage.setHeight(1080);
         stage.setResizable(false);
-        //stage.setFullScreen(true);
-        //stage.setFullScreenExitHint("Press esc to exit Fullscreen");
+        stage.setFullScreen(true);
+        stage.setFullScreenExitHint("Press esc to exit Fullscreen");
 
         scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
 
