@@ -1,7 +1,10 @@
 package com.example.ovapp;
 
+import java.awt.Dimension;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -21,11 +24,15 @@ public class Main extends Application {
         Group root = new Group();
         Scene scene = new Scene(root, Color.rgb(191, 20, 65));
 
+        Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth();
+        double height = screenSize.getHeight();
+
         Image icon = new Image("file:src/main/resources/images/icon.png");
         stage.getIcons().add(icon);
         stage.setTitle("Hollandse Baan");
-        stage.setWidth(1680);
-        stage.setHeight(1080);
+        stage.setWidth(width);
+        stage.setHeight(height);
         stage.setResizable(false);
         //stage.setFullScreen(true);
         //stage.setFullScreenExitHint("Press esc to exit Fullscreen");
@@ -49,7 +56,7 @@ public class Main extends Application {
         Line line = new Line();
         line.setStartX(0);
         line.setStartY(200);
-        line.setEndX(1680);
+        line.setEndX(width);
         line.setEndY(200);
 
 
