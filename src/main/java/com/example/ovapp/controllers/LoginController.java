@@ -1,4 +1,4 @@
-package com.example.ovapp;
+package com.example.ovapp.controllers;
 
 import javafx.fxml.FXML;
 

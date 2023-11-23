@@ -6,4 +6,6 @@ module com.example.ovapp {
 
     opens com.example.ovapp to javafx.fxml;
     exports com.example.ovapp;
+    exports com.example.ovapp.controllers;
+    opens com.example.ovapp.controllers to javafx.fxml;
 }

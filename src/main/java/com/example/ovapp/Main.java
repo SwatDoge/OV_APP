@@ -18,9 +18,6 @@ public class Main extends Application {
         Scene scene = new Scene(root, 1680, 800);
 
         primaryStage.setTitle("Hollandse Baan");
-        primaryStage.setResizable(false);
-        primaryStage.setFullScreen(true);
-        primaryStage.setFullScreenExitHint("Press esc to exit Fullscreen");
         primaryStage.setScene(scene);
 
         primaryStage.show();

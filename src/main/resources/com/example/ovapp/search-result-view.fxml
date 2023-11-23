@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ovapp.SearchResultView">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ovapp.controllers.SearchResultView">
    <children>
       <Accordion layoutX="218.0" layoutY="110.0" />
       <Button layoutX="252.0" layoutY="187.0" mnemonicParsing="false" text="don't press me" />
