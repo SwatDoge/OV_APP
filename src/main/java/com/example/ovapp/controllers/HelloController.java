@@ -1,7 +1,7 @@
-package com.example.ovapp;
-
+package com.example.ovapp.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+
 
 public class HelloController {
     @FXML

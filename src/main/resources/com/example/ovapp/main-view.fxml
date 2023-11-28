@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1680.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ovapp.controllers.MainController">
+    <children>
+        <AnchorPane prefHeight="800.0" prefWidth="1680.0" style="-fx-background-color: #BF1441;">
+            <children>
+                <Text fill="WHITE" layoutX="165.0" layoutY="311.0" style="-fx-font-family: Inconsolata; -fx-font-size: 48.0" text="Start" />
+                <Text fill="WHITE" layoutX="940.0" layoutY="311.0" style="-fx-font-family: Inconsolata; -fx-font-size: 48.0" text="Einde" />
+                <Line endX="1680.0" endY="200.0" startX="0.0" startY="200.0" />
+                <VBox layoutX="165.0" layoutY="350.0" prefHeight="135.0" prefWidth="200.0" spacing="10.0">
+                    <Label text="Start" />
+                    <ChoiceBox fx:id="startCityChoiceBox" prefHeight="159.0" prefWidth="362.0">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Amersfoort" />
+                                <String fx:value="Amsterdam" />
+                                <String fx:value="Ede" />
+                                <String fx:value="Alkmaar" />
+                                <String fx:value="Den Haag" />
+                            </FXCollections>
+                        </items>
+                    </ChoiceBox>
+                    <ChoiceBox fx:id="startDepartArriveChoiceBox">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Vertrek" />
+                                <String fx:value="Aankomst" />
+                            </FXCollections>
+                        </items>
+                    </ChoiceBox>
+                    <DatePicker fx:id="startDatePicker" />
+                </VBox>
+                <VBox layoutX="940.0" layoutY="350.0" prefHeight="135.0" prefWidth="200.0" spacing="10.0">
+                    <Label text="Einde" />
+                    <ChoiceBox fx:id="endCityChoiceBox" prefHeight="45.0" prefWidth="362.0">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Groningen" />
+                                <String fx:value="Deventer" />
+                                <String fx:value="Nijkerk" />
+                                <String fx:value="Apeldoorn" />
+                                <String fx:value="Enschede" />
+                            </FXCollections>
+                        </items>
+                    </ChoiceBox>
+                    <HBox spacing="10.0">
+                        <RadioButton fx:id="busRadioButton" text="Bus" />
+                        <RadioButton fx:id="trainRadioButton" text="Trein" />
+                    </HBox>
+                </VBox>
+                <Button fx:id="planReisButton" layoutX="579.0" layoutY="659.0" onAction="#onPlanReisButtonClick" text="Plan je reis" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
