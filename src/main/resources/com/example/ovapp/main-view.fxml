@@ -39,7 +39,7 @@
                     <Label text="Einde" />
                     <TextField fx:id="endCityTextField" />
                     <HBox spacing="10.0" />
-               <ChoiceBox prefHeight="26.0" prefWidth="206.0" >
+               <ChoiceBox fx:id="transportChoiceBox" prefHeight="26.0" prefWidth="206.0" >
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Alleen Bus" />
