@@ -23,12 +23,6 @@ public class MainController {
     private TextField endCityTextField;
 
     @FXML
-    private RadioButton busRadioButton;
-
-    @FXML
-    private RadioButton trainRadioButton;
-
-    @FXML
     private Button planReisButton;
 
     private ObservableList<String> allCities = FXCollections.observableArrayList("Amersfoort", "Amsterdam", "Utrecht", "Ede", "Alkmaar", "Den Haag", "Groningen", "Deventer", "Nijkerk", "Apeldoorn", "Enschede");
@@ -84,13 +78,11 @@ public class MainController {
         String startCity = startCityTextField.getText();
         String startDepartArrive = startDepartArriveChoiceBox.getValue();
         String endCity = endCityTextField.getText();
-        String transport = busRadioButton.isSelected() ? "Bus" : "Trein";
         String date = startDatePicker.getValue() != null ? startDatePicker.getValue().toString() : "Geen datum geselecteerd";
 
         System.out.println("Start Stad: " + startCity);
         System.out.println("Vertrek/Aankomst: " + startDepartArrive);
         System.out.println("Eind Stad: " + endCity);
-        System.out.println("Transport: " + transport);
         System.out.println("Datum: " + date);
     }
 }
