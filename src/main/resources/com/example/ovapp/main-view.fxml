@@ -35,7 +35,7 @@
                             </FXCollections>
                         </items>
                     </ChoiceBox>
-                    <DatePicker fx:id="startDatePicker" prefHeight="30.0" prefWidth="264.0" />
+                    <DatePicker fx:id="startDatePicker" prefHeight="26.0" prefWidth="106.0" />
                 </VBox>
                 <VBox alignment="TOP_CENTER" layoutX="670.0" layoutY="361.0" prefHeight="306.0" prefWidth="470.0" spacing="10.0">
                     <TextField fx:id="endCityTextField" alignment="TOP_CENTER" prefHeight="18.0" prefWidth="470.0" />
@@ -56,12 +56,12 @@
                </ChoiceBox>
                 </VBox>
                 <Button fx:id="planReisButton" layoutX="612.0" layoutY="706.0" onAction="#onPlanReisButtonClick" prefHeight="36.0" prefWidth="101.0" text="Plan je reis" />
-            <Spinner fx:id="uurSpinner" layoutX="359.0" layoutY="514.0" prefHeight="26.0" prefWidth="63.0">
+            <Spinner fx:id="uurSpinner" layoutX="201.0" layoutY="514.0" prefHeight="26.0" prefWidth="63.0">
                 <valueFactory>
                     <SpinnerValueFactory.IntegerSpinnerValueFactory max="23" min="0" />
                 </valueFactory>
             </Spinner>
-            <Spinner fx:id="minuutSpinner" layoutX="436.0" layoutY="514.0" prefHeight="26.0" prefWidth="63.0">
+            <Spinner fx:id="minuutSpinner" layoutX="278.0" layoutY="514.0" prefHeight="26.0" prefWidth="63.0">
                 <valueFactory>
                     <SpinnerValueFactory.IntegerSpinnerValueFactory max="59" min="0" />
                 </valueFactory>
