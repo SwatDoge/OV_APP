@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BF1441;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ovapp.controllers.LoginController">
+    <children>
+        <Separator layoutX="7.0" layoutY="83.0" prefHeight="114.0" prefWidth="1238.0" style="-fx-background-color: 000000;" />
+
+        <!-- Witte rechthoek 1 -->
+        <StackPane layoutX="345.0" layoutY="346.0">
+            <clip>
+                <Rectangle arcHeight="20.0" arcWidth="20.0" height="26.0" width="182.0" />
+            </clip>
+        </StackPane>
+
+        <!-- Zwarte knop -->
+        <Button layoutX="346.0" layoutY="419.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: black; -fx-background-radius: 20;" text="Plan je reis" textFill="WHITE">
+            <font>
+                <Font size="12.0" />
+            </font>
+        </Button>
+
+        <!-- Witte rechthoek 2 -->
+        <StackPane layoutX="545.0" layoutY="346.0">
+            <clip>
+                <Rectangle arcHeight="20.0" arcWidth="20.0" height="26.0" width="182.0" />
+            </clip>
+        </StackPane>
+
+        <!-- Extra witte rechthoek 3 -->
+        <StackPane layoutX="100.0" layoutY="100.0">
+            <clip>
+                <Rectangle arcHeight="20.0" arcWidth="20.0" height="50.0" width="150.0" />
+            </clip>
+        </StackPane>
+
+        <ButtonBar layoutX="62.0" layoutY="346.0" prefHeight="40.0" prefWidth="112.0" />
+        <ButtonBar layoutX="362.0" layoutY="462.0" prefHeight="40.0" prefWidth="200.0" />
+        <Text fill="WHITE" layoutX="311.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Loginpagina">
+            <font>
+                <Font size="52.0" />
+            </font>
+        </Text>
+         <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="28.0" layoutX="316.0" layoutY="222.0" stroke="BLACK" strokeType="OUTSIDE" width="243.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="28.0" layoutX="316.0" layoutY="276.0" stroke="BLACK" strokeType="OUTSIDE" width="243.0" />
+    </children>
+</AnchorPane>
