@@ -6,7 +6,14 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class MainController {
 
@@ -90,4 +97,11 @@ public class MainController {
         System.out.println("Transport: " + transport);
         System.out.println("Datum: " + date);
     }
+
+    @FXML
+    protected void onLogInButtonClick(ActionEvent event) throws IOException {
+        ScreenController screenController = new ScreenController(event);
+        screenController.activate("login", "welcome");
+    }
 }
+
