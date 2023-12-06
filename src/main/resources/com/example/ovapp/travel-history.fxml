@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BF1441;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER" prefHeight="82.0" prefWidth="600.0">
+         <children>
+            <ImageView fx:id="Logo" fitHeight="46.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/Full%20Logo.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></ImageView>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutY="113.0" prefHeight="287.0" prefWidth="600.0">
+         <children>
+            <ScrollPane fx:id="scrollPaneMain" pannable="true" prefHeight="264.0" prefWidth="202.0" stylesheets="@../../../CSS/TravelHistory.css">
+               <HBox.margin>
+                  <Insets bottom="20.0" />
+               </HBox.margin>
+               <content>
+                  <AnchorPane prefHeight="352.0" prefWidth="183.0" />
+               </content>
+            </ScrollPane>
+            <VBox prefHeight="270.0" prefWidth="127.0" style="-fx-background-color: #252422; -fx-background-radius: 10 0 0 10;">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="40.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="290.0" prefWidth="161.0" style="-fx-background-color: #252422; -fx-background-radius: 0 10 10 0;">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets bottom="20.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <AnchorPane layoutY="71.0" prefHeight="35.0" prefWidth="600.0">
+         <children>
+            <Hyperlink layoutX="33.0" layoutY="14.0" text="Terug" textFill="#f4f3ee" underline="true">
+               <font>
+                  <Font name="Verdana" size="15.0" />
+               </font>
+            </Hyperlink>
+            <Line endX="573.0" layoutX="27.0" layoutY="11.0" startX="-27.0" stroke="#252422" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
