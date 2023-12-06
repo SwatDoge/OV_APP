@@ -21,7 +21,7 @@
         <AnchorPane layoutX="-31.0" layoutY="6.0" prefHeight="800.0" prefWidth="1680.0" style="-fx-background-color: #BF1441;">
             <children>
                 <Text fill="WHITE" layoutX="263.0" layoutY="341.0" style="-fx-font-family: Inconsolata; -fx-font-size: 48.0" text="Start" />
-                <Text fill="WHITE" layoutX="847.0" layoutY="342.0" style="-fx-font-family: Inconsolata; -fx-font-size: 48.0" text="Einde" />
+                <Text fill="WHITE" layoutX="1245.0" layoutY="340.0" style="-fx-font-family: Inconsolata; -fx-font-size: 48.0" text="Einde" />
                 <Line endX="1680.0" endY="200.0" startX="0.0" startY="200.0" />
                 <VBox layoutX="78.0" layoutY="361.0" prefHeight="176.0" prefWidth="470.0" spacing="10.0">
                     <TextField fx:id="startCityTextField" />
@@ -37,7 +37,7 @@
                     </ChoiceBox>
                     <DatePicker fx:id="startDatePicker" prefHeight="26.0" prefWidth="106.0" />
                 </VBox>
-                <VBox alignment="TOP_CENTER" layoutX="670.0" layoutY="361.0" prefHeight="306.0" prefWidth="470.0" spacing="10.0">
+                <VBox alignment="TOP_CENTER" layoutX="1068.0" layoutY="361.0" prefHeight="306.0" prefWidth="470.0" spacing="10.0">
                     <TextField fx:id="endCityTextField" alignment="TOP_CENTER" prefHeight="18.0" prefWidth="470.0" />
                     <HBox spacing="10.0" />
                <Text fill="WHITE" style="-fx-font-family: Inconsolata; -fx-font-size: 48.0" text="vervoersmiddel" wrappingWidth="335.6374969482422">
@@ -66,6 +66,7 @@
                     <SpinnerValueFactory.IntegerSpinnerValueFactory max="59" min="0" />
                 </valueFactory>
             </Spinner>
+            <Button fx:id="logInButton" layoutX="817.0" layoutY="308.0" mnemonicParsing="false" text="log in" onAction="#onLogInButtonClick" />
             </children>
         </AnchorPane>
         <VBox alignment="CENTER" prefHeight="50.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
