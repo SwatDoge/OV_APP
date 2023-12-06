@@ -30,7 +30,7 @@
                         <VBox alignment="CENTER" prefHeight="273.0" prefWidth="174.0" spacing="5.0">
                            <children>
                               <TextField alignment="CENTER" promptText="Gebruikersnaam" />
-                              <TextField alignment="CENTER" promptText="Wachtwoord" />
+                              <PasswordField alignment="CENTER" promptText="Wachtwoord" />
                            </children>
                            <HBox.margin>
                               <Insets />
