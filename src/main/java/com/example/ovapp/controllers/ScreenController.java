@@ -3,8 +3,10 @@ package com.example.ovapp.controllers;
 import com.example.ovapp.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,8 +18,17 @@ public class ScreenController {
 
     public ScreenController(Stage stage) throws IOException {
         this.stage = stage;
-        FXMLLoader fxmlLoader = new FXMLLoader(MainController.class.getResource("login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
         main = new Scene(fxmlLoader.load(), 1680, 800);
+
+        Screen userScreen = Screen.getPrimary();
+        Rectangle2D boundaries = userScreen.getVisualBounds();
+
+        stage.setX(boundaries.getMinX());
+        stage.setY(boundaries.getMinY());
+        stage.setWidth(boundaries.getWidth());
+        stage.setHeight(boundaries.getHeight());
+
         activate("login", "login!");
     }
 
