@@ -1,4 +1,16 @@
 .scroll-pane>.viewport {
     -fx-background-color: #252422;
-    -fx-background-radius: 10 10 10 10;
+}
+
+.scroll-pane {
+    fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.scroll-pane:focused{
+    -fx-background-insets: 0;
+}
+
+.scroll-pane>.corner {
+    -fx-background-insets: 0;
 }

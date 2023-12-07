@@ -10,18 +10,33 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BF1441;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER" prefHeight="82.0" prefWidth="600.0">
          <children>
-            <ImageView fx:id="Logo" fitHeight="46.0" fitWidth="330.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/Full%20Logo.png" />
-               </image>
+            <Text fill="#f4f3ee" strokeType="OUTSIDE" strokeWidth="0.0" text="Hollandse">
+               <font>
+                  <Font name="Verdana" size="31.0" />
+               </font>
                <HBox.margin>
-                  <Insets />
-               </HBox.margin></ImageView>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Text>
+            <ImageView fitHeight="40.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/train.png" />
+               </image>
+            </ImageView>
+            <Text fill="#f4f3ee" layoutX="208.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Baan">
+               <font>
+                  <Font name="Verdana" size="31.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Text>
          </children>
       </HBox>
       <HBox alignment="CENTER" layoutY="113.0" prefHeight="287.0" prefWidth="600.0">
