@@ -2,8 +2,10 @@ package com.example.ovapp;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -19,6 +21,14 @@ public class Main extends Application {
 
         primaryStage.setTitle("Hollandse Baan");
         primaryStage.setScene(scene);
+
+        Screen userScreen = Screen.getPrimary();
+        Rectangle2D boundaries = userScreen.getVisualBounds();
+
+        primaryStage.setX(boundaries.getMinX());
+        primaryStage.setY(boundaries.getMinY());
+        primaryStage.setWidth(boundaries.getWidth());
+        primaryStage.setHeight(boundaries.getHeight());
 
         primaryStage.show();
     }
