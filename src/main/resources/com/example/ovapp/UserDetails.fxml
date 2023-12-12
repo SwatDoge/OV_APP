@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.Line?>
-
+<?import javafx.scene.shape.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BF1441;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserDetailscontroller">
     <children>
+        <VBox alignment="CENTER" />
 
-        <Button fx:id="back_button" layoutX="10.0" layoutY="74.0" mnemonicParsing="false" onAction="#back"
-                style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-size: 15; -fx-font-family: 'Verdana';"
-                text="Terug" />
+        <Button fx:id="back_button" layoutX="10.0" layoutY="74.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-size: 15; -fx-font-family: 'Verdana';" text="Terug" />
 
-        <Line startX="0" startY="75" endX="600" endY="75" stroke="#000000" strokeWidth="2" />
+        <Line endX="600" endY="75" startX="0" startY="75" stroke="#000000" strokeWidth="2" />
 
         <Pane layoutX="25.0" layoutY="105.0" prefHeight="275.0" prefWidth="550.0" style="-fx-background-color: #F4F3EE;" />
 
@@ -20,14 +19,19 @@
 
         <Label layoutX="40.0" layoutY="105.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-size: 30; -fx-font-family: 'Verdana';" text="Goedendag, {User}" />
 
-        <Label layoutX="100.0" layoutY="160.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Gebruikersnaam:" />
+        <Label layoutX="40.0" layoutY="160.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Gebruikersnaam:" />
         <TextField fx:id="usernameField" layoutX="220.0" layoutY="159.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15;" />
-        <Label layoutX="100.0" layoutY="220.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Nieuw Wachtwoord:" />
+        <Label layoutX="40.0" layoutY="220.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Nieuw Wachtwoord:" />
         <PasswordField fx:id="newPasswordField" layoutX="220.0" layoutY="220.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15;" />
-        <Label layoutX="100.0" layoutY="255.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Huidig Wachtwoord:" />
+        <Label layoutX="40.0" layoutY="255.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Huidig Wachtwoord:" />
         <PasswordField fx:id="currentPasswordField" layoutX="220.0" layoutY="255.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15;" />
 
-        <Button fx:id="changePasswordButton" layoutX="100.0" layoutY="325.0" mnemonicParsing="false" onAction="#changePassword" style="-fx-background-color: F4F3EE; -fx-text-fill: #252422; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Wachtwoord Wijzigen" />
+        <Button fx:id="changePasswordButton" layoutX="40.0" layoutY="325.0" mnemonicParsing="false" onAction="#changePassword" style="-fx-background-color: F4F3EE; -fx-text-fill: #252422; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Wachtwoord Wijzigen" />
         <Button fx:id="deleteAccountButton" layoutX="350.0" layoutY="325.0" mnemonicParsing="false" onAction="#deleteAccount" style="-fx-background-color: F4F3EE; -fx-text-fill: #BF1441; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Account Verwijderen" />
+         <ImageView fitHeight="100.0" fitWidth="50.0" layoutX="272.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+             <image>
+                 <Image url="@../../../images/train.png" />
+             </image>
+         </ImageView>
     </children>
 </AnchorPane>
