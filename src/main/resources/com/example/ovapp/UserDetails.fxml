@@ -9,26 +9,32 @@
     <children>
         <VBox alignment="CENTER" />
 
+        <Label layoutX="200.0" layoutY="48.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Gebruikers Profiel:" />
+
         <Button fx:id="back_button" layoutX="10.0" layoutY="74.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-size: 15; -fx-font-family: 'Verdana';" text="Terug" />
 
         <Line endX="600" endY="75" startX="0" startY="75" stroke="#000000" strokeWidth="2" />
 
-        <Pane layoutX="25.0" layoutY="105.0" prefHeight="275.0" prefWidth="550.0" style="-fx-background-color: #F4F3EE;" />
+        <Pane layoutX="25.0" layoutY="105.0" prefHeight="275.0" prefWidth="550.0" style="-fx-background-color: #F4F3EE; -fx-background-radius: 10 10 10 10;" />
 
-        <Pane layoutX="25.0" layoutY="105.0" prefHeight="275.0" prefWidth="550.0" style="-fx-background-color: #333333;" />
+        <Pane layoutX="25.0" layoutY="105.0" prefHeight="275.0" prefWidth="550.0" style="-fx-background-color: #333333; -fx-background-radius: 10 10 10 10;" />
 
-        <Label layoutX="40.0" layoutY="105.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-size: 30; -fx-font-family: 'Verdana';" text="Goedendag, {User}" />
+        <Label layoutX="40.0" layoutY="110.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-size: 19; -fx-font-family: 'Verdana';" text="Goedendag, {User}" />
 
         <Label layoutX="40.0" layoutY="160.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Gebruikersnaam:" />
-        <TextField fx:id="usernameField" layoutX="220.0" layoutY="159.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15;" />
+        <TextField fx:id="usernameField" layoutX="220.0" layoutY="159.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 10 10 10 10;" />
         <Label layoutX="40.0" layoutY="220.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Nieuw Wachtwoord:" />
-        <PasswordField fx:id="newPasswordField" layoutX="220.0" layoutY="220.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15;" />
-        <Label layoutX="40.0" layoutY="255.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Huidig Wachtwoord:" />
-        <PasswordField fx:id="currentPasswordField" layoutX="220.0" layoutY="255.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15;" />
+        <PasswordField fx:id="newPasswordField" layoutX="220.0" layoutY="220.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 10 10 10 10;
+" />
+        <Label layoutX="40.0" layoutY="255.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15 ;" text="Huidig Wachtwoord:" />
+        <PasswordField fx:id="currentPasswordField" layoutX="220.0" layoutY="255.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 10 10 10 10;
+" />
 
-        <Button fx:id="changePasswordButton" layoutX="40.0" layoutY="325.0" mnemonicParsing="false" onAction="#changePassword" style="-fx-background-color: F4F3EE; -fx-text-fill: #252422; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Wachtwoord Wijzigen" />
-        <Button fx:id="deleteAccountButton" layoutX="350.0" layoutY="325.0" mnemonicParsing="false" onAction="#deleteAccount" style="-fx-background-color: F4F3EE; -fx-text-fill: #BF1441; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Account Verwijderen" />
-         <ImageView fitHeight="100.0" fitWidth="50.0" layoutX="272.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+        <Button fx:id="changePasswordButton" layoutX="52.0" layoutY="325.0" mnemonicParsing="false" onAction="#changePassword" style="-fx-background-color: F4F3EE; -fx-text-fill: #252422; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 10 10 10 10;
+" text="Wachtwoord Wijzigen" />
+        <Button fx:id="deleteAccountButton" layoutX="350.0" layoutY="325.0" mnemonicParsing="false" onAction="#deleteAccount" style="-fx-background-color: F4F3EE; -fx-text-fill: #BF1441; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 10 10 10 10;
+" text="Account Verwijderen" />
+         <ImageView fitHeight="90.0" fitWidth="35.0" layoutX="282.5" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
              <image>
                  <Image url="@../../../images/train.png" />
              </image>
