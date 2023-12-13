@@ -16,20 +16,12 @@
    <children>
       <HBox alignment="CENTER" prefHeight="82.0" prefWidth="600.0">
          <children>
-            <Text fill="#f4f3ee" strokeType="OUTSIDE" strokeWidth="0.0" text="Hollandse">
-               <font>
-                  <Font name="Verdana" size="31.0" />
-               </font>
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin>
-            </Text>
             <ImageView fitHeight="40.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/train.png" />
                </image>
             </ImageView>
-            <Text fill="#f4f3ee" layoutX="208.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Baan">
+            <Text fill="#f4f3ee" layoutX="208.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reisgeschiedenis">
                <font>
                   <Font name="Verdana" size="31.0" />
                </font>
@@ -46,7 +38,7 @@
                   <Insets bottom="20.0" />
                </HBox.margin>
                <content>
-                  <AnchorPane prefHeight="352.0" prefWidth="183.0" />
+                  <AnchorPane prefHeight="352.0" prefWidth="183.0" stylesheets="@../../../CSS/TravelHistory.css" />
                </content>
             </ScrollPane>
             <VBox prefHeight="270.0" prefWidth="127.0" style="-fx-background-color: #252422; -fx-background-radius: 10 0 0 10;">
