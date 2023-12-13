@@ -29,8 +29,16 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="273.0" prefWidth="174.0" spacing="5.0">
                            <children>
-                              <TextField alignment="CENTER" promptText="Gebruikersnaam" />
-                              <PasswordField alignment="CENTER" promptText="Wachtwoord" />
+                              <TextField id="username_login" promptText="Gebruikersnaam" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 50 50 50 50;">
+                                 <graphic>
+                                    <ImageView fitHeight="15" fitWidth="15" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../images/train.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </TextField>
+                              <PasswordField id="password_login" alignment="CENTER" promptText="Wachtwoord" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 50 50 50 50;" />
                            </children>
                            <HBox.margin>
                               <Insets />
@@ -44,10 +52,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="54.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button mnemonicParsing="false" style="-fx-background-color: black;" text="Plan je reis" textFill="WHITE">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
+                        <Button id="login_button" mnemonicParsing="false" style="-fx-background-color: #252422; -fx-background-radius: 70 70 70 70; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15 ;" text="Inloggen">
                         </Button>
                      </children>
                   </HBox>
