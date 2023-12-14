@@ -13,7 +13,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="125.0" prefWidth="251.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" text="OVApp" textAlignment="CENTER" textFill="WHITE">
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="Login" textAlignment="CENTER" textFill=#FFFFFF">
                            <font>
                               <Font name="Century Gothic" size="40.0" />
                            </font>
@@ -30,13 +30,6 @@
                         <VBox alignment="CENTER" prefHeight="273.0" prefWidth="174.0" spacing="5.0">
                            <children>
                               <TextField id="username_login" promptText="Gebruikersnaam" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 50 50 50 50;">
-                                 <graphic>
-                                    <ImageView fitHeight="15" fitWidth="15" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../images/train.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
                               </TextField>
                               <PasswordField id="password_login" alignment="CENTER" promptText="Wachtwoord" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 50 50 50 50;" />
                            </children>

@@ -9,7 +9,7 @@
     <children>
         <VBox alignment="CENTER" />
 
-        <Label layoutX="200.0" layoutY="48.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Gebruikers Profiel:" />
+        <Label layoutX="200.0" layoutY="48.0" style="-fx-text-fill: #FFFFFF; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Gebruikers Profiel:" />
 
         <Button fx:id="back_button" layoutX="10.0" layoutY="74.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-size: 15; -fx-font-family: 'Verdana';" text="Terug" />
 
@@ -22,17 +22,17 @@
         <Label layoutX="40.0" layoutY="110.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-size: 19; -fx-font-family: 'Verdana';" text="Goedendag, {User}" />
 
         <Label layoutX="40.0" layoutY="160.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Gebruikersnaam:" />
-        <TextField fx:id="usernameField" layoutX="220.0" layoutY="159.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 10 10 10 10;" />
-        <Label layoutX="40.0" layoutY="220.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Nieuw Wachtwoord:" />
-        <PasswordField fx:id="newPasswordField" layoutX="220.0" layoutY="220.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 10 10 10 10;
+        <TextField fx:id="usernameField" layoutX="220.0" layoutY="159.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 50 50 50 50;" />
+        <Label layoutX="40.0" layoutY="222.5" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Nieuw Wachtwoord:" />
+        <PasswordField fx:id="newPasswordField" layoutX="220.0" layoutY="220.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 50 50 50 50;
 " />
-        <Label layoutX="40.0" layoutY="255.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15 ;" text="Huidig Wachtwoord:" />
-        <PasswordField fx:id="currentPasswordField" layoutX="220.0" layoutY="255.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 10 10 10 10;
+        <Label layoutX="40.0" layoutY="265.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15 ;" text="Huidig Wachtwoord:" />
+        <PasswordField fx:id="currentPasswordField" layoutX="220.0" layoutY="260.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 50 50 50 50;
 " />
 
-        <Button fx:id="changePasswordButton" layoutX="52.0" layoutY="325.0" mnemonicParsing="false" onAction="#changePassword" style="-fx-background-color: F4F3EE; -fx-text-fill: #252422; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 10 10 10 10;
+        <Button fx:id="changePasswordButton" layoutX="52.0" layoutY="325.0" mnemonicParsing="false" onAction="#changePassword" style="-fx-background-color: F4F3EE; -fx-text-fill: #252422; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 70 70 70 70;
 " text="Wachtwoord Wijzigen" />
-        <Button fx:id="deleteAccountButton" layoutX="350.0" layoutY="325.0" mnemonicParsing="false" onAction="#deleteAccount" style="-fx-background-color: F4F3EE; -fx-text-fill: #BF1441; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 10 10 10 10;
+        <Button fx:id="deleteAccountButton" layoutX="350.0" layoutY="325.0" mnemonicParsing="false" onAction="#deleteAccount" style="-fx-background-color: F4F3EE; -fx-text-fill: #BF1441; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 70 70 70 70;
 " text="Account Verwijderen" />
          <ImageView fitHeight="90.0" fitWidth="35.0" layoutX="282.5" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
              <image>
