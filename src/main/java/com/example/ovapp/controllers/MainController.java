@@ -5,16 +5,18 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.control.ListView;
 import javafx.stage.Popup;
+import javafx.stage.Stage;
 import javafx.stage.Window;
-import javafx.event.Event;
-import javafx.event.EventType;
-
 
 import java.io.IOException;
 
@@ -34,6 +36,26 @@ public class MainController {
 
     @FXML
     private Button planReisButton;
+
+    @FXML
+    private void onPlanReisButtonClick(ActionEvent event) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ovapp/search-result-view.fxml"));
+            Parent searchResultParent = loader.load();
+
+
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+
+
+            Scene scene = new Scene(searchResultParent);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
 
     @FXML
     private void citySuggestion(MouseEvent event) {
@@ -88,60 +110,48 @@ public class MainController {
     }
 
     @FXML
-    private void onPlanReisButtonClick(ActionEvent event) {
-        String startCity = startCityTextField.getText();
-        String endCity = endCityTextField.getText();
-        String transport = transportChoiceBox.getValue();
-        String date = startDatePicker.getValue() != null ? startDatePicker.getValue().toString() : "Geen datum geselecteerd";
-
-        System.out.println("Start Stad: " + startCity);
-        System.out.println("Eind Stad: " + endCity);
-        System.out.println("Transport: " + transport);
-        System.out.println("Datum: " + date);
-    }
-
-    @FXML
     protected void onLogInButtonClick(ActionEvent event) throws IOException {
         ScreenController screenController = new ScreenController(event);
         screenController.activate("login", "welcome");
     }
-        public class CustomSuggestionPopup<T> extends Popup {
 
-            private final ListView<T> listView;
+    public class CustomSuggestionPopup<T> extends Popup {
 
-            public CustomSuggestionPopup(ObservableList<T> suggestions) {
-                this.listView = new ListView<>(suggestions);
-                this.listView.getStyleClass().add("suggestion-list");
+        private final ListView<T> listView;
 
-                this.getContent().add(listView);
-            }
+        public CustomSuggestionPopup(ObservableList<T> suggestions) {
+            this.listView = new ListView<>(suggestions);
+            this.listView.getStyleClass().add("suggestion-list");
 
-            public void show(Window window, double anchorX, double anchorY) {
-                if (!isShowing()) {
-                    show(window);
-                }
-
-                setX(anchorX);
-                setY(anchorY);
-            }
-
-            public void hide() {
-                super.hide();
-            }
-
-            public void setOnSuggestionSelected(EventHandler<SuggestionEvent<T>> eventHandler, TextField targetTextField) {
-                listView.setOnMouseClicked(event -> {
-                    T selectedItem = listView.getSelectionModel().getSelectedItem();
-                    if (selectedItem != null) {
-                        SuggestionEvent<T> suggestionEvent = new SuggestionEvent<>(selectedItem);
-                        eventHandler.handle(suggestionEvent);
-                        targetTextField.setText(String.valueOf(selectedItem));
-                    }
-                });
-            }
+            this.getContent().add(listView);
         }
 
-        public class SuggestionEvent<T> extends Event {
+        public void show(Window window, double anchorX, double anchorY) {
+            if (!isShowing()) {
+                show(window);
+            }
+
+            setX(anchorX);
+            setY(anchorY);
+        }
+
+        public void hide() {
+            super.hide();
+        }
+
+        public void setOnSuggestionSelected(EventHandler<SuggestionEvent<T>> eventHandler, TextField targetTextField) {
+            listView.setOnMouseClicked(event -> {
+                T selectedItem = listView.getSelectionModel().getSelectedItem();
+                if (selectedItem != null) {
+                    SuggestionEvent<T> suggestionEvent = new SuggestionEvent<>(selectedItem);
+                    eventHandler.handle(suggestionEvent);
+                    targetTextField.setText(String.valueOf(selectedItem));
+                }
+            });
+        }
+    }
+
+    public class SuggestionEvent<T> extends Event {
 
         public static final EventType<SuggestionEvent> SUGGESTION_SELECTED = new EventType<>(Event.ANY, "SUGGESTION_SELECTED");
 

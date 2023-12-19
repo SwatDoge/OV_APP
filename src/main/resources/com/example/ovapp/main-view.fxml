@@ -2,60 +2,69 @@
 
 <?import java.lang.*?>
 <?import javafx.collections.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BF1441;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ovapp.controllers.MainController">
+<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ovapp.controllers.MainController">
+
     <children>
-        <Label layoutX="229.0" layoutY="50.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Hoofdpagina" />
+        <AnchorPane style="-fx-background-color: #BF1441;" VBox.vgrow="ALWAYS">
+            <children>
+                <Label layoutX="229.0" layoutY="50.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Hoofdpagina" />
 
-        <Line endX="600" endY="75" startX="0" startY="75" stroke="#000000" strokeWidth="2" />
+                <Line endX="600" endY="75" startX="0" startY="75" stroke="#000000" strokeWidth="2" />
 
-        <Label layoutX="123.0" layoutY="91.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Start" />
-        <TextField fx:id="startCityTextField" layoutX="36.0" layoutY="117.0" onMouseClicked="#citySuggestion" prefWidth="223.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 10 10 10 10;" />
-        <Spinner fx:id="startUurSpinner" layoutX="87.0" layoutY="228.0" prefHeight="26.0" prefWidth="61.0">
-            <valueFactory>
-                <SpinnerValueFactory.IntegerSpinnerValueFactory max="23" min="0" />
-            </valueFactory>
-        </Spinner>
-        <Spinner fx:id="startMinuutSpinner" layoutX="162.0" layoutY="228.0" prefHeight="26.0" prefWidth="61.0">
-            <valueFactory>
-                <SpinnerValueFactory.IntegerSpinnerValueFactory max="59" min="0" />
-            </valueFactory>
-        </Spinner>
-        <DatePicker fx:id="startStartDatePicker" layoutX="103.0" layoutY="266.0" prefHeight="26.0" prefWidth="109.0" />
+                <Label layoutX="123.0" layoutY="91.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Start" />
+                <TextField fx:id="startCityTextField" layoutX="36.0" layoutY="117.0" onMouseClicked="#citySuggestion" prefWidth="223.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 10 10 10 10;" />
+                <Spinner fx:id="startUurSpinner" layoutX="87.0" layoutY="228.0" prefHeight="26.0" prefWidth="61.0">
+                    <valueFactory>
+                        <SpinnerValueFactory.IntegerSpinnerValueFactory max="23" min="0" />
+                    </valueFactory>
+                </Spinner>
+                <Spinner fx:id="startMinuutSpinner" layoutX="162.0" layoutY="228.0" prefHeight="26.0" prefWidth="61.0">
+                    <valueFactory>
+                        <SpinnerValueFactory.IntegerSpinnerValueFactory max="59" min="0" />
+                    </valueFactory>
+                </Spinner>
+                <DatePicker fx:id="startStartDatePicker" layoutX="103.0" layoutY="266.0" prefHeight="26.0" prefWidth="109.0" />
 
-        <Label layoutX="434.0" layoutY="91.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Eind" />
-        <TextField fx:id="endCityTextField" layoutX="341.0" layoutY="117.0" onMouseClicked="#citySuggestion" prefWidth="223.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 10 10 10 10;" />
+                <Label layoutX="434.0" layoutY="91.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Eind" />
+                <TextField fx:id="endCityTextField" layoutX="341.0" layoutY="117.0" onMouseClicked="#citySuggestion" prefWidth="223.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 10 10 10 10;" />
 
-        <Label layoutX="386.0" layoutY="161.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15 ;" text="Vervoersmiddel" />
-        <ChoiceBox fx:id="transportChoiceBox" layoutX="394.0" layoutY="186.0" prefHeight="29.0" prefWidth="117.0" style="-fx-background-radius: 10 10 10 10;">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Trein" />
-                    <String fx:value="Bus" />
-                    <String fx:value="Geen Voorkeur" />
-                </FXCollections>
-            </items>
-        </ChoiceBox>
-        <Button fx:id="planReisButton" layoutX="241.0" layoutY="327.0" mnemonicParsing="false" onAction="#onPlanReisButtonClick" prefHeight="35.0" prefWidth="124.0" style="-fx-background-color: F4F3EE; -fx-text-fill: #BF1441; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 12; -fx-background-radius: 10 10 10 10;" text="Plan je Reis" />
+                <Label layoutX="386.0" layoutY="161.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15 ;" text="Vervoersmiddel" />
+                <ChoiceBox fx:id="transportChoiceBox" layoutX="394.0" layoutY="186.0" prefHeight="29.0" prefWidth="117.0" style="-fx-background-radius: 10 10 10 10;">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Trein" />
+                            <String fx:value="Bus" />
+                            <String fx:value="Geen Voorkeur" />
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
+                <Button fx:id="planReisButton" layoutX="241.0" layoutY="327.0" mnemonicParsing="false" onAction="#onPlanReisButtonClick" prefHeight="35.0" prefWidth="124.0" style="-fx-background-color: F4F3EE; -fx-text-fill: #BF1441; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 12; -fx-background-radius: 10 10 10 10;" text="Plan je Reis" />
 
-        <ChoiceBox fx:id="timeChoiceBox" layoutX="103.0" layoutY="188.0" prefHeight="19.0" prefWidth="88.0" style="-fx-background-radius: 10 10 10 10;">
-        <items>
-            <FXCollections fx:factory="observableArrayList">
-                <String fx:value="Vertrek" />
-                <String fx:value="Aankomst" />
-            </FXCollections>
-        </items>
-    </ChoiceBox>
-        <Label layoutX="68.0" layoutY="161.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15 ;" text="Vertrek/Aankomst" />
+                <ChoiceBox fx:id="timeChoiceBox" layoutX="103.0" layoutY="188.0" prefHeight="19.0" prefWidth="88.0" style="-fx-background-radius: 10 10 10 10;">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Vertrek" />
+                            <String fx:value="Aankomst" />
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
+                <Label layoutX="68.0" layoutY="161.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15 ;" text="Vertrek/Aankomst" />
 
-        <ImageView fitHeight="90.0" fitWidth="35.0" layoutX="282.5" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../../images/train.png" />
-            </image>
-        </ImageView>
+                <ImageView fitHeight="90.0" fitWidth="35.0" layoutX="282.5" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/train.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
     </children>
-</AnchorPane>
+    <VBox.margin>
+        <Insets />
+    </VBox.margin>
+</VBox>
