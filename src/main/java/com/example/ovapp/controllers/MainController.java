@@ -5,13 +5,17 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
+import javafx.stage.Popup;
+import javafx.stage.Window;
+import javafx.event.Event;
+import javafx.event.EventType;
+
 
 import java.io.IOException;
 
@@ -19,9 +23,6 @@ public class MainController {
 
     @FXML
     private TextField startCityTextField;
-
-    @FXML
-    private ChoiceBox<String> startDepartArriveChoiceBox;
 
     @FXML
     private DatePicker startDatePicker;
@@ -35,17 +36,21 @@ public class MainController {
     @FXML
     private Button planReisButton;
 
-    private ObservableList<String> allCities = FXCollections.observableArrayList("Amersfoort", "Amsterdam", "Utrecht", "Ede", "Alkmaar", "Den Haag", "Groningen", "Deventer", "Nijkerk", "Apeldoorn", "Enschede");
-
     @FXML
-    private void initialize() {
-        ObservableList<String> departArriveOptions = FXCollections.observableArrayList("Vertrek", "Aankomst");
-        startDepartArriveChoiceBox.setItems(departArriveOptions);
-
-        // Configure city suggestions for start and end fields
+    private void citySuggestion(MouseEvent event) {
+        // Your implementation here
         configureCitySuggestions(startCityTextField);
         configureCitySuggestions(endCityTextField);
     }
+
+    @FXML
+    private void initialize() {
+        configureCitySuggestions(startCityTextField);
+        configureCitySuggestions(endCityTextField);
+    }
+
+    private final ObservableList<String> allCities = FXCollections.observableArrayList(
+            "Amersfoort", "Amsterdam", "Utrecht", "Ede", "Alkmaar", "Den Haag", "Groningen", "Deventer", "Nijkerk", "Apeldoorn", "Enschede");
 
     private void configureCitySuggestions(TextField textField) {
         FilteredList<String> filteredCities = new FilteredList<>(allCities, s -> true);
@@ -64,10 +69,10 @@ public class MainController {
         SortedList<String> sortedCities = new SortedList<>(filteredCities);
 
         // Use a custom Popup for suggestions
-        CustomSuggestionPopup suggestionPopup = new CustomSuggestionPopup(sortedCities);
+        CustomSuggestionPopup<String> suggestionPopup = new CustomSuggestionPopup<>(sortedCities);
 
         // Show suggestions when the user clicks the text field
-        textField.setOnMouseClicked(event -> suggestionPopup.show(textField));
+        textField.setOnMouseClicked(event -> suggestionPopup.show(textField.getScene().getWindow(), event.getScreenX(), event.getScreenY()));
 
         // Hide suggestions when the user clicks outside the text field
         textField.focusedProperty().addListener((obs, oldVal, newVal) -> {
@@ -86,13 +91,11 @@ public class MainController {
     @FXML
     private void onPlanReisButtonClick(ActionEvent event) {
         String startCity = startCityTextField.getText();
-        String startDepartArrive = startDepartArriveChoiceBox.getValue();
         String endCity = endCityTextField.getText();
         String transport = transportChoiceBox.getValue();
         String date = startDatePicker.getValue() != null ? startDatePicker.getValue().toString() : "Geen datum geselecteerd";
 
         System.out.println("Start Stad: " + startCity);
-        System.out.println("Vertrek/Aankomst: " + startDepartArrive);
         System.out.println("Eind Stad: " + endCity);
         System.out.println("Transport: " + transport);
         System.out.println("Datum: " + date);
@@ -103,5 +106,53 @@ public class MainController {
         ScreenController screenController = new ScreenController(event);
         screenController.activate("login", "welcome");
     }
-}
+    public class CustomSuggestionPopup<T> extends Popup {
 
+        private final ListView<T> listView;
+
+        public CustomSuggestionPopup(ObservableList<T> suggestions) {
+            this.listView = new ListView<>(suggestions);
+            this.listView.getStyleClass().add("suggestion-list");
+
+            this.getContent().add(listView);
+        }
+
+        public void show(Window window, double anchorX, double anchorY) {
+            if (!isShowing()) {
+                show(window);
+            }
+
+            setX(anchorX);
+            setY(anchorY);
+        }
+
+        public void hide() {
+            super.hide();
+        }
+
+        public void setOnSuggestionSelected(EventHandler<SuggestionEvent<T>> eventHandler) {
+            listView.setOnMouseClicked(event -> {
+                T selectedItem = listView.getSelectionModel().getSelectedItem();
+                if (selectedItem != null) {
+                    SuggestionEvent<T> suggestionEvent = new SuggestionEvent<>(selectedItem);
+                    eventHandler.handle(suggestionEvent);
+                }
+            });
+        }
+    }
+    public class SuggestionEvent<T> extends Event {
+
+        public static final EventType<SuggestionEvent> SUGGESTION_SELECTED = new EventType<>(Event.ANY, "SUGGESTION_SELECTED");
+
+        private final T selectedItem;
+
+        public SuggestionEvent(T selectedItem) {
+            super(SUGGESTION_SELECTED);
+            this.selectedItem = selectedItem;
+        }
+
+        public T getSelectedItem() {
+            return selectedItem;
+        }
+    }
+}
