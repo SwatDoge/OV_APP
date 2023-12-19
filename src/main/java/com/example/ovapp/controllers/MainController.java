@@ -9,7 +9,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 import javafx.stage.Popup;
 import javafx.stage.Window;
@@ -85,7 +84,7 @@ public class MainController {
         suggestionPopup.setOnSuggestionSelected(selectedItem -> {
             textField.setText(String.valueOf(selectedItem));
             suggestionPopup.hide();
-        });
+        }, textField);
     }
 
     @FXML
@@ -106,41 +105,43 @@ public class MainController {
         ScreenController screenController = new ScreenController(event);
         screenController.activate("login", "welcome");
     }
-    public class CustomSuggestionPopup<T> extends Popup {
+        public class CustomSuggestionPopup<T> extends Popup {
 
-        private final ListView<T> listView;
+            private final ListView<T> listView;
 
-        public CustomSuggestionPopup(ObservableList<T> suggestions) {
-            this.listView = new ListView<>(suggestions);
-            this.listView.getStyleClass().add("suggestion-list");
+            public CustomSuggestionPopup(ObservableList<T> suggestions) {
+                this.listView = new ListView<>(suggestions);
+                this.listView.getStyleClass().add("suggestion-list");
 
-            this.getContent().add(listView);
-        }
-
-        public void show(Window window, double anchorX, double anchorY) {
-            if (!isShowing()) {
-                show(window);
+                this.getContent().add(listView);
             }
 
-            setX(anchorX);
-            setY(anchorY);
-        }
-
-        public void hide() {
-            super.hide();
-        }
-
-        public void setOnSuggestionSelected(EventHandler<SuggestionEvent<T>> eventHandler) {
-            listView.setOnMouseClicked(event -> {
-                T selectedItem = listView.getSelectionModel().getSelectedItem();
-                if (selectedItem != null) {
-                    SuggestionEvent<T> suggestionEvent = new SuggestionEvent<>(selectedItem);
-                    eventHandler.handle(suggestionEvent);
+            public void show(Window window, double anchorX, double anchorY) {
+                if (!isShowing()) {
+                    show(window);
                 }
-            });
+
+                setX(anchorX);
+                setY(anchorY);
+            }
+
+            public void hide() {
+                super.hide();
+            }
+
+            public void setOnSuggestionSelected(EventHandler<SuggestionEvent<T>> eventHandler, TextField targetTextField) {
+                listView.setOnMouseClicked(event -> {
+                    T selectedItem = listView.getSelectionModel().getSelectedItem();
+                    if (selectedItem != null) {
+                        SuggestionEvent<T> suggestionEvent = new SuggestionEvent<>(selectedItem);
+                        eventHandler.handle(suggestionEvent);
+                        targetTextField.setText(String.valueOf(selectedItem));
+                    }
+                });
+            }
         }
-    }
-    public class SuggestionEvent<T> extends Event {
+
+        public class SuggestionEvent<T> extends Event {
 
         public static final EventType<SuggestionEvent> SUGGESTION_SELECTED = new EventType<>(Event.ANY, "SUGGESTION_SELECTED");
 
