@@ -16,10 +16,9 @@ import com.google.gson.JsonParser;
 
 public class Request {
 
-    public static void sendApiRequest(String fromStation, String toStation, String transportType) {
+    public static void sendApiRequest(String fromStation, String toStation, String transportType, boolean searchForArrival) {
         String url = "https://reisinfo.ns-mlab.nl/api/v3/trips";
 
-        // Bouw de parameters op, inclusief het vervoerstype
         Map<String, String> params = Map.of(
                 "fromStation", fromStation,
                 "toStation", toStation,
@@ -27,13 +26,13 @@ public class Request {
                 "lang", "nl",
                 "product", "OVCHIPKAART_ENKELE_REIS",
                 "travelClass", "2",
+                "searchForArrival", String.valueOf(searchForArrival),
                 "disabledTransportModalities", transportType,
                 "firstMileModality", "PUBLIC_TRANSPORT",
                 "lastMileModality", "PUBLIC_TRANSPORT"
         );
 
         try {
-            // Maak de API-url en voer het verzoek uit
             String apiUrl = url + buildQueryString(params);
             System.out.println("API URL: " + apiUrl);
 
@@ -73,7 +72,6 @@ public class Request {
         for (Map.Entry<String, String> entry : params.entrySet()) {
             String value = URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8);
 
-            // Voeg alleen niet-lege waarden toe aan de querystring
             if (!value.isEmpty()) {
                 queryString
                         .append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8))
