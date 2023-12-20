@@ -20,10 +20,12 @@
 }
 
 /* Default component overrides*/
+* {
+    -fx-font-family: Verdana;
+}
 
 Label {
     -fx-text-fill: #F4F3EE;
-    -fx-font-family: Verdana;
     -fx-font-weight: bold;
     -fx-font-size: 15px;
 }
