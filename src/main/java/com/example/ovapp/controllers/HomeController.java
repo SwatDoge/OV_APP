@@ -20,7 +20,7 @@ import javafx.stage.Window;
 
 import java.io.IOException;
 
-public class MainController {
+public class HomeController {
 
     @FXML
     private TextField startCityTextField;
@@ -53,7 +53,6 @@ public class MainController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-
         }
     }
 
@@ -107,12 +106,6 @@ public class MainController {
             textField.setText(String.valueOf(selectedItem));
             suggestionPopup.hide();
         }, textField);
-    }
-
-    @FXML
-    protected void onLogInButtonClick(ActionEvent event) throws IOException {
-        ScreenController screenController = new ScreenController(event);
-        screenController.activate("login", "welcome");
     }
 
     public class CustomSuggestionPopup<T> extends Popup {

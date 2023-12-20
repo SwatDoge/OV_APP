@@ -7,13 +7,17 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ovapp.controllers.MainController">
+<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ovapp.controllers.HomeController">
 
     <children>
         <AnchorPane style="-fx-background-color: #BF1441;" VBox.vgrow="ALWAYS">
             <children>
-                <Label layoutX="229.0" layoutY="50.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Hoofdpagina" />
+                <Label layoutX="283.0" layoutY="29.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Hoofdpagina">
+               <font>
+                  <Font name="Verdana" size="31.0" />
+               </font></Label>
 
                 <Line endX="600" endY="75" startX="0" startY="75" stroke="#000000" strokeWidth="2" />
 
@@ -56,7 +60,7 @@
                 </ChoiceBox>
                 <Label layoutX="68.0" layoutY="161.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15 ;" text="Vertrek/Aankomst" />
 
-                <ImageView fitHeight="90.0" fitWidth="35.0" layoutX="282.5" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="90.0" fitWidth="35.0" layoutX="248.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../images/train.png" />
                     </image>

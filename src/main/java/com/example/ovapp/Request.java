@@ -1,4 +1,4 @@
-package com.example.ovapp.models;
+package com.example.ovapp;
 
 import java.io.BufferedReader;
 import java.io.IOException;

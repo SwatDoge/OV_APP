@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class UserDetailscontroller {
+public class ProfileController {
 
     @FXML
     private Button back_button;

@@ -1,4 +1,4 @@
-package com.example.ovapp.controllers;
+package com.example.ovapp.components;
 
 import javafx.collections.transformation.SortedList;
 import javafx.event.EventHandler;

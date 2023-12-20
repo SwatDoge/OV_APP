@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 
-public class TravelHistory implements Initializable{
+public class SearchResultController implements Initializable{
     @FXML
     private ScrollPane scrollPaneMain;
     @Override
