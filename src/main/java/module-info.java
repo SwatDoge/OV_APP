@@ -2,6 +2,7 @@ module com.example.ovapp {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
+    requires com.google.gson;
 
 
     opens com.example.ovapp to javafx.fxml;
