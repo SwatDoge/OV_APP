@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="background" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BF1441;" stylesheets="@../../../CSS/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserDetailscontroller">
+<AnchorPane id="background" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BF1441;" stylesheets="@../../../css/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserDetailscontroller">
     <children>
         <HBox id="header" alignment="CENTER" layoutX="187.0" prefHeight="75.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
 
                 <ImageView fitHeight="90.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../../../images/train.png" />
+                        <Image url="@../../../icons/train.png" />
                     </image>
                 </ImageView>
                 <Label style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Profielpagina">
@@ -23,7 +23,11 @@
             </children></HBox>
         <VBox alignment="CENTER" />
 
-        <Button fx:id="back_button" layoutX="10.0" layoutY="74.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-size: 15; -fx-font-family: 'Verdana';" text="Terug" />
+        <Hyperlink layoutX="25.0" layoutY="80.0" styleClass="dark" text="Terug" underline="true">
+            <font>
+                <Font name="Verdana" size="15.0" />
+            </font>
+        </Hyperlink>
 
         <Pane layoutX="25.0" layoutY="105.0" prefHeight="275.0" prefWidth="550.0" style="-fx-background-color: #333333; -fx-background-radius: 10 10 10 10;">
          <children>
