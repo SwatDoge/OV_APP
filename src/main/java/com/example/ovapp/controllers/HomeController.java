@@ -20,6 +20,7 @@ import javafx.stage.Window;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import static com.example.ovapp.Request.sendApiRequest;
@@ -50,7 +51,7 @@ public class HomeController {
     @FXML
     private Button planReisButton;
 
-    @FXML
+        @FXML
     private void onPlanReisButtonClick(ActionEvent event) {
         try {
             String fromStation = startCityTextField.getText();
@@ -104,12 +105,30 @@ public class HomeController {
         // Your implementation here
         configureCitySuggestions(startCityTextField);
         configureCitySuggestions(endCityTextField);
+
     }
 
     @FXML
     private void initialize() {
         configureCitySuggestions(startCityTextField);
         configureCitySuggestions(endCityTextField);
+
+        setDefaultTimeInSpinners();
+
+        setDefaultDateInDatePicker();
+    }
+
+    private void setDefaultTimeInSpinners() {
+        LocalTime currentTime = LocalTime.now();
+
+        startUurSpinner.getValueFactory().setValue(currentTime.getHour());
+
+        startMinuutSpinner.getValueFactory().setValue(currentTime.getMinute());
+    }
+
+    private void setDefaultDateInDatePicker() {
+        LocalDate currentDate = LocalDate.now();
+        startDatePicker.setValue(currentDate);
     }
 
     private final ObservableList<String> allCities = FXCollections.observableArrayList(
