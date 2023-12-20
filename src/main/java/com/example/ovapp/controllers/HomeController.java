@@ -46,8 +46,11 @@ public class HomeController {
             String fromStation = startCityTextField.getText();
             String toStation = endCityTextField.getText();
 
+            String transportType = getTransportTypeFromChoiceBox();
 
-            sendApiRequest(fromStation, toStation );
+
+            // Voeg het vervoersmiddel toe aan de parameters
+            sendApiRequest(fromStation, toStation, transportType);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ovapp/search-result-view.fxml"));
             Parent searchResultParent = loader.load();
@@ -61,6 +64,18 @@ public class HomeController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private String getTransportTypeFromChoiceBox() {
+        switch (transportChoiceBox.getValue()) {
+            case "Trein":
+                return "METRO,TRAM,FERRY,BUS";
+            case "Bus":
+                return "TRAIN,METRO,TRAM,FERRY";
+            case "Geen Voorkeur":
+            default:
+                return "METRO,TRAM,FERRY";
         }
     }
 
