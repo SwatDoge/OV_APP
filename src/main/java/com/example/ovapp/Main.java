@@ -18,19 +18,12 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("main-view.fxml"));
 
-        Scene scene = new Scene(root, 1680, 800);
+        Scene scene = new Scene(root, 600, 400);
+
+        primaryStage.setResizable(false);
 
         primaryStage.setTitle("Hollandse Baan");
         primaryStage.setScene(scene);
-
-        Screen userScreen = Screen.getPrimary();
-        Rectangle2D boundaries = userScreen.getVisualBounds();
-
-        primaryStage.setX(boundaries.getMinX());
-        primaryStage.setY(boundaries.getMinY());
-        primaryStage.setWidth(boundaries.getWidth());
-        primaryStage.setHeight(boundaries.getHeight());
-
         primaryStage.show();
     }
 }
