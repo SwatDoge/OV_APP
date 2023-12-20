@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static com.example.ovapp.Request.sendApiRequest;
 
@@ -63,7 +65,12 @@ public class HomeController {
 
             String formattedTime = String.format("%02d:%02d:00", selectedHour, selectedMinute);
 
-            sendApiRequest(fromStation, toStation, transportType, searchForArrival, formattedTime);
+            LocalDate selectedDate = startDatePicker.getValue();
+
+            String formattedDate = selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+
+            sendApiRequest(fromStation, toStation, transportType, searchForArrival, formattedTime, formattedDate);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ovapp/search-result-view.fxml"));
             Parent searchResultParent = loader.load();

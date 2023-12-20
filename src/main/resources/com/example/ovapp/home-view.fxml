@@ -27,7 +27,7 @@
                         <SpinnerValueFactory.IntegerSpinnerValueFactory max="59" min="0" />
                     </valueFactory>
                 </Spinner>
-                <DatePicker fx:id="startStartDatePicker" layoutX="48.0" layoutY="289.0" prefHeight="26.0" prefWidth="230.0" />
+                <DatePicker fx:id="startDatePicker" layoutX="48.0" layoutY="289.0" prefHeight="26.0" prefWidth="230.0" />
 
                 <Label layoutX="380.0" layoutY="105.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15;" text="Eind bestemming" />
 
