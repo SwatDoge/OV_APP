@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <BorderPane layoutX="250.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <AnchorPane prefHeight="65.0" prefWidth="200.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
+                    <children>
+                        <Pane layoutX="237.0" layoutY="20.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: BF1441;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <HBox layoutX="250.0" prefHeight="43.0" prefWidth="525.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
+                        <Label fx:id="MenuBack" layoutX="14.0" layoutY="37.0" text="MENU">
+                            <font>
+                                <Font name="System Bold" size="15.0" />
+                            </font></Label>
+                        <Label fx:id="MenuBack1" layoutX="14.0" layoutY="37.0" text="MENU">
+                            <font>
+                                <Font name="System Bold" size="15.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </top>
+            <left>
+                <AnchorPane prefHeight="362.0" prefWidth="176.0" style="-fx-background-color: BF1441;" BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox layoutX="48.0" layoutY="41.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
+                            <children>
+                                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="176.0" style="-fx-background-color: BF1441;" text="Hoofdmenu">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                </Button>
+                                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="176.0" style="-fx-background-color: BF1441;" text="Profiel">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                </Button>
+                                <Button layoutX="10.0" layoutY="48.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="176.0" style="-fx-background-color: BF1441;" text="Favorieten">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                </Button>
+                                <Button layoutX="10.0" layoutY="86.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="176.0" style="-fx-background-color: BF1441;" text="Taal">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </left></BorderPane>
+    </children>
+</AnchorPane>
