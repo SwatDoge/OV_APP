@@ -28,6 +28,12 @@ public class HomeController {
     private TextField startCityTextField;
 
     @FXML
+    private Spinner<Integer> startUurSpinner;
+
+    @FXML
+    private Spinner<Integer> startMinuutSpinner;
+
+    @FXML
     private DatePicker startDatePicker;
 
     @FXML
@@ -52,9 +58,12 @@ public class HomeController {
 
             boolean searchForArrival = timeChoiceBox.getValue().equals("Aankomst");
 
+            int selectedHour = startUurSpinner.getValue();
+            int selectedMinute = startMinuutSpinner.getValue();
 
-            // Voeg het vervoersmiddel toe aan de parameters
-            sendApiRequest(fromStation, toStation, transportType, searchForArrival);
+            String formattedTime = String.format("%02d:%02d:00", selectedHour, selectedMinute);
+
+            sendApiRequest(fromStation, toStation, transportType, searchForArrival, formattedTime);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ovapp/search-result-view.fxml"));
             Parent searchResultParent = loader.load();
