@@ -37,20 +37,24 @@ public class HomeController {
     private ChoiceBox<String> transportChoiceBox;
 
     @FXML
+    private ChoiceBox<String> timeChoiceBox;
+
+    @FXML
     private Button planReisButton;
 
     @FXML
     private void onPlanReisButtonClick(ActionEvent event) {
         try {
-            // Haal waarden op uit JavaFX-elementen
             String fromStation = startCityTextField.getText();
             String toStation = endCityTextField.getText();
 
             String transportType = getTransportTypeFromChoiceBox();
 
+            boolean searchForArrival = timeChoiceBox.getValue().equals("Aankomst");
+
 
             // Voeg het vervoersmiddel toe aan de parameters
-            sendApiRequest(fromStation, toStation, transportType);
+            sendApiRequest(fromStation, toStation, transportType, searchForArrival);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ovapp/search-result-view.fxml"));
             Parent searchResultParent = loader.load();
