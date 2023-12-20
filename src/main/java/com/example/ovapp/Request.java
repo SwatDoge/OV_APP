@@ -16,13 +16,13 @@ import com.google.gson.JsonParser;
 
 public class Request {
 
-    public static void main(String[] args) {
+    public static void sendApiRequest(String fromStation, String toStation ) {
         String url = "https://reisinfo.ns-mlab.nl/api/v3/trips";
 
         Map<String, String> params = Map.of(
-                "fromStation", "Amersfoort Centraal",
-                "toStation", "Den Haag Centraal",
-                "dateTime", "2023-12-19T10:00:00",
+                "fromStation", fromStation,
+                "toStation", toStation,
+                "dateTime", "2023-12-19T10:05:00",
                 "lang", "nl",
                 "product", "OVCHIPKAART_ENKELE_REIS",
                 "travelClass", "2",
@@ -62,6 +62,7 @@ public class Request {
             e.printStackTrace();
         }
     }
+
 
     private static String buildQueryString(Map<String, String> params) {
         StringBuilder queryString = new StringBuilder("?");

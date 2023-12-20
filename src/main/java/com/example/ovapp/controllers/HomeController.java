@@ -20,6 +20,8 @@ import javafx.stage.Window;
 
 import java.io.IOException;
 
+import static com.example.ovapp.Request.sendApiRequest;
+
 public class HomeController {
 
     @FXML
@@ -40,14 +42,20 @@ public class HomeController {
     @FXML
     private void onPlanReisButtonClick(ActionEvent event) {
         try {
+            // Haal waarden op uit JavaFX-elementen
+            String fromStation = startCityTextField.getText();
+            String toStation = endCityTextField.getText();
+
+
+            sendApiRequest(fromStation, toStation );
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ovapp/search-result-view.fxml"));
             Parent searchResultParent = loader.load();
 
-
+            // Haal het podium op
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
-
+            // Stel het zoekresultaatscherm in als de nieuwe scene
             Scene scene = new Scene(searchResultParent);
             stage.setScene(scene);
             stage.show();
@@ -70,7 +78,7 @@ public class HomeController {
     }
 
     private final ObservableList<String> allCities = FXCollections.observableArrayList(
-            "Amersfoort", "Amsterdam", "Utrecht", "Ede", "Alkmaar", "Den Haag", "Groningen", "Deventer", "Nijkerk", "Apeldoorn", "Enschede");
+            "Amersfoort Centraal", "Amsterdam Centraal", "Utrecht Centraal", "Ede Centrum", "Alkmaar", "Den Haag Centraal", "Groningen", "Deventer", "Nijkerk", "Apeldoorn", "Enschede");
 
     private void configureCitySuggestions(TextField textField) {
         FilteredList<String> filteredCities = new FilteredList<>(allCities, s -> true);
