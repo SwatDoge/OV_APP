@@ -1,45 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BF1441;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BF1441;" stylesheets="@../../../CSS/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox alignment="CENTER" prefHeight="82.0" prefWidth="600.0">
+      <HBox id="header" alignment="CENTER" layoutX="187.0" prefHeight="75.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="40.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+
+            <ImageView fitHeight="90.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/train.png" />
                </image>
             </ImageView>
-            <Text fill="#f4f3ee" layoutX="208.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zoekresultaten">
+            <Label style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Zoek resultaten">
                <font>
                   <Font name="Verdana" size="31.0" />
                </font>
-               <HBox.margin>
-                  <Insets left="5.0" />
-               </HBox.margin>
-            </Text>
-         </children>
-      </HBox>
+            </Label>
+         </children></HBox>
       <HBox alignment="CENTER" layoutY="113.0" prefHeight="287.0" prefWidth="600.0">
          <children>
-            <ScrollPane fx:id="scrollPaneMain" pannable="true" prefHeight="264.0" prefWidth="202.0" stylesheets="@../../../CSS/TravelHistory.css">
+            <ScrollPane fx:id="scrollPaneMain" hbarPolicy="NEVER" pannable="true" prefHeight="264.0" prefWidth="202.0" vbarPolicy="ALWAYS">
                <HBox.margin>
                   <Insets bottom="20.0" />
                </HBox.margin>
                <content>
-                  <AnchorPane prefHeight="352.0" prefWidth="183.0" stylesheets="@../../../CSS/TravelHistory.css">
+                  <AnchorPane prefHeight="352.0" prefWidth="183.0">
                      <children>
                         <TextArea editable="false" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #252422;" />
                         <TextArea editable="false" layoutY="59.0" prefHeight="51.0" prefWidth="200.0" style="-fx-background-color: #252422;" />
@@ -66,7 +56,6 @@
                   <Font name="Verdana" size="15.0" />
                </font>
             </Hyperlink>
-            <Line endX="573.0" layoutX="27.0" layoutY="11.0" startX="-27.0" stroke="#252422" />
          </children>
       </AnchorPane>
    </children>

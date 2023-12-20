@@ -2,40 +2,44 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BF1441;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ovapp.controllers.LoginController">
+<AnchorPane id="background" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../CSS/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ovapp.controllers.LoginController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane prefHeight="100.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER" prefHeight="125.0" prefWidth="251.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <HBox id="header" alignment="CENTER" layoutX="187.0" prefHeight="75.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" text="Login" textAlignment="CENTER" textFill=#FFFFFF">
+
+                        <ImageView fitHeight="90.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/train.png" />
+                           </image>
+                        </ImageView>
+                        <Label style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Inlogpagina">
                            <font>
-                              <Font name="Century Gothic" size="40.0" />
+                              <Font name="Verdana" size="31.0" />
                            </font>
                         </Label>
-                     </children>
-                  </HBox>
+                     </children></HBox>
                </children>
             </AnchorPane>
-            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="1.0" prefWidth="600.0" style="-fx-background-color: black;" VBox.vgrow="ALWAYS" />
             <AnchorPane prefHeight="177.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                <children>
                   <HBox alignment="CENTER" prefHeight="162.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <VBox alignment="CENTER" prefHeight="273.0" prefWidth="174.0" spacing="5.0">
-                           <children>
-                              <TextField id="username_login" promptText="Gebruikersnaam" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 50 50 50 50;">
-                              </TextField>
-                              <PasswordField id="password_login" alignment="CENTER" promptText="Wachtwoord" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 50 50 50 50;" />
-                           </children>
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
+                           <children>
+                              <TextField alignment="CENTER" promptText="Gebruikersnaam" />
+                              <PasswordField alignment="CENTER" promptText="Wachtwoord" />
+                           </children>
                         </VBox>
                      </children>
                   </HBox>
