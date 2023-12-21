@@ -19,6 +19,9 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import static com.example.ovapp.Request.sendApiRequest;
 
@@ -26,6 +29,12 @@ public class HomeController {
 
     @FXML
     private TextField startCityTextField;
+
+    @FXML
+    private Spinner<Integer> startUurSpinner;
+
+    @FXML
+    private Spinner<Integer> startMinuutSpinner;
 
     @FXML
     private DatePicker startDatePicker;
@@ -37,25 +46,38 @@ public class HomeController {
     private ChoiceBox<String> transportChoiceBox;
 
     @FXML
-    private Button planReisButton;
+    private ChoiceBox<String> timeChoiceBox;
 
     @FXML
+    private Button planReisButton;
+
+        @FXML
     private void onPlanReisButtonClick(ActionEvent event) {
         try {
-            // Haal waarden op uit JavaFX-elementen
             String fromStation = startCityTextField.getText();
             String toStation = endCityTextField.getText();
 
+            String transportType = getTransportTypeFromChoiceBox();
 
-            sendApiRequest(fromStation, toStation );
+            boolean searchForArrival = timeChoiceBox.getValue().equals("Aankomst");
+
+            int selectedHour = startUurSpinner.getValue();
+            int selectedMinute = startMinuutSpinner.getValue();
+
+            String formattedTime = String.format("%02d:%02d:00", selectedHour, selectedMinute);
+
+            LocalDate selectedDate = startDatePicker.getValue();
+
+            String formattedDate = selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+
+            sendApiRequest(fromStation, toStation, transportType, searchForArrival, formattedTime, formattedDate);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ovapp/search-result-view.fxml"));
             Parent searchResultParent = loader.load();
 
-            // Haal het podium op
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
-            // Stel het zoekresultaatscherm in als de nieuwe scene
             Scene scene = new Scene(searchResultParent);
             stage.setScene(scene);
             stage.show();
@@ -64,17 +86,46 @@ public class HomeController {
         }
     }
 
+    private String getTransportTypeFromChoiceBox() {
+        switch (transportChoiceBox.getValue()) {
+            case "Trein":
+                return "METRO,TRAM,FERRY,BUS";
+            case "Bus":
+                return "TRAIN,METRO,TRAM,FERRY";
+            case "Geen Voorkeur":
+            default:
+                return "METRO,TRAM,FERRY";
+        }
+    }
+
     @FXML
     private void citySuggestion(MouseEvent event) {
-        // Your implementation here
         configureCitySuggestions(startCityTextField);
         configureCitySuggestions(endCityTextField);
+
     }
 
     @FXML
     private void initialize() {
         configureCitySuggestions(startCityTextField);
         configureCitySuggestions(endCityTextField);
+
+        setDefaultTimeInSpinners();
+
+        setDefaultDateInDatePicker();
+    }
+
+    private void setDefaultTimeInSpinners() {
+        LocalTime currentTime = LocalTime.now();
+
+        startUurSpinner.getValueFactory().setValue(currentTime.getHour());
+
+        startMinuutSpinner.getValueFactory().setValue(currentTime.getMinute());
+    }
+
+    private void setDefaultDateInDatePicker() {
+        LocalDate currentDate = LocalDate.now();
+        startDatePicker.setValue(currentDate);
     }
 
     private final ObservableList<String> allCities = FXCollections.observableArrayList(
@@ -96,20 +147,16 @@ public class HomeController {
 
         SortedList<String> sortedCities = new SortedList<>(filteredCities);
 
-        // Use a custom Popup for suggestions
         CustomSuggestionPopup<String> suggestionPopup = new CustomSuggestionPopup<>(sortedCities);
 
-        // Show suggestions when the user clicks the text field
         textField.setOnMouseClicked(event -> suggestionPopup.show(textField.getScene().getWindow(), event.getScreenX(), event.getScreenY()));
 
-        // Hide suggestions when the user clicks outside the text field
         textField.focusedProperty().addListener((obs, oldVal, newVal) -> {
             if (!newVal) {
                 suggestionPopup.hide();
             }
         });
 
-        // Set the selected suggestion in the text field when clicked
         suggestionPopup.setOnSuggestionSelected(selectedItem -> {
             textField.setText(String.valueOf(selectedItem));
             suggestionPopup.hide();
