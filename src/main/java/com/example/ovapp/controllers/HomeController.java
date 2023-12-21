@@ -76,10 +76,8 @@ public class HomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ovapp/search-result-view.fxml"));
             Parent searchResultParent = loader.load();
 
-            // Haal het podium op
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
-            // Stel het zoekresultaatscherm in als de nieuwe scene
             Scene scene = new Scene(searchResultParent);
             stage.setScene(scene);
             stage.show();
@@ -102,7 +100,6 @@ public class HomeController {
 
     @FXML
     private void citySuggestion(MouseEvent event) {
-        // Your implementation here
         configureCitySuggestions(startCityTextField);
         configureCitySuggestions(endCityTextField);
 
@@ -150,20 +147,16 @@ public class HomeController {
 
         SortedList<String> sortedCities = new SortedList<>(filteredCities);
 
-        // Use a custom Popup for suggestions
         CustomSuggestionPopup<String> suggestionPopup = new CustomSuggestionPopup<>(sortedCities);
 
-        // Show suggestions when the user clicks the text field
         textField.setOnMouseClicked(event -> suggestionPopup.show(textField.getScene().getWindow(), event.getScreenX(), event.getScreenY()));
 
-        // Hide suggestions when the user clicks outside the text field
         textField.focusedProperty().addListener((obs, oldVal, newVal) -> {
             if (!newVal) {
                 suggestionPopup.hide();
             }
         });
 
-        // Set the selected suggestion in the text field when clicked
         suggestionPopup.setOnSuggestionSelected(selectedItem -> {
             textField.setText(String.valueOf(selectedItem));
             suggestionPopup.hide();
