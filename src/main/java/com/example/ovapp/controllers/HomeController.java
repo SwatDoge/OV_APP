@@ -119,11 +119,6 @@ public class HomeController {
         configureTimeSelectionBox();
     }
 
-    private void setDefaultTimeInSpinners() {
-        LocalDate currentDate = LocalDate.now();
-        startDatePicker.setValue(currentDate);
-    }
-
     private void setDefaultDateInDatePicker() {
         LocalDate currentDate = LocalDate.now();
         startDatePicker.setValue(currentDate);
@@ -133,9 +128,14 @@ public class HomeController {
         List<String> timeValues = generateTimeValues();
         ObservableList<String> timeOptions = FXCollections.observableArrayList(timeValues);
 
+        LocalTime currentTime = LocalTime.now();
+        LocalTime nextInterval = currentTime.plusMinutes(30).truncatedTo(java.time.temporal.ChronoUnit.HOURS);
+        String formattedTime = nextInterval.format(DateTimeFormatter.ofPattern("HH:mm"));
+
         timeSelectionBox.setItems(timeOptions);
-        timeSelectionBox.setValue("00:00");
+        timeSelectionBox.setValue(formattedTime);
     }
+
 
     private List<String> generateTimeValues() {
         List<String> timeValues = new ArrayList<>();
