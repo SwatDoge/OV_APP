@@ -64,7 +64,7 @@ public class HomeController {
             boolean searchForArrival = timeChoiceBox.getValue().equals("Aankomst");
 
             String selectedTime = timeSelectionBox.getValue();
-            String formattedTime = convertTime(selectedTime); // Nieuwe regel toegevoegd
+            String formattedTime = convertTime(selectedTime);
 
 
             LocalDate selectedDate = startDatePicker.getValue();
@@ -117,6 +117,10 @@ public class HomeController {
         setDefaultDateInDatePicker();
 
         configureTimeSelectionBox();
+
+        timeChoiceBox.setValue("Vertrek");
+
+        transportChoiceBox.setValue("Geen Voorkeur");
     }
 
     private void setDefaultDateInDatePicker() {
