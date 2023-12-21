@@ -89,7 +89,7 @@ public class Request {
         JsonObject json = jsonParser.parse(jsonResponse).getAsJsonObject();
         JsonArray trips = json.getAsJsonArray("trips");
 
-        for (int i = 0; i < Math.min(trips.size(), 7); i++) {
+        for (int i = 0; i < Math.min(trips.size(), 10); i++) {
             JsonObject routeInfo = trips.get(i).getAsJsonObject();
 
             JsonObject origin = routeInfo.getAsJsonArray("legs").get(0).getAsJsonObject().getAsJsonObject("origin");
