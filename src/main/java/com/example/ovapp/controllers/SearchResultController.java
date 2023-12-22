@@ -2,9 +2,13 @@ package com.example.ovapp.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.example.ovapp.Request;
+import com.google.gson.JsonObject;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 
 public class SearchResultController implements Initializable{
     @FXML
@@ -13,5 +17,6 @@ public class SearchResultController implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
         scrollPaneMain.setStyle("-fx-background: #252422; -fx-border-color: #252422;");
     }
+
 
 }
