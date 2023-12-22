@@ -84,7 +84,7 @@ public class Request {
         JsonObject json = jsonParser.parse(jsonResponse).getAsJsonObject();
         JsonArray trips = json.getAsJsonArray("trips");
 
-        for (int i = 0; i < Math.min(trips.size(), 10); i++) {
+        for (int i = 0; i < Math.min(trips.size(), 6); i++) {
             JsonObject routeInfo = trips.get(i).getAsJsonObject();
 
             JsonObject origin = routeInfo.getAsJsonArray("legs").get(0).getAsJsonObject().getAsJsonObject("origin");
@@ -97,11 +97,14 @@ public class Request {
 
             int plannedDuration = routeInfo.get("plannedDurationInMinutes").getAsInt();
             int idx = routeInfo.get("idx").getAsInt();
+            int transfers = routeInfo.get("transfers").getAsInt();
+
 
             System.out.println("Route: " + idx);
             System.out.println("==========================================");
             System.out.println("Van: " + originName);
             System.out.println("Naar: " + destinationName);
+            System.out.println("Overstappen: " + transfers);
             System.out.println("Vertrektijd: " + plannedDepartureTime);
             System.out.println("Aankomst-tijd: " + plannedArrivalTime);
             System.out.println("Geplande duur: " + plannedDuration + " minuten");
