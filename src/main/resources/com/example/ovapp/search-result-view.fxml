@@ -150,10 +150,10 @@
                                     <Image url="@../../../icons/arrow_icon.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="arrival_route5" alignment="TOP_RIGHT" layoutX="155.0" layoutY="287.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" text="13:59" textAlignment="CENTER" />
-                              <Label fx:id="departure_route5" alignment="TOP_LEFT" layoutX="19.0" layoutY="287.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" text="12:59" textAlignment="CENTER" />
-                              <Label fx:id="during_route5" alignment="TOP_LEFT" layoutX="40.0" layoutY="316.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" text="01:00" textAlignment="CENTER" />
-                              <Label fx:id="transfer_route5" alignment="TOP_RIGHT" layoutX="163.0" layoutY="318.0" prefHeight="19.0" prefWidth="35.0" style="-fx-text-fill: black; -fx-font-size: 15px;" text="1x" textAlignment="CENTER" />
+                              <Label fx:id="arrival_route5" alignment="TOP_RIGHT" layoutX="155.0" layoutY="287.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="departure_route5" alignment="TOP_LEFT" layoutX="19.0" layoutY="287.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="during_route5" alignment="TOP_LEFT" layoutX="40.0" layoutY="316.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="transfer_route5" alignment="TOP_RIGHT" layoutX="163.0" layoutY="318.0" prefHeight="19.0" prefWidth="35.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
 
                               <Button fx:id="route6" layoutX="7.0" layoutY="347.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #F4F3EE; -fx-text-fill: #252422; -fx-background-radius: 10 10 10 10;">
                                  <graphic>
