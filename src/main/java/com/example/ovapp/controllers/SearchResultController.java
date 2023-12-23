@@ -15,7 +15,6 @@ public class SearchResultController implements Initializable{
     private ScrollPane scrollPaneMain;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        scrollPaneMain.setStyle("-fx-background: #252422; -fx-border-color: #252422;");
     }
 
 
