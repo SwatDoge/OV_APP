@@ -1,5 +1,9 @@
 package com.example.ovapp;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,11 +12,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 public class Request {
 
@@ -84,7 +83,7 @@ public class Request {
         JsonObject json = jsonParser.parse(jsonResponse).getAsJsonObject();
         JsonArray trips = json.getAsJsonArray("trips");
 
-        for (int i = 0; i < Math.min(trips.size(), 6); i++) {
+        for (int i = 0; i < Math.min(trips.size(), 1); i++) {
             JsonObject routeInfo = trips.get(i).getAsJsonObject();
 
             JsonObject origin = routeInfo.getAsJsonArray("legs").get(0).getAsJsonObject().getAsJsonObject("origin");
@@ -98,13 +97,12 @@ public class Request {
             int transfers = routeInfo.get("transfers").getAsInt();
 
 
+
             System.out.println(idx);
-            System.out.println("==========================================");
             System.out.println(transfers);
             System.out.println(plannedDepartureTime);
             System.out.println(plannedArrivalTime);
             System.out.println(plannedDuration);
-            System.out.println("==========================================");
 
         }
     }
