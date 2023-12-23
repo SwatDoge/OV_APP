@@ -88,11 +88,9 @@ public class Request {
             JsonObject routeInfo = trips.get(i).getAsJsonObject();
 
             JsonObject origin = routeInfo.getAsJsonArray("legs").get(0).getAsJsonObject().getAsJsonObject("origin");
-            String originName = origin.get("name").getAsString();
             String plannedDepartureTime = origin.get("plannedDateTime").getAsString().substring(11, 16);
 
             JsonObject destination = routeInfo.getAsJsonArray("legs").get(0).getAsJsonObject().getAsJsonObject("destination");
-            String destinationName = destination.get("name").getAsString();
             String plannedArrivalTime = destination.get("plannedDateTime").getAsString().substring(11, 16);
 
             int plannedDuration = routeInfo.get("plannedDurationInMinutes").getAsInt();
@@ -100,37 +98,14 @@ public class Request {
             int transfers = routeInfo.get("transfers").getAsInt();
 
 
-            System.out.println("Route: " + idx);
+            System.out.println(idx);
             System.out.println("==========================================");
-            System.out.println("Van: " + originName);
-            System.out.println("Naar: " + destinationName);
-            System.out.println("Overstappen: " + transfers);
-            System.out.println("Vertrektijd: " + plannedDepartureTime);
-            System.out.println("Aankomst-tijd: " + plannedArrivalTime);
-            System.out.println("Geplande duur: " + plannedDuration + " minuten");
+            System.out.println(transfers);
+            System.out.println(plannedDepartureTime);
+            System.out.println(plannedArrivalTime);
+            System.out.println(plannedDuration);
             System.out.println("==========================================");
 
-            JsonArray stops = routeInfo.getAsJsonArray("legs").get(0).getAsJsonObject().getAsJsonArray("stops");
-            for (int j = 0; j < stops.size(); j++) {
-                JsonObject stop = stops.get(j).getAsJsonObject();
-                String stopName = stop.get("name").getAsString();
-
-                JsonElement plannedArrivalTimeElement = stop.get("plannedArrivalDateTime");
-                String plannedArrivalTimeStop = (plannedArrivalTimeElement != null && !plannedArrivalTimeElement.isJsonNull()) ? plannedArrivalTimeElement.getAsString().substring(11, 16) : "";
-
-                JsonElement plannedDepartureTimeElement = stop.get("plannedDepartureDateTime");
-                String plannedDepartureTimeStop = (plannedDepartureTimeElement != null && !plannedDepartureTimeElement.isJsonNull()) ? plannedDepartureTimeElement.getAsString().substring(11, 16) : "";
-
-                if (!plannedArrivalTimeStop.isEmpty()) {
-                    System.out.println("Stop: " + stopName + ", Aankomsttijd: " + plannedArrivalTimeStop);
-                } else if (!plannedDepartureTimeStop.isEmpty()) {
-                    System.out.println("Stop: " + stopName + ", Vertrektijd: " + plannedDepartureTimeStop);
-                }
-
-                System.out.println();
-            }
-
-            System.out.println();
         }
     }
 
