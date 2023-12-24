@@ -91,7 +91,7 @@ public class SearchResultController implements Initializable{
 
         if (trips.length > 0) {
             transfer_route1.setText(String.format("%d", trips[0].transfers));
-            during_route1.setText(String.format("%d", trips[0].plannedDurationInMinutes));
+            during_route1.setText(trips[0].getFormattedDuration());
             departure_route1.setText(trips[0].legs.get(0).origin.getFormattedTime());
 
         }

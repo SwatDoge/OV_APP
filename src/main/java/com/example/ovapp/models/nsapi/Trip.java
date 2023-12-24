@@ -8,4 +8,12 @@ public class Trip {
     public int transfers;
     public int plannedDurationInMinutes;
     public List<Leg> legs;
+
+    public String getFormattedDuration() {
+        int hours = plannedDurationInMinutes / 60;
+        int minutes = plannedDurationInMinutes % 60;
+
+        return String.format("%02d:%02d", hours, minutes);
+    }
 }
+
