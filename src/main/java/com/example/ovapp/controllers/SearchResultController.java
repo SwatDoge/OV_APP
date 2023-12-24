@@ -105,21 +105,15 @@ public class SearchResultController implements Initializable{
         if (trips.length >= 1) {
             transfer_route2.setText(String.format("%dx", trips[1].transfers));
             during_route2.setText(trips[1].getFormattedDuration());
-            departure_route2.setText(trips[1].legs.get(1).origin.getFormattedTime());
-
-            String formattedDepartureTime = trips[1].legs.get(1).origin.getFormattedTime();
-            String formattedDuration = trips[1].getFormattedDuration();
-            String formattedArrivalTime = TimeUtils.calculateArrivalTime(formattedDepartureTime, formattedDuration);
-
-            arrival_route2.setText(formattedArrivalTime);
+            departure_route2.setText(trips[1].legs.get(0).origin.getFormattedTime());
         }
 
         if (trips.length >= 2) {
             transfer_route3.setText(String.format("%dx", trips[2].transfers));
             during_route3.setText(trips[2].getFormattedDuration());
-            departure_route3.setText(trips[2].legs.get(2).origin.getFormattedTime());
-
-
+            departure_route3.setText(trips[2].legs.get(0).origin.getFormattedTime());
         }
+
+
     }
 }
