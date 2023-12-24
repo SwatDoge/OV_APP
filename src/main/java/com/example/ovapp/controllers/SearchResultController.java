@@ -106,12 +106,60 @@ public class SearchResultController implements Initializable{
             transfer_route2.setText(String.format("%dx", trips[1].transfers));
             during_route2.setText(trips[1].getFormattedDuration());
             departure_route2.setText(trips[1].legs.get(0).origin.getFormattedTime());
+
+            String formattedDepartureTime = trips[1].legs.get(0).origin.getFormattedTime();
+            String formattedDuration = trips[1].getFormattedDuration();
+            String formattedArrivalTime = TimeUtils.calculateArrivalTime(formattedDepartureTime, formattedDuration);
+
+            arrival_route2.setText(formattedArrivalTime);
         }
 
         if (trips.length >= 2) {
             transfer_route3.setText(String.format("%dx", trips[2].transfers));
             during_route3.setText(trips[2].getFormattedDuration());
             departure_route3.setText(trips[2].legs.get(0).origin.getFormattedTime());
+
+            String formattedDepartureTime = trips[2].legs.get(0).origin.getFormattedTime();
+            String formattedDuration = trips[2].getFormattedDuration();
+            String formattedArrivalTime = TimeUtils.calculateArrivalTime(formattedDepartureTime, formattedDuration);
+
+            arrival_route3.setText(formattedArrivalTime);
+        }
+
+        if (trips.length >= 3) {
+            transfer_route4.setText(String.format("%dx", trips[3].transfers));
+            during_route4.setText(trips[3].getFormattedDuration());
+            departure_route4.setText(trips[3].legs.get(0).origin.getFormattedTime());
+
+            String formattedDepartureTime = trips[3].legs.get(0).origin.getFormattedTime();
+            String formattedDuration = trips[3].getFormattedDuration();
+            String formattedArrivalTime = TimeUtils.calculateArrivalTime(formattedDepartureTime, formattedDuration);
+
+            arrival_route4.setText(formattedArrivalTime);
+        }
+
+        if (trips.length >= 4) {
+            transfer_route5.setText(String.format("%dx", trips[4].transfers));
+            during_route5.setText(trips[4].getFormattedDuration());
+            departure_route5.setText(trips[4].legs.get(0).origin.getFormattedTime());
+
+            String formattedDepartureTime = trips[4].legs.get(0).origin.getFormattedTime();
+            String formattedDuration = trips[4].getFormattedDuration();
+            String formattedArrivalTime = TimeUtils.calculateArrivalTime(formattedDepartureTime, formattedDuration);
+
+            arrival_route5.setText(formattedArrivalTime);
+        }
+
+        if (trips.length >= 5) {
+            transfer_route6.setText(String.format("%dx", trips[5].transfers));
+            during_route6.setText(trips[5].getFormattedDuration());
+            departure_route6.setText(trips[5].legs.get(0).origin.getFormattedTime());
+
+            String formattedDepartureTime = trips[5].legs.get(0).origin.getFormattedTime();
+            String formattedDuration = trips[5].getFormattedDuration();
+            String formattedArrivalTime = TimeUtils.calculateArrivalTime(formattedDepartureTime, formattedDuration);
+
+            arrival_route6.setText(formattedArrivalTime);
         }
 
 
