@@ -76,14 +76,6 @@ public class SearchResultController implements Initializable{
     private Label transfer_route6;
 
     @FXML
-    private Label arrival_route7;
-    @FXML
-    private Label departure_route7;
-    @FXML
-    private Label during_route7;
-    @FXML
-    private Label transfer_route7;
-    @FXML
     //</editor-fold>
 
     //Pak de namen van de resultaten en zet ze in de labels.
