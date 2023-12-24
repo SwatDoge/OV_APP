@@ -12,18 +12,14 @@ public class TimeUtils {
         try {
             SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
-            // Parse de geformatteerde vertrektijd
             Date departureDate = timeFormat.parse(departureTime);
 
-            // Parse de geformatteerde duur naar minuten
             int durationInMinutes = parseDurationToMinutes(duration);
 
-            // Voeg de duur toe aan de vertrektijd
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(departureDate);
             calendar.add(Calendar.MINUTE, durationInMinutes);
 
-            // Formateer de resulterende tijd naar "HH:mm"
             return timeFormat.format(calendar.getTime());
         } catch (ParseException e) {
             e.printStackTrace();
