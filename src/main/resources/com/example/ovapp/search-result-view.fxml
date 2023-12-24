@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BF1441;" stylesheets="@../../../css/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ovapp.controllers.SearchResultController" >
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BF1441;" stylesheets="@../../../css/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ovapp.controllers.SearchResultController">
    <children>
       <HBox id="header" alignment="CENTER" layoutX="187.0" prefHeight="75.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -52,7 +52,7 @@
                               </ImageView>
                               <Label fx:id="arrival_route1" alignment="TOP_RIGHT" layoutX="155.0" layoutY="14.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
                               <Label fx:id="departure_route1" alignment="TOP_LEFT" layoutX="19.0" layoutY="15.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="during_route1" alignment="TOP_LEFT" layoutX="40.0" layoutY="44.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;"  textAlignment="CENTER" />
+                              <Label fx:id="during_route1" alignment="TOP_LEFT" layoutX="40.0" layoutY="44.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
                               <Label fx:id="transfer_route1" alignment="TOP_RIGHT" layoutX="163.0" layoutY="46.0" prefHeight="19.0" prefWidth="35.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
 
                               <Button fx:id="route2" layoutX="7.0" layoutY="75.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #F4F3EE; -fx-text-fill: #252422; -fx-background-radius: 10 10 10 10;">
@@ -287,7 +287,7 @@
       </HBox>
       <AnchorPane layoutY="71.0" prefHeight="35.0" prefWidth="600.0">
          <children>
-            <Hyperlink layoutX="14.0" layoutY="7.0" styleClass="dark" text="Terug" underline="true">
+            <Hyperlink layoutX="14.0" layoutY="7.0" onAction="#onBackButtonPressed" styleClass="dark" text="Terug" underline="true">
                <font>
                   <Font name="Verdana" size="15.0" />
                </font>
