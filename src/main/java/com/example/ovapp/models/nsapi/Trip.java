@@ -4,5 +4,5 @@ public class Trip {
     public FareRoute fareRoute;
     public int transfers;
     public int plannedDurationInMinutes;
-    public Origin origin;
+    public Leg legs;
 }
