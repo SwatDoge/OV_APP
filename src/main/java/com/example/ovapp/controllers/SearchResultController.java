@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import com.example.ovapp.TimeUtils;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -90,20 +91,35 @@ public class SearchResultController implements Initializable{
         Trip[] trips = nsApiRoot.trips;
 
         if (trips.length > 0) {
-            transfer_route1.setText(String.format("%d", trips[0].transfers));
+            transfer_route1.setText(String.format("%dx", trips[0].transfers));
             during_route1.setText(trips[0].getFormattedDuration());
             departure_route1.setText(trips[0].legs.get(0).origin.getFormattedTime());
 
+            String formattedDepartureTime = trips[0].legs.get(0).origin.getFormattedTime();
+            String formattedDuration = trips[0].getFormattedDuration();
+            String formattedArrivalTime = TimeUtils.calculateArrivalTime(formattedDepartureTime, formattedDuration);
+
+            arrival_route1.setText(formattedArrivalTime);
         }
 
         if (trips.length >= 1) {
-            departure_route2.setText(trips[1].fareRoute.origin.name);
-            arrival_route2.setText(trips[1].fareRoute.destination.name);
+            transfer_route2.setText(String.format("%dx", trips[1].transfers));
+            during_route2.setText(trips[1].getFormattedDuration());
+            departure_route2.setText(trips[1].legs.get(1).origin.getFormattedTime());
+
+            String formattedDepartureTime = trips[1].legs.get(1).origin.getFormattedTime();
+            String formattedDuration = trips[1].getFormattedDuration();
+            String formattedArrivalTime = TimeUtils.calculateArrivalTime(formattedDepartureTime, formattedDuration);
+
+            arrival_route2.setText(formattedArrivalTime);
         }
 
         if (trips.length >= 2) {
-            departure_route3.setText(trips[2].fareRoute.origin.name);
-            arrival_route3.setText(trips[2].fareRoute.destination.name);
+            transfer_route3.setText(String.format("%dx", trips[2].transfers));
+            during_route3.setText(trips[2].getFormattedDuration());
+            departure_route3.setText(trips[2].legs.get(2).origin.getFormattedTime());
+
+
         }
     }
 }

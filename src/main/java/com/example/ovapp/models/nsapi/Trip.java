@@ -16,4 +16,3 @@ public class Trip {
         return String.format("%02d:%02d", hours, minutes);
     }
 }
-
