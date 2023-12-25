@@ -2,6 +2,7 @@ package com.example.ovapp.controllers;
 
 import com.example.ovapp.models.nsapi.NSApiRoot;
 import com.example.ovapp.models.nsapi.Trip;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -180,5 +181,23 @@ public class SearchResultController implements Initializable{
         }
 
 
+    }
+
+    public void handleRoute1ButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void handleRoute2ButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void handleRoute3ButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void handleRoute4ButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void handleRoute5ButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void handleRoute6ButtonClick(ActionEvent actionEvent) {
     }
 }
