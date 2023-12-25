@@ -4,6 +4,7 @@ import com.example.ovapp.models.nsapi.NSApiRoot;
 import com.example.ovapp.models.nsapi.Trip;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import com.example.ovapp.TimeUtils;
@@ -75,6 +76,18 @@ public class SearchResultController implements Initializable{
     @FXML
     private Label transfer_route6;
 
+    @FXML
+    private Button route1;
+    @FXML
+    private Button route2;
+    @FXML
+    private Button route3;
+    @FXML
+    private Button route4;
+    @FXML
+    private Button route5;
+    @FXML
+    private Button route6;
     @FXML
     //</editor-fold>
 
