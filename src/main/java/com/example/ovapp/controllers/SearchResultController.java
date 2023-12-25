@@ -88,6 +88,18 @@ public class SearchResultController implements Initializable{
     private Button route5;
     @FXML
     private Button route6;
+
+    @FXML
+    private Label departure_details;
+    @FXML
+    private Label during_details;
+    @FXML
+    private Label arrival_details;
+    @FXML
+    private Label track_details;
+    @FXML
+    private Label transfer_details;
+
     @FXML
     //</editor-fold>
 
