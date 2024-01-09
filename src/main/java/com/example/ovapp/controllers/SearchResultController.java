@@ -14,11 +14,21 @@ import javafx.scene.control.ScrollPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SearchResultController implements Initializable {
+import com.example.ovapp.enums.EPage;
+import com.example.ovapp.tools.Page;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
+
+public class SearchResultController implements Initializable{
     @FXML
     private ScrollPane scrollPaneMain;
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+    }
 
-
+    //Dit zijn alle labels die ik nu aanpas
+    //<editor-fold desc="Elements">
     @FXML
     private Label arrival_route1;
     @FXML
@@ -54,6 +64,7 @@ public class SearchResultController implements Initializable {
     private Label during_route4;
     @FXML
     private Label transfer_route4;
+
 
     @FXML
     private Label arrival_route5;
@@ -97,12 +108,13 @@ public class SearchResultController implements Initializable {
     @FXML
     private Label transfer_details;
 
-    private NSApiRoot currentApiResult;
+    @FXML
+    //</editor-fold>
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    }
+    private NSApiRoot apiResult;
 
+
+    //Pak de namen van de resultaten en zet ze in de labels.
     public void updateResultsDisplay(NSApiRoot nsApiRoot) {
         Trip[] trips = nsApiRoot.trips;
 
@@ -177,29 +189,28 @@ public class SearchResultController implements Initializable {
 
             arrival_route6.setText(formattedArrivalTime);
         }
-
-        currentApiResult = nsApiRoot;
     }
 
     public void setApiResult(NSApiRoot apiResult) {
-        this.currentApiResult = apiResult;
+        this.apiResult = apiResult;
         System.out.println("apiResult set: " + apiResult);
+
     }
 
     public NSApiRoot getApiResult() {
-        return currentApiResult;
+        return apiResult;
     }
 
     private void updateDetails(int routeNumber) {
         System.out.println("Updating details for route " + routeNumber + "...");
-
-        if (currentApiResult == null || currentApiResult.trips == null) {
+        if (apiResult == null || apiResult.trips == null) {
             System.out.println("NSApiRoot or trips is null.");
             return;
         }
 
-        Trip[] trips = currentApiResult.trips;
+        Trip[] trips = apiResult.trips;
         System.out.println("Number of trips: " + trips.length);
+
 
         if (trips.length >= routeNumber) {
             Trip selectedTrip = trips[routeNumber - 1];
@@ -225,6 +236,7 @@ public class SearchResultController implements Initializable {
 
     public void handleRoute2ButtonClick(ActionEvent actionEvent) {
         updateDetails(2);
+
     }
 
     public void handleRoute3ButtonClick(ActionEvent actionEvent) {
@@ -237,5 +249,7 @@ public class SearchResultController implements Initializable {
     }
 
     public void handleRoute6ButtonClick(ActionEvent actionEvent) {
+    public void onBackButtonPressed() {
+        Page.navigateTo(EPage.HOME);
     }
 }
