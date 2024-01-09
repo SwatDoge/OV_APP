@@ -249,6 +249,8 @@ public class SearchResultController implements Initializable{
     }
 
     public void handleRoute6ButtonClick(ActionEvent actionEvent) {
+    }
+
     public void onBackButtonPressed() {
         Page.navigateTo(EPage.HOME);
     }
