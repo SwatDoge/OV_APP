@@ -101,9 +101,6 @@ public class SearchResultController implements Initializable{
     @FXML
     private Label transfer_details;
 
-    @FXML
-    //</editor-fold>
-
     private NSApiRoot currentApiResult;
 
     @Override
@@ -186,15 +183,6 @@ public class SearchResultController implements Initializable{
         }
 
         currentApiResult = nsApiRoot;
-    }
-
-    public void setApiResult(NSApiRoot apiResult) {
-        this.currentApiResult = apiResult;
-        System.out.println("apiResult set: " + apiResult);
-    }
-
-    public NSApiRoot getApiResult() {
-        return currentApiResult;
     }
 
     private void updateDetails(int routeNumber) {
