@@ -11,6 +11,8 @@ public class Origin {
     public String type;
     public String plannedDateTime;
     public String checkinStatus;
+    public String plannedTrack;
+    public String actualTrack;
 
     public String getFormattedTime() {
         // Parse de plannedDateTime-string

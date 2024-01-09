@@ -210,6 +210,19 @@ public class SearchResultController implements Initializable{
                 String formattedArrivalTime = TimeUtils.calculateArrivalTime(formattedDepartureTime, formattedDuration);
 
                 arrival_details.setText(formattedArrivalTime);
+
+                String trackOrLine = "";
+
+                if (selectedTrip.legs.get(0).origin.actualTrack != null && !selectedTrip.legs.get(0).origin.actualTrack.isEmpty()) {
+                    trackOrLine = "Spoor " + selectedTrip.legs.get(0).origin.actualTrack;
+                } else if (selectedTrip.legs.get(0).origin.plannedTrack != null && !selectedTrip.legs.get(0).origin.plannedTrack.isEmpty()) {
+                    trackOrLine = "Perron " + selectedTrip.legs.get(0).origin.plannedTrack;
+                } else if (selectedTrip.legs.get(0).product.number != null) {
+                    trackOrLine = "Lijn " + selectedTrip.legs.get(0).product.number;
+                }
+
+                track_details.setText(trackOrLine);
+
             });
         }
     }

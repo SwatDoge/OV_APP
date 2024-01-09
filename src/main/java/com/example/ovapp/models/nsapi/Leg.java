@@ -11,5 +11,5 @@ public class Leg {
     public boolean alternativeTransport;
     public String journeyDetailRef;
     public Origin origin;
-
+    public Product product;
 }
