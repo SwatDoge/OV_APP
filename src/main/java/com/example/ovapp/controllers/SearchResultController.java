@@ -18,6 +18,7 @@ public class SearchResultController implements Initializable {
     @FXML
     private ScrollPane scrollPaneMain;
 
+
     @FXML
     private Label arrival_route1;
     @FXML
