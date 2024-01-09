@@ -100,6 +100,8 @@ public class SearchResultController implements Initializable{
     private Label track_details;
     @FXML
     private Label transfer_details;
+    @FXML
+    private Label stops_details;
 
     private NSApiRoot currentApiResult;
 
@@ -222,7 +224,6 @@ public class SearchResultController implements Initializable{
                 }
 
                 track_details.setText(trackOrLine);
-
             });
         }
     }
