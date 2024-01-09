@@ -1,8 +1,10 @@
 package com.example.ovapp.controllers;
 
 import com.example.ovapp.TimeUtils;
+import com.example.ovapp.enums.EPage;
 import com.example.ovapp.models.nsapi.NSApiRoot;
 import com.example.ovapp.models.nsapi.Trip;
+import com.example.ovapp.tools.Page;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,12 +15,6 @@ import javafx.scene.control.ScrollPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import com.example.ovapp.enums.EPage;
-import com.example.ovapp.tools.Page;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.ScrollPane;
 
 public class SearchResultController implements Initializable{
     @FXML
@@ -249,6 +245,9 @@ public class SearchResultController implements Initializable{
     }
 
     public void handleRoute6ButtonClick(ActionEvent actionEvent) {
+
+    }
+
     public void onBackButtonPressed() {
         Page.navigateTo(EPage.HOME);
     }
