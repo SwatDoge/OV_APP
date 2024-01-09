@@ -27,7 +27,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import static com.example.ovapp.Request.sendApiRequest;
+import static com.example.ovapp.Main.currentStage;
+import static com.example.ovapp.tools.Request.sendApiRequest;
 
 
 
@@ -84,8 +85,8 @@ public class HomeController {
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
             Scene scene = new Scene(searchResultParent);
-            stage.setScene(scene);
-            stage.show();
+            currentStage.setScene(scene);
+            currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -11,9 +11,11 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    public static Stage currentStage;
 
     @Override
     public void start(Stage stage) throws Exception {
+        currentStage = stage;
         Parent root = FXMLLoader.load(getClass().getResource("home-view.fxml"));
 
         Scene scene = new Scene(root, 600, 400);

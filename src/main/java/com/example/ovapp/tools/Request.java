@@ -1,4 +1,4 @@
-package com.example.ovapp;
+package com.example.ovapp.tools;
 
 import com.example.ovapp.models.nsapi.NSApiRoot;
 import com.google.gson.Gson;
