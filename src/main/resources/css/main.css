@@ -43,10 +43,15 @@ TextField, PasswordField, ChoiceBox {
     -fx-pref-width: 200;
 }
 
-Hyperlink {
+Hyperlink, .hyperlink:hover {
+    -fx-font-size: 15;
     -fx-text-fill: white;
     -fx-border-width: 0;
     -fx-underline: false;
+}
+
+.hyperlink:hover {
+    -fx-underline: true;
 }
 
 Button {
@@ -87,10 +92,30 @@ ScrollPane > .scroll-bar:vertical{
     -fx-background-radius: 0;
 }
 
-/*Search results*/
+/* Search results */
 .search-item {
     -fx-background-color: white;
     -fx-border-width: 1;
     -fx-border-color: #BF1441;
     -fx-border-style: solid;
+}
+
+/* Sidebar */
+#sidebar {
+
+}
+
+#sidebar > AnchorPane {
+
+}
+
+#sidebar > AnchorPane > VBox > AnchorPane {
+    -fx-pref-height: 50;
+}
+
+#sidebar > AnchorPane > VBox > AnchorPane > HBox > Button {
+    -fx-font-size: 21px;
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-padding: 0;
 }

@@ -15,6 +15,7 @@ public class Page {
         put(EPage.REGISTER, new PageInfo("/com/example/ovapp/register-view.fxml"));
         put(EPage.PROFILE, new PageInfo("/com/example/ovapp/profile-view.fxml"));
         put(EPage.SEARCHRESULT, new PageInfo("/com/example/ovapp/search-result-view.fxml"));
+        put(EPage.SIDEBAR, new PageInfo("/com/example/ovapp/sidebar-view.fxml"));
     }};
 
     public static PageInfo getPageInfo(EPage page) {

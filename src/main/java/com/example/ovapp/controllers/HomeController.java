@@ -1,5 +1,8 @@
 package com.example.ovapp.controllers;
 
+import com.example.ovapp.enums.EPage;
+import com.example.ovapp.tools.Page;
+import com.example.ovapp.tools.PageInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -14,6 +17,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -98,6 +103,20 @@ public class HomeController {
             default:
                 return "METRO,TRAM,FERRY";
         }
+    }
+
+    @FXML
+    private void test() {
+            try {
+                PageInfo<HomeController> pageInfoSidebar = Page.getPageInfo(EPage.SIDEBAR);
+                VBox page = (VBox) Page.getPageInfo(EPage.HOME).getParent();
+
+                ((AnchorPane) page.getChildren().getFirst()).getChildren().addFirst(pageInfoSidebar.getParent());
+                System.out.println("a");
+            }
+            catch (Exception E){
+                System.out.println("b");
+            }
     }
 
     @FXML
