@@ -2,8 +2,7 @@ package com.example.ovapp.controllers;
 
 import com.example.ovapp.TimeUtils;
 import com.example.ovapp.enums.EPage;
-import com.example.ovapp.models.nsapi.NSApiRoot;
-import com.example.ovapp.models.nsapi.Trip;
+import com.example.ovapp.models.nsapi.*;
 import com.example.ovapp.tools.Page;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -17,6 +16,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SearchResultController implements Initializable{
+
+    private Button lastClickedButton;
+
+    private void setButtonStyle(Button button) {
+        button.setStyle("-fx-background-color: white; -fx-border-color: transparent; -fx-border-width: 0px;");
+    }
     @FXML
     private ScrollPane scrollPaneMain;
 
@@ -105,8 +110,36 @@ public class SearchResultController implements Initializable{
 
     private NSApiRoot currentApiResult;
 
-    @Override
+
     public void initialize(URL url, ResourceBundle rb) {
+        setButtonStyle(route1);
+        setButtonStyle(route2);
+        // Voeg de event handlers toe
+        route1.setOnAction(event -> handleRouteButtonClick(1));
+        route2.setOnAction(event -> handleRouteButtonClick(2));
+    }
+
+    private void handleRouteButtonClick(int routeNumber) {
+        if (lastClickedButton != null) {
+            lastClickedButton.setStyle("-fx-background-color: white; -fx-border-color: transparent; -fx-border-width: 2px;");
+        }
+
+        Button clickedButton = getRouteButton(routeNumber);
+        clickedButton.setStyle("-fx-background-color: white; -fx-border-color: red; -fx-border-width: 2px;");
+
+        updateDetails(routeNumber);
+
+        lastClickedButton = clickedButton;
+    }
+    private Button getRouteButton(int routeNumber) {
+        switch (routeNumber) {
+            case 1:
+                return route1;
+            case 2:
+                return route2;
+            default:
+                return null;
+        }
     }
 
     public void updateResultsDisplay(NSApiRoot nsApiRoot) {
@@ -196,11 +229,9 @@ public class SearchResultController implements Initializable{
         }
 
         Trip[] trips = currentApiResult.trips;
-        System.out.println("Number of trips: " + trips.length);
 
         if (trips.length >= routeNumber) {
             Trip selectedTrip = trips[routeNumber - 1];
-            System.out.println("Selected trip: " + selectedTrip);
 
             Platform.runLater(() -> {
                 transfer_details.setText(String.format("%dx", selectedTrip.transfers));
@@ -224,10 +255,45 @@ public class SearchResultController implements Initializable{
                 }
 
                 track_details.setText(trackOrLine);
+
+                System.out.println("Details van de reis");
+                System.out.println();
+
+
+                for (Leg leg : selectedTrip.legs) {
+                System.out.println("Vertrek-punt: " + leg.origin.name);
+                System.out.println("Vertrek-Tijd: " + leg.origin.getFormattedTime());
+                System.out.println("Opstapperron: " + leg.origin.plannedTrack);
+                System.out.println("Checkin-Status: " + leg.origin.checkinStatus);
+                System.out.println();
+
+
+                System.out.println("Bestemming: " + leg.destination.name);
+                System.out.println("Aankomst-tijd: " + leg.destination.getFormattedTime());
+                System.out.println("Aankomst-Parron: " + leg.destination.plannedTrack);
+                System.out.println("Uitstap-kant: " + leg.destination.exitSide);
+                System.out.println("Checkin-Status: " + leg.destination.checkinStatus);
+
+                if (leg.transferMessages != null) {
+                    for (TransferMessages transferMessage : leg.transferMessages) {
+                        System.out.println("Overstap-Bericht: " + transferMessage.getAccessibilityMessage());
+                    }
+                }
+
+                if (leg.stops != null) {
+                    for (Stops stop : leg.stops) {
+                        System.out.println();
+                        System.out.println("Stop: " + stop.getName());
+                        System.out.println("Aankomst-tijd: " + stop.getPlannedArrivalDateTime());
+                        System.out.println("Vertrek-tijd: " + stop.getPlannedDepartureDateTime());
+                        System.out.println();
+                    }
+                }
+
+            }
             });
         }
     }
-
     public void handleRoute1ButtonClick(ActionEvent actionEvent) {
         updateDetails(1);
     }
@@ -252,6 +318,12 @@ public class SearchResultController implements Initializable{
         updateDetails(6);
     }
 
+    private void resetButtonStyles() {
+        route1.setStyle("-fx-background-color: white; -fx-border-color: transparent; -fx-border-width: 2px;");
+        route2.setStyle("-fx-background-color: white; -fx-border-color: transparent; -fx-border-width: 2px;");
+
+        lastClickedButton = null;
+    }
 public void onBackButtonPressed() {
         Page.navigateTo(EPage.HOME);
     }
