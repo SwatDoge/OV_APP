@@ -38,6 +38,7 @@ public class Page {
             currentStage.setScene(scene);
         }
 
+        System.out.println("Navigeren naar " + page);
         return pageInfo;
     }
 }

@@ -5,25 +5,40 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="background" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BF1441;" stylesheets="@../../../css/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserDetailscontroller">
+<AnchorPane id="background" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BF1441;" stylesheets="@../../../css/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ovapp.controllers.ProfileController">
     <children>
-        <HBox id="header" alignment="CENTER" layoutX="187.0" prefHeight="75.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <HBox fx:id="header" prefHeight="75.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <ImageView fitWidth="40.0" onMouseClicked="#toggleSideBar" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../assets/icons/more.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </VBox>
+                <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                    <children>
 
-                <ImageView fitHeight="90.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../assets/brand/train.png" />
-                    </image>
-                </ImageView>
-                <Label style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Profielpagina">
-                    <font>
-                        <Font name="Verdana" size="31.0" />
-                    </font>
-                </Label>
-            </children></HBox>
+                        <ImageView fitHeight="90.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../assets/brand/train.png" />
+                            </image>
+                        </ImageView>
+                        <Label style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="ProfielPagina">
+                            <font>
+                                <Font name="Verdana" size="31.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+                <VBox prefHeight="200.0" prefWidth="100.0" />
+            </children>
+        </HBox>
         <VBox alignment="CENTER" />
 
-        <Hyperlink layoutX="25.0" layoutY="80.0" styleClass="dark" text="Terug" underline="true">
+        <Hyperlink layoutX="25.0" layoutY="80.0" onAction="#onBackButtonPressed" styleClass="dark" text="Terug naar hoofdmenu" underline="true">
             <font>
                 <Font name="Verdana" size="15.0" />
             </font>
@@ -44,5 +59,6 @@
               <PasswordField fx:id="currentPasswordField" layoutX="198.0" layoutY="169.0" style="-fx-font-family: 'Verdana'; -fx-font-size: 15; -fx-background-radius: 50 50 50 50; " />
               <Label layoutX="14.0" layoutY="177.0" style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15 ;" text="Huidig Wachtwoord:" />
          </children></Pane>
+        <fx:include fx:id="sidebar" source="sidebar-view.fxml" />
     </children>
 </AnchorPane>

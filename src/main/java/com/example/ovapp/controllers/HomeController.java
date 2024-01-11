@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -55,6 +56,9 @@ public class HomeController {
 
     @FXML
     private Button planReisButton;
+
+    @FXML
+    private Pane sidebar;
 
     @FXML
     private ChoiceBox<String> timeSelectionBox;
@@ -106,17 +110,8 @@ public class HomeController {
     }
 
     @FXML
-    private void test() {
-            try {
-                PageInfo<HomeController> pageInfoSidebar = Page.getPageInfo(EPage.SIDEBAR);
-                VBox page = (VBox) Page.getPageInfo(EPage.HOME).getParent();
-
-                ((AnchorPane) page.getChildren().getFirst()).getChildren().addFirst(pageInfoSidebar.getParent());
-                System.out.println("a");
-            }
-            catch (Exception E){
-                System.out.println("b");
-            }
+    private void toggleSideBar() {
+        sidebar.setVisible(true);
     }
 
     @FXML
