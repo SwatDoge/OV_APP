@@ -1,5 +1,6 @@
 package com.example.ovapp.controllers;
 
+import com.example.ovapp.models.nsapi.NSApiRoot;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -17,24 +18,24 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import java.util.ArrayList;
+import java.util.List;
+
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import static com.example.ovapp.Request.sendApiRequest;
+import static com.example.ovapp.Main.currentStage;
+import static com.example.ovapp.tools.Request.sendApiRequest;
+
+
 
 public class HomeController {
 
     @FXML
     private TextField startCityTextField;
-
-    @FXML
-    private Spinner<Integer> startUurSpinner;
-
-    @FXML
-    private Spinner<Integer> startMinuutSpinner;
 
     @FXML
     private DatePicker startDatePicker;
@@ -51,6 +52,9 @@ public class HomeController {
     @FXML
     private Button planReisButton;
 
+    @FXML
+    private ChoiceBox<String> timeSelectionBox;
+
         @FXML
     private void onPlanReisButtonClick(ActionEvent event) {
         try {
@@ -61,29 +65,35 @@ public class HomeController {
 
             boolean searchForArrival = timeChoiceBox.getValue().equals("Aankomst");
 
-            int selectedHour = startUurSpinner.getValue();
-            int selectedMinute = startMinuutSpinner.getValue();
+            String selectedTime = timeSelectionBox.getValue();
+            String formattedTime = convertTime(selectedTime);
 
-            String formattedTime = String.format("%02d:%02d:00", selectedHour, selectedMinute);
 
             LocalDate selectedDate = startDatePicker.getValue();
-
             String formattedDate = selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-
-            sendApiRequest(fromStation, toStation, transportType, searchForArrival, formattedTime, formattedDate);
+            //Deze stuurt nu het hele api resultaat als classes terug
+            NSApiRoot nsApiRoot = sendApiRequest(fromStation, toStation, transportType, searchForArrival, formattedTime, formattedDate);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ovapp/search-result-view.fxml"));
             Parent searchResultParent = loader.load();
 
+            //In de controller van het volgende scherm roep ik een functie aan
+            SearchResultController searchResultController = loader.getController();
+            searchResultController.updateResultsDisplay(nsApiRoot);
+
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
             Scene scene = new Scene(searchResultParent);
-            stage.setScene(scene);
-            stage.show();
+            currentStage.setScene(scene);
+            currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String convertTime(String selectedTime) {
+        return selectedTime + ":00";
     }
 
     private String getTransportTypeFromChoiceBox() {
@@ -110,22 +120,43 @@ public class HomeController {
         configureCitySuggestions(startCityTextField);
         configureCitySuggestions(endCityTextField);
 
-        setDefaultTimeInSpinners();
 
         setDefaultDateInDatePicker();
-    }
 
-    private void setDefaultTimeInSpinners() {
-        LocalTime currentTime = LocalTime.now();
+        configureTimeSelectionBox();
 
-        startUurSpinner.getValueFactory().setValue(currentTime.getHour());
+        timeChoiceBox.setValue("Vertrek");
 
-        startMinuutSpinner.getValueFactory().setValue(currentTime.getMinute());
+        transportChoiceBox.setValue("Geen Voorkeur");
     }
 
     private void setDefaultDateInDatePicker() {
         LocalDate currentDate = LocalDate.now();
         startDatePicker.setValue(currentDate);
+    }
+
+    private void configureTimeSelectionBox() {
+        List<String> timeValues = generateTimeValues();
+        ObservableList<String> timeOptions = FXCollections.observableArrayList(timeValues);
+
+        LocalTime currentTime = LocalTime.now();
+        LocalTime nextInterval = currentTime.plusMinutes(30).truncatedTo(java.time.temporal.ChronoUnit.HOURS);
+        String formattedTime = nextInterval.format(DateTimeFormatter.ofPattern("HH:mm"));
+
+        timeSelectionBox.setItems(timeOptions);
+        timeSelectionBox.setValue(formattedTime);
+    }
+
+
+    private List<String> generateTimeValues() {
+        List<String> timeValues = new ArrayList<>();
+        for (int hour = 0; hour < 24; hour++) {
+            for (int minute = 0; minute < 60; minute += 30) {
+                String formattedTime = String.format("%02d:%02d", hour, minute);
+                timeValues.add(formattedTime);
+            }
+        }
+        return timeValues;
     }
 
     private final ObservableList<String> allCities = FXCollections.observableArrayList(

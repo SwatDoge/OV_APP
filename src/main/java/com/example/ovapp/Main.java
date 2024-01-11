@@ -4,23 +4,27 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    public static Stage currentStage;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage stage) throws Exception {
+        currentStage = stage;
         Parent root = FXMLLoader.load(getClass().getResource("home-view.fxml"));
 
         Scene scene = new Scene(root, 600, 400);
 
-        primaryStage.setResizable(false);
+        stage.getIcons().add(new Image(this.getClass().getResourceAsStream("favicon/logo.png")));
+        stage.setResizable(false);
+        stage.setTitle("Hollandse Baan");
 
-        primaryStage.setTitle("Hollandse Baan");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        stage.setScene(scene);
+        stage.show();
     }
 }
