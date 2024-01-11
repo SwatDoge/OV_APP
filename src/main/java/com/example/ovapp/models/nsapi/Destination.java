@@ -12,6 +12,17 @@ public class Destination {
     public String exitSide;
    public String checkinStatus;
 
+    public String getFormattedExit() {
+        switch (exitSide) {
+            case "RIGHT":
+                return "Rechts";
+            case "LEFT":
+                return "Links";
+            default:
+                throw new NullPointerException("Ongeldige richting: " + exitSide);
+        }
+    }
+
     public String getFormattedTime() {
         // Parse de plannedDateTime-string
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault());

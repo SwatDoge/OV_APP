@@ -110,7 +110,6 @@ public class SearchResultController implements Initializable{
 
     private NSApiRoot currentApiResult;
 
-
     public void initialize(URL url, ResourceBundle rb) {
         setButtonStyle(route1);
         setButtonStyle(route2);
@@ -125,7 +124,7 @@ public class SearchResultController implements Initializable{
         }
 
         Button clickedButton = getRouteButton(routeNumber);
-        clickedButton.setStyle("-fx-background-color: white; -fx-border-color: red; -fx-border-width: 2px;");
+        clickedButton.setStyle("-fx-background-color: white; -fx-border-color: red; -fx-border-width: 4px;");
 
         updateDetails(routeNumber);
 
@@ -261,7 +260,7 @@ public class SearchResultController implements Initializable{
 
 
                 for (Leg leg : selectedTrip.legs) {
-                System.out.println("Vertrek-punt: " + leg.origin.name);
+                System.out.println("Vertrek-Punt: " + leg.origin.name);
                 System.out.println("Vertrek-Tijd: " + leg.origin.getFormattedTime());
                 System.out.println("Opstapperron: " + leg.origin.plannedTrack);
                 System.out.println("Checkin-Status: " + leg.origin.checkinStatus);
@@ -269,9 +268,9 @@ public class SearchResultController implements Initializable{
 
 
                 System.out.println("Bestemming: " + leg.destination.name);
-                System.out.println("Aankomst-tijd: " + leg.destination.getFormattedTime());
+                System.out.println("Aankomst-Tijd: " + leg.destination.getFormattedTime());
                 System.out.println("Aankomst-Parron: " + leg.destination.plannedTrack);
-                System.out.println("Uitstap-kant: " + leg.destination.exitSide);
+                System.out.println("Uitstap-Kant: " + leg.destination.getFormattedExit());
                 System.out.println("Checkin-Status: " + leg.destination.checkinStatus);
 
                 if (leg.transferMessages != null) {
@@ -286,7 +285,6 @@ public class SearchResultController implements Initializable{
                         System.out.println("Stop: " + stop.getName());
                         System.out.println("Aankomst-tijd: " + stop.getPlannedArrivalDateTime());
                         System.out.println("Vertrek-tijd: " + stop.getPlannedDepartureDateTime());
-                        System.out.println();
                     }
                 }
 
