@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -107,6 +108,8 @@ public class SearchResultController implements Initializable{
     private Label transfer_details;
     @FXML
     private Label stops_details;
+    @FXML
+    private Pane stop_details_pane;
 
     private NSApiRoot currentApiResult;
 
@@ -220,8 +223,6 @@ public class SearchResultController implements Initializable{
     }
 
     private void updateDetails(int routeNumber) {
-        System.out.println("Updating details for route " + routeNumber + "...");
-
         if (currentApiResult == null || currentApiResult.trips == null) {
             System.out.println("NSApiRoot or trips is null.");
             return;
@@ -255,43 +256,46 @@ public class SearchResultController implements Initializable{
 
                 track_details.setText(trackOrLine);
 
-                System.out.println("Details van de reis");
-                System.out.println();
-
+                StringBuilder detailsText = new StringBuilder();
 
                 for (Leg leg : selectedTrip.legs) {
-                System.out.println("Vertrek-Punt: " + leg.origin.name);
-                System.out.println("Vertrek-Tijd: " + leg.origin.getFormattedTime());
-                System.out.println("Opstapperron: " + leg.origin.plannedTrack);
-                System.out.println("Checkin-Status: " + leg.origin.checkinStatus);
-                System.out.println();
+                    detailsText.append("Vertrek-Punt: ").append(leg.origin.name).append("\n");
+                    detailsText.append("Vertrek-Tijd: ").append(leg.origin.getFormattedTime()).append("\n");
+                    detailsText.append("Opstapperron: ").append(leg.origin.plannedTrack).append("\n");
+                    detailsText.append("Checkin-Status: ").append(leg.origin.getFormattedCheckin()).append("\n\n");
 
+                    detailsText.append("Bestemming: ").append(leg.destination.name).append("\n");
+                    detailsText.append("Aankomst-Tijd: ").append(leg.destination.getFormattedTime()).append("\n");
+                    detailsText.append("Aankomst-Perron: ").append(leg.destination.plannedTrack).append("\n");
+                    detailsText.append("Uitstap-Kant: ").append(leg.destination.getFormattedExit()).append("\n");
+                    detailsText.append("Checkin-Status: ").append(leg.destination.getFormattedCheckin()).append("\n");
 
-                System.out.println("Bestemming: " + leg.destination.name);
-                System.out.println("Aankomst-Tijd: " + leg.destination.getFormattedTime());
-                System.out.println("Aankomst-Parron: " + leg.destination.plannedTrack);
-                System.out.println("Uitstap-Kant: " + leg.destination.getFormattedExit());
-                System.out.println("Checkin-Status: " + leg.destination.checkinStatus);
+                    if (leg.transferMessages != null) {
+                        for (TransferMessages transferMessage : leg.transferMessages) {
+                            detailsText.append("Overstap-Bericht: ").append(transferMessage.getAccessibilityMessage()).append("\n");
+                        }
+                    }
 
-                if (leg.transferMessages != null) {
-                    for (TransferMessages transferMessage : leg.transferMessages) {
-                        System.out.println("Overstap-Bericht: " + transferMessage.getAccessibilityMessage());
+                    if (leg.stops != null) {
+                        for (Stops stop : leg.stops) {
+                            detailsText.append("\nStop: ").append(stop.getName()).append("\n");
+                            detailsText.append("Aankomst-tijd: ").append(stop.getPlannedArrivalDateTime()).append("\n");
+                            detailsText.append("Vertrek-tijd: ").append(stop.getPlannedDepartureDateTime()).append("\n");
+                        }
                     }
                 }
+                stops_details.setText(detailsText.toString());
 
-                if (leg.stops != null) {
-                    for (Stops stop : leg.stops) {
-                        System.out.println();
-                        System.out.println("Stop: " + stop.getName());
-                        System.out.println("Aankomst-tijd: " + stop.getPlannedArrivalDateTime());
-                        System.out.println("Vertrek-tijd: " + stop.getPlannedDepartureDateTime());
-                    }
-                }
+                double height = stops_details.getBoundsInLocal().getHeight();
+                stop_details_pane.setPrefHeight(height);
 
-            }
+                // Pas de hoogte van de ScrollPane aan
+                scrollPaneMain.setPrefHeight(height + 5); // Voeg eventueel een beetje extra hoogte toe
             });
         }
     }
+
+
     public void handleRoute1ButtonClick(ActionEvent actionEvent) {
         updateDetails(1);
     }
@@ -316,12 +320,12 @@ public class SearchResultController implements Initializable{
         updateDetails(6);
     }
 
-    private void resetButtonStyles() {
-        route1.setStyle("-fx-background-color: white; -fx-border-color: transparent; -fx-border-width: 2px;");
-        route2.setStyle("-fx-background-color: white; -fx-border-color: transparent; -fx-border-width: 2px;");
+   // private void resetButtonStyles() {
+      //  route1.setStyle("-fx-background-color: white; -fx-border-color: transparent; -fx-border-width: 2px;");
+        //route2.setStyle("-fx-background-color: white; -fx-border-color: transparent; -fx-border-width: 2px;");
 
-        lastClickedButton = null;
-    }
+       // lastClickedButton = null;
+  //  }
 public void onBackButtonPressed() {
         Page.navigateTo(EPage.HOME);
     }

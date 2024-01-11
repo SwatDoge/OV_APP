@@ -37,5 +37,16 @@ public class Origin {
             return "";
         }
     }
-
+    public String getFormattedCheckin() {
+        switch (checkinStatus) {
+            case "CHECKOUT":
+                return "Uit-Checken";
+            case "CHECKIN":
+                return "In-Checken";
+            case "NOTHING":
+                return "Geen in- of uitcheck vereist";
+            default:
+                throw new NullPointerException(checkinStatus);
+        }
+    }
 }
