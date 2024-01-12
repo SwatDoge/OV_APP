@@ -45,24 +45,40 @@
                <font>
                   <Font size="11.0" />
                </font></Label>
-            <HBox id="header" alignment="CENTER" layoutX="187.0" prefHeight="75.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-      
-                      <ImageView fitHeight="90.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@../../../icons/train.png" />
-                          </image>
-                      </ImageView>
-                      <Label style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Hoofdpagina">
-                     <font>
-                        <Font name="Verdana" size="31.0" />
-                     </font>
-                  </Label>
-               </children></HBox>
             <TextField fx:id="endCityTextField" layoutX="353.0" layoutY="124.0" style="-fx-fill: black;" />
             <Label layoutX="118.0" layoutY="256.0" text="Datum:" />
             <ChoiceBox fx:id="timeSelectionBox" layoutX="357.0" layoutY="272.0" prefWidth="150.0" />
             <Label layoutX="434.0" layoutY="251.0" text="Tijd:" />
+            <HBox fx:id="header" prefHeight="75.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <ImageView fitWidth="40.0" onMouseClicked="#toggleSideBar" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../assets/icons/more.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                     <children>
+      
+                            <ImageView fitHeight="90.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../assets/brand/train.png" />
+                                </image>
+                            </ImageView>
+                            <Label style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Hoofdpagina">
+                           <font>
+                              <Font name="Verdana" size="31.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+               </children>
+            </HBox>
+                <fx:include fx:id="sidebar" source="sidebar-view.fxml" />
             </children>
         </AnchorPane>
     </children>

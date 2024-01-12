@@ -1,6 +1,8 @@
 package com.example.ovapp.controllers;
 
-import com.example.ovapp.models.nsapi.NSApiRoot;
+import com.example.ovapp.enums.EPage;
+import com.example.ovapp.tools.Page;
+import com.example.ovapp.tools.PageInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -15,6 +17,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -53,6 +58,9 @@ public class HomeController {
     private Button planReisButton;
 
     @FXML
+    private Pane sidebar;
+
+    @FXML
     private ChoiceBox<String> timeSelectionBox;
 
         @FXML
@@ -72,17 +80,10 @@ public class HomeController {
             LocalDate selectedDate = startDatePicker.getValue();
             String formattedDate = selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-            //Deze stuurt nu het hele api resultaat als classes terug
-            NSApiRoot nsApiRoot = sendApiRequest(fromStation, toStation, transportType, searchForArrival, formattedTime, formattedDate);
+            sendApiRequest(fromStation, toStation, transportType, searchForArrival, formattedTime, formattedDate);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ovapp/search-result-view.fxml"));
             Parent searchResultParent = loader.load();
-
-            //In de controller van het volgende scherm roep ik een functie aan
-            SearchResultController searchResultController = loader.getController();
-            searchResultController.updateResultsDisplay(nsApiRoot);
-
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
             Scene scene = new Scene(searchResultParent);
             currentStage.setScene(scene);
@@ -106,6 +107,11 @@ public class HomeController {
             default:
                 return "METRO,TRAM,FERRY";
         }
+    }
+
+    @FXML
+    private void toggleSideBar() {
+        sidebar.setVisible(true);
     }
 
     @FXML

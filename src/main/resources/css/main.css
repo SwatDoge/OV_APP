@@ -43,10 +43,19 @@ TextField, PasswordField, ChoiceBox {
     -fx-pref-width: 200;
 }
 
-Hyperlink {
+Button, ChoiceBox {
+    -fx-cursor: hand;
+}
+
+Hyperlink, .hyperlink:hover {
+    -fx-font-size: 15;
     -fx-text-fill: white;
     -fx-border-width: 0;
     -fx-underline: false;
+}
+
+.hyperlink:hover {
+    -fx-underline: true;
 }
 
 Button {
@@ -55,6 +64,16 @@ Button {
     -fx-text-fill: white;
     -fx-padding: .5em 1.5em;
     -fx-font-size: 15px;
+}
+
+Button:hover {
+    -fx-scale-x: 105%;
+    -fx-scale-y: 105%;
+}
+
+.no_scaling {
+    -fx-scale-x: 100% !important;
+    -fx-scale-y: 100% !important;
 }
 
 Button.title, Label.title {
@@ -87,10 +106,65 @@ ScrollPane > .scroll-bar:vertical{
     -fx-background-radius: 0;
 }
 
-/*Search results*/
+/* Search results */
 .search-item {
     -fx-background-color: white;
     -fx-border-width: 1;
     -fx-border-color: #BF1441;
     -fx-border-style: solid;
+}
+
+/* Sidebar */
+#sidebar {
+    -fx-background-color: white;
+    -fx-background-radius: 5px;
+}
+
+#sidebar .titled-pane {
+    -fx-animated: true;
+}
+
+#sidebar .titled-pane > .title {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-font-size: 21px;
+}
+
+#sidebar .titled-pane > .title > .text {
+    -fx-text-fill: black;
+    -fx-fill: black;
+}
+
+#sidebar .titled-pane > .content {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+
+#sidebar .titled-pane > .title > .arrow-button > .arrow, #sidebar .titled-pane > .title > .arrow-button {
+    -fx-padding: 0;
+    -fx-shape: "";
+}
+
+#sidebar > AnchorPane {
+    background-color: green;
+}
+
+#sidebar > AnchorPane > VBox > AnchorPane > HBox, #sidebar .titled-pane > .content HBox {
+    -fx-cursor: hand;
+}
+
+#sidebar > AnchorPane > VBox > AnchorPane {
+    -fx-pref-height: 50;
+}
+
+#sidebar .titled-pane {
+    -fx-font-size: 21px;
+    -fx-background-color: transparent;
+}
+
+#sidebar Button {
+    -fx-font-size: 21px;
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-padding: 0;
 }

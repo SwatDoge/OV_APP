@@ -19,6 +19,7 @@ import com.example.ovapp.tools.Page;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Pane;
 
 public class SearchResultController implements Initializable{
     @FXML
@@ -26,6 +27,15 @@ public class SearchResultController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }
+
+    @FXML
+    private Pane sidebar;
+
+    @FXML
+    private void toggleSideBar() {
+        sidebar.setVisible(true);
+    }
+
 
     //Dit zijn alle labels die ik nu aanpas
     //<editor-fold desc="Elements">
