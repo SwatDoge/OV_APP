@@ -13,13 +13,17 @@ public class Destination {
     public String checkinStatus;
 
     public String getFormattedExit() {
-        switch (exitSide) {
-            case "RIGHT":
-                return "Rechts";
-            case "LEFT":
-                return "Links";
-            default:
-                throw new NullPointerException("Ongeldige richting: " + exitSide);
+        if (exitSide != null) {
+            switch (exitSide) {
+                case "RIGHT":
+                    return "Rechts";
+                case "LEFT":
+                    return "Links";
+                default:
+                    throw new IllegalArgumentException("Rechts");
+            }
+        } else {
+            return "Rechts";
         }
     }
 
