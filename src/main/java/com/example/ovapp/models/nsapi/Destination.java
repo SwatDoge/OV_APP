@@ -1,23 +1,31 @@
 package com.example.ovapp.models.nsapi;
 
-
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
-public class Origin {
+public class Destination {
     public String name;
-    public String city;
-    public String type;
     public String plannedDateTime;
-    public String checkinStatus;
     public String plannedTrack;
-    public String actualTrack;
-    public List<TransferMessages> transferMessages;  // Gebruik een lijst voor transferMessages
-    public List<Stops> stops;  // Gebruik een lijst voor stops
+    public String exitSide;
+    public String checkinStatus;
+
+    public String getFormattedExit() {
+        if (exitSide != null) {
+            switch (exitSide) {
+                case "RIGHT":
+                    return "Rechts";
+                case "LEFT":
+                    return "Links";
+                default:
+                    throw new IllegalArgumentException("Rechts");
+            }
+        } else {
+            return "Rechts";
+        }
+    }
 
     public String getFormattedTime() {
         // Parse de plannedDateTime-string
@@ -29,7 +37,6 @@ public class Origin {
             e.printStackTrace();
         }
 
-        // Formateer naar HH:mm
         if (date != null) {
             SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
             return outputFormat.format(date);
@@ -37,16 +44,5 @@ public class Origin {
             return "";
         }
     }
-    public String getFormattedCheckin() {
-        switch (checkinStatus) {
-            case "CHECKOUT":
-                return "Uit-Checken";
-            case "CHECKIN":
-                return "In-Checken";
-            case "NOTHING":
-                return "Geen in- of uitcheck vereist";
-            default:
-                throw new NullPointerException(checkinStatus);
-        }
-    }
 }
+
