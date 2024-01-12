@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Leg {
     public String name;
-
+    public String idx;
     public Origin origin;
     public Product product;
     public Destination destination;

@@ -8,9 +8,9 @@ import java.util.Locale;
 public class Destination {
     public String name;
     public String plannedDateTime;
-   public String plannedTrack;
+    public String plannedTrack;
     public String exitSide;
-   public String checkinStatus;
+    public String checkinStatus;
 
     public String getFormattedExit() {
         switch (exitSide) {
@@ -40,22 +40,5 @@ public class Destination {
             return "";
         }
     }
-
-    public String getFormattedCheckin() {
-        switch (checkinStatus) {
-            case "CHECKOUT":
-                return "Uit-Checken";
-            case "CHECKIN":
-                return "In-Checken";
-            case "OVERCHECK":
-                return "Overstapen";
-            case "NOTHING":
-                return "Geen in- of uitcheck vereist";
-            default:
-                throw new NullPointerException(checkinStatus);
-        }
-    }
-
 }
-
 

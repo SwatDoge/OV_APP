@@ -259,32 +259,33 @@ public class SearchResultController implements Initializable{
                 StringBuilder detailsText = new StringBuilder();
 
                 for (Leg leg : selectedTrip.legs) {
-                    detailsText.append("Vertrek-Punt: ").append(leg.origin.name).append("\n");
-                    detailsText.append("Vertrek-Tijd: ").append(leg.origin.getFormattedTime()).append("\n");
-                    detailsText.append("Opstapperron: ").append(leg.origin.plannedTrack).append("\n");
-                    detailsText.append("Checkin-Status: ").append(leg.origin.getFormattedCheckin()).append("\n\n");
-
-                    detailsText.append("Bestemming: ").append(leg.destination.name).append("\n");
-                    detailsText.append("Aankomst-Tijd: ").append(leg.destination.getFormattedTime()).append("\n");
-                    detailsText.append("Aankomst-Perron: ").append(leg.destination.plannedTrack).append("\n");
-                    detailsText.append("Uitstap-Kant: ").append(leg.destination.getFormattedExit()).append("\n");
-                    detailsText.append("Checkin-Status: ").append(leg.destination.getFormattedCheckin()).append("\n");
-
                     if (leg.transferMessages != null) {
+                        detailsText.append("Overstap: ").append(leg.idx).append("\n");
                         for (TransferMessages transferMessage : leg.transferMessages) {
-                            detailsText.append("Overstap-Bericht: ").append(transferMessage.getAccessibilityMessage()).append("\n");
+                            detailsText.append(transferMessage.getAccessibilityMessage()).append("\n");
                         }
+                        detailsText.append("\n"); // Extra lege regel na overstap
                     }
 
-                    if (leg.stops != null) {
-                        for (Stops stop : leg.stops) {
-                            detailsText.append("\nStop: ").append(stop.getName()).append("\n");
-                            detailsText.append("Aankomst-tijd: ").append(stop.getPlannedArrivalDateTime()).append("\n");
-                            detailsText.append("Vertrek-tijd: ").append(stop.getPlannedDepartureDateTime()).append("\n");
-                        }
-                    }
+                    detailsText.append("Vertrek:\n");
+                    detailsText.append(leg.origin.getFormattedTime()).append(" - ").append(leg.origin.name).append("\n");
+                    detailsText.append("Vertrek Perron: ").append(leg.origin.plannedTrack).append("\n\n");
+
+                    int numberOfStops = (leg.stops != null) ? leg.stops.size() : 0;
+                    detailsText.append(numberOfStops).append("x Stops\n\n");
+
+                    detailsText.append("Bestemming:\n");
+                    detailsText.append(leg.destination.getFormattedTime()).append(" - ").append(leg.destination.name).append("\n");
+                    detailsText.append("Aankomst Perron: ").append(leg.destination.plannedTrack).append("\n");
+                    detailsText.append(leg.destination.getFormattedExit()).append(" uitstappen").append("\n");
+
+                    detailsText.append("\n\n"); // Extra lege regel tussen trips
                 }
+
                 stops_details.setText(detailsText.toString());
+
+
+
 
                 double height = stops_details.getBoundsInLocal().getHeight();
                 stop_details_pane.setPrefHeight(height);
