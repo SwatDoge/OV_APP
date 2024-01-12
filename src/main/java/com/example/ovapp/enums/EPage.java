@@ -5,5 +5,6 @@ public enum EPage {
     LOGIN,
     REGISTER,
     PROFILE,
-    SEARCHRESULT
+    SEARCHRESULT,
+    SIDEBAR,
 }

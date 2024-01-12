@@ -16,6 +16,13 @@ import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.example.ovapp.enums.EPage;
+import com.example.ovapp.tools.Page;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Pane;
+
 public class SearchResultController implements Initializable{
 
     private Button lastClickedButton;
@@ -25,6 +32,15 @@ public class SearchResultController implements Initializable{
     }
     @FXML
     private ScrollPane scrollPaneMain;
+
+    @FXML
+    private Pane sidebar;
+
+    @FXML
+    private void toggleSideBar() {
+        sidebar.setVisible(true);
+    }
+
 
     //Dit zijn alle labels die ik nu aanpas
     //<editor-fold desc="Elements">
@@ -106,6 +122,7 @@ public class SearchResultController implements Initializable{
     private Label track_details;
     @FXML
     private Label transfer_details;
+
     @FXML
     private Label stops_details;
     @FXML
@@ -218,7 +235,6 @@ public class SearchResultController implements Initializable{
 
             arrival_route6.setText(formattedArrivalTime);
         }
-
         currentApiResult = nsApiRoot;
     }
 
@@ -321,13 +337,7 @@ public class SearchResultController implements Initializable{
         updateDetails(6);
     }
 
-   // private void resetButtonStyles() {
-      //  route1.setStyle("-fx-background-color: white; -fx-border-color: transparent; -fx-border-width: 2px;");
-        //route2.setStyle("-fx-background-color: white; -fx-border-color: transparent; -fx-border-width: 2px;");
-
-       // lastClickedButton = null;
-  //  }
-public void onBackButtonPressed() {
+    public void onBackButtonPressed() {
         Page.navigateTo(EPage.HOME);
     }
 }
