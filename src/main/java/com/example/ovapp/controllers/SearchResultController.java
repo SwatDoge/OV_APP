@@ -300,15 +300,6 @@ public class SearchResultController implements Initializable{
                 }
 
                 stops_details.setText(detailsText.toString());
-
-
-
-
-                double height = stops_details.getBoundsInLocal().getHeight();
-                stop_details_pane.setPrefHeight(height);
-
-                // Pas de hoogte van de ScrollPane aan
-                scrollPaneMain.setPrefHeight(height + 5); // Voeg eventueel een beetje extra hoogte toe
             });
         }
     }
