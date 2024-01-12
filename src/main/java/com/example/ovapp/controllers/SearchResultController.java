@@ -241,6 +241,7 @@ public class SearchResultController implements Initializable{
     private void updateDetails(int routeNumber) {
         if (currentApiResult == null || currentApiResult.trips == null) {
             System.out.println("NSApiRoot or trips is null.");
+            System.out.println(currentApiResult + " " + currentApiResult.trips );
             return;
         }
 
