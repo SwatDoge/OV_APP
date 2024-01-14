@@ -1,9 +1,6 @@
 package com.example.ovapp.controllers;
 
-import com.example.ovapp.enums.EPage;
 import com.example.ovapp.models.nsapi.NSApiRoot;
-import com.example.ovapp.tools.Page;
-import com.example.ovapp.tools.PageInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -18,15 +15,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 import java.util.ArrayList;
 import java.util.List;
-
 
 import java.io.IOException;
 import java.time.LocalDate;

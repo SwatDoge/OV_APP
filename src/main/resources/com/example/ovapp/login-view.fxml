@@ -10,7 +10,7 @@
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane prefHeight="100.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+            <AnchorPane prefWidth="600.0" VBox.vgrow="NEVER">
                <children>
                   <HBox id="header" alignment="CENTER" layoutX="187.0" prefHeight="75.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
@@ -28,17 +28,24 @@
                      </children></HBox>
                </children>
             </AnchorPane>
+            <AnchorPane VBox.vgrow="NEVER">
+               <children>
+                  <Hyperlink onAction="#onBackButtonPressed" text="Terug naar hoofdmenu" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
             <AnchorPane prefHeight="177.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER" prefHeight="162.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <HBox alignment="CENTER" prefHeight="150.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="273.0" prefWidth="174.0" spacing="5.0">
+                        <VBox alignment="BOTTOM_CENTER" prefHeight="273.0" prefWidth="300.0" spacing="5.0">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                            <children>
-                              <TextField alignment="CENTER" promptText="Gebruikersnaam" />
-                              <PasswordField alignment="CENTER" promptText="Wachtwoord" />
+                              <TextField fx:id="usernameField" alignment="CENTER" promptText="Gebruikersnaam" />
+                              <PasswordField fx:id="passwordField" alignment="CENTER" promptText="Wachtwoord" />
+                              <Hyperlink alignment="CENTER" contentDisplay="CENTER" onAction="#onRequestRegisterButtonClick" prefHeight="44.0" prefWidth="243.0" text="Geen account? Klik hier om te registreren." textAlignment="CENTER" wrapText="true" />
+                              <Label fx:id="errorLabel" textAlignment="CENTER" underline="true" wrapText="true" />
                            </children>
                         </VBox>
                      </children>
@@ -47,10 +54,9 @@
             </AnchorPane>
             <AnchorPane prefHeight="54.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER" prefHeight="54.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <HBox alignment="CENTER" prefHeight="54.0" prefWidth="600.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button id="login_button" mnemonicParsing="false" style="-fx-background-color: #252422; -fx-background-radius: 70 70 70 70; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15 ;" text="Inloggen">
-                        </Button>
+                        <Button id="login_button" defaultButton="true" layoutX="244.0" layoutY="29.0" mnemonicParsing="false" onAction="#onLoginButtonPressed" prefWidth="300.0" style="-fx-background-color: #252422; -fx-background-radius: 70 70 70 70; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 15 ;" text="Inloggen" />
                      </children>
                   </HBox>
                </children>
