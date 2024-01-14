@@ -44,6 +44,6 @@ public class LoginController {
 
     private void clearFields() {
         passwordField.setText("");
-        passwordField.setText("");
+        errorLabel.setText("");
     }
 }
