@@ -12,7 +12,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
+import javafx.geometry.Insets;
 
+
+import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -136,6 +139,12 @@ public class SearchResultController implements Initializable{
         // Voeg de event handlers toe
         route1.setOnAction(event -> handleRouteButtonClick(1));
         route2.setOnAction(event -> handleRouteButtonClick(2));
+
+        stop_details_pane.setPadding(new Insets(5, 0, -10, 5));
+
+        stops_details.setMaxHeight(Double.MAX_VALUE);
+
+
     }
 
     private void handleRouteButtonClick(int routeNumber) {
@@ -283,7 +292,6 @@ public class SearchResultController implements Initializable{
                         }
                         detailsText.append("\n"); // Extra lege regel na overstap
                     }
-
                     detailsText.append("Vertrek:\n");
                     detailsText.append(leg.origin.getFormattedTime()).append(" - ").append(leg.origin.name).append("\n");
                     detailsText.append("Vertrek Perron: ").append(leg.origin.plannedTrack).append("\n\n");
