@@ -27,7 +27,7 @@
                         <Image url="@../../../assets/brand/train.png" />
                      </image>
                   </ImageView>
-                  <Label style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Hoofdpagina">
+                  <Label style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Reisplanner">
                      <font>
                         <Font name="Verdana" size="31.0" />
                      </font>
@@ -267,7 +267,7 @@
                                     <Font size="8.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" style="-fx-background-color: E6C042;" text="Favorite">
+                              <Button mnemonicParsing="false" style="-fx-background-color: E6C042;" text="Favoriet">
                                  <HBox.margin>
                                     <Insets left="30.0" />
                                  </HBox.margin>
