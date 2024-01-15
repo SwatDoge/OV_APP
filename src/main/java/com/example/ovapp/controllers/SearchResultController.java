@@ -292,16 +292,27 @@ public class SearchResultController implements Initializable{
                         }
                         detailsText.append("\n"); // Extra lege regel na overstap
                     }
+
                     detailsText.append("Vertrek:\n");
                     detailsText.append(leg.origin.getFormattedTime()).append(" - ").append(leg.origin.name).append("\n");
-                    detailsText.append("Vertrek Perron: ").append(leg.origin.plannedTrack).append("\n\n");
+                    detailsText.append("Vertrek ")
+                            .append((leg.origin.actualTrack != null && !leg.origin.actualTrack.isEmpty())
+                                    ? "Spoor: " + leg.origin.actualTrack
+                                    : (leg.origin.plannedTrack != null && !leg.origin.plannedTrack.isEmpty())
+                                    ? "Perron: " + leg.origin.plannedTrack
+                                    : (leg.product.number != null)
+                                    ? "Lijn: " + leg.product.number
+                                    : "")
+                            .append("\n\n");
 
                     int numberOfStops = (leg.stops != null) ? leg.stops.size() : 0;
                     detailsText.append(numberOfStops).append("x Stops\n\n");
 
                     detailsText.append("Bestemming:\n");
                     detailsText.append(leg.destination.getFormattedTime()).append(" - ").append(leg.destination.name).append("\n");
-                    detailsText.append("Aankomst Perron: ").append(leg.destination.plannedTrack).append("\n");
+                    if (leg.destination.plannedTrack != null) {
+                        detailsText.append("Aankomst Perron: ").append(leg.destination.plannedTrack).append("\n");
+                    }
                     detailsText.append(leg.destination.getFormattedExit()).append(" uitstappen").append("\n");
 
                     detailsText.append("\n"); // Extra lege regel tussen trips
