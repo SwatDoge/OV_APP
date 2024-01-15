@@ -1,6 +1,7 @@
 package com.example.ovapp.tools;
 
 import com.example.ovapp.enums.EPage;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.IOException;
@@ -18,24 +19,38 @@ public class Page {
         put(EPage.SIDEBAR, new PageInfo("/com/example/ovapp/sidebar-view.fxml"));
     }};
 
+    //Gets a PageInfo class from the given page.
     public static PageInfo getPageInfo(EPage page) {
         return PageLoaderMap.get(page);
     }
 
+    //Navigates to the next page (and provides middleware functionality)
     public static PageInfo navigateTo(EPage page) {
+        //Reset variables
         Scene scene = null;
         PageInfo pageInfo = null;
 
+        //Try to load the given page from an Enum key
         try {
             pageInfo = PageLoaderMap.get(page);
             scene = pageInfo.getScene();
         }
         catch (IOException e) {
-
+            System.out.println("Er was een fout tijdens het veranderen van paginas. Neem contact op met een developer.");
+            System.out.println(e);
         }
 
-        if (scene != null) {
-            currentStage.setScene(scene);
+        //If the scene exists, set it to the correct scene.
+        currentStage.setScene(scene);
+
+        //Find an `onSwitchToPage` method on the next page, and invoke it if it exists.
+        try {
+            Object controller = pageInfo.getController();
+            var method = controller.getClass().getMethod("onSwitchToPage");
+            method.invoke(controller, (Object[]) null);
+        }
+        catch (Exception e) {
+
         }
 
         System.out.println("Navigeren naar " + page);

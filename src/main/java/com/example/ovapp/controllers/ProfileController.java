@@ -1,14 +1,22 @@
 package com.example.ovapp.controllers;
 
+import com.example.ovapp.Users;
 import com.example.ovapp.enums.EPage;
 import com.example.ovapp.tools.Page;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 public class ProfileController {
+
+    @FXML
+    private AnchorPane base;
 
     @FXML
     private Pane sidebar;
@@ -19,7 +27,7 @@ public class ProfileController {
     }
 
     @FXML
-    private Button back_button;
+    private Label title;
 
     @FXML
     private PasswordField newPasswordField;
@@ -49,10 +57,28 @@ public class ProfileController {
     // Event handler voor het verwijderen van het account
     @FXML
     private void deleteAccount() {
+        Users.getInstance().deleteCurrentUser();
+        Page.navigateTo(EPage.REGISTER);
+        sidebar.setVisible(false);
     }
 
     @FXML
     private void onBackButtonPressed() {
         Page.navigateTo(EPage.HOME);
+    }
+
+    @FXML
+    protected void initialize() {
+        updateDetails();
+    }
+
+    public void onSwitchToPage() {
+        updateDetails();
+    }
+
+    //Initiele waardes
+    void updateDetails() {
+        title.setText("Goedendag, " + Users.getInstance().currentUser.username);
+        usernameField.setText(Users.getInstance().currentUser.username);
     }
 }

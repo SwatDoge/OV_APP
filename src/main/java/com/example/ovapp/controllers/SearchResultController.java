@@ -12,7 +12,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
+import javafx.geometry.Insets;
 
+
+import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -131,6 +134,12 @@ public class SearchResultController implements Initializable{
         // Voeg de event handlers toe
         route1.setOnAction(event -> handleRouteButtonClick(1));
         route2.setOnAction(event -> handleRouteButtonClick(2));
+
+        stop_details_pane.setPadding(new Insets(5, 0, -10, 5));
+
+        stops_details.setMaxHeight(Double.MAX_VALUE);
+
+
     }
 
     private void handleRouteButtonClick(int routeNumber) {
@@ -281,17 +290,27 @@ public class SearchResultController implements Initializable{
 
                     detailsText.append("Vertrek:\n");
                     detailsText.append(leg.origin.getFormattedTime()).append(" - ").append(leg.origin.name).append("\n");
-                    detailsText.append("Vertrek Perron: ").append(leg.origin.plannedTrack).append("\n\n");
+                    detailsText.append("Vertrek ")
+                            .append((leg.origin.actualTrack != null && !leg.origin.actualTrack.isEmpty())
+                                    ? "Spoor: " + leg.origin.actualTrack
+                                    : (leg.origin.plannedTrack != null && !leg.origin.plannedTrack.isEmpty())
+                                    ? "Perron: " + leg.origin.plannedTrack
+                                    : (leg.product.number != null)
+                                    ? "Lijn: " + leg.product.number
+                                    : "")
+                            .append("\n\n");
 
                     int numberOfStops = (leg.stops != null) ? leg.stops.size() : 0;
                     detailsText.append(numberOfStops).append("x Stops\n\n");
 
                     detailsText.append("Bestemming:\n");
                     detailsText.append(leg.destination.getFormattedTime()).append(" - ").append(leg.destination.name).append("\n");
-                    detailsText.append("Aankomst Perron: ").append(leg.destination.plannedTrack).append("\n");
+                    if (leg.destination.plannedTrack != null) {
+                        detailsText.append("Aankomst Perron: ").append(leg.destination.plannedTrack).append("\n");
+                    }
                     detailsText.append(leg.destination.getFormattedExit()).append(" uitstappen").append("\n");
 
-                    detailsText.append("\n\n"); // Extra lege regel tussen trips
+                    detailsText.append("\n"); // Extra lege regel tussen trips
                 }
 
                 stops_details.setText(detailsText.toString());

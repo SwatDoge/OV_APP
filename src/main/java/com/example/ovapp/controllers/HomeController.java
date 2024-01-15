@@ -1,9 +1,6 @@
 package com.example.ovapp.controllers;
 
-import com.example.ovapp.enums.EPage;
 import com.example.ovapp.models.nsapi.NSApiRoot;
-import com.example.ovapp.tools.Page;
-import com.example.ovapp.tools.PageInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -18,15 +15,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Locale;
+import java.util.ResourceBundle;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -57,12 +55,14 @@ public class HomeController {
 
     @FXML
     private Button planReisButton;
+    private final ResourceBundle bundle = ResourceBundle.getBundle("messages", Locale.getDefault());
 
     @FXML
     private Pane sidebar;
 
     @FXML
     private ChoiceBox<String> timeSelectionBox;
+
 
         @FXML
     private void onPlanReisButtonClick(ActionEvent event) {
@@ -95,6 +95,20 @@ public class HomeController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void updateUITranslations() {
+        startCityTextField.setPromptText(bundle.getString("startCityPrompt"));
+        endCityTextField.setPromptText(bundle.getString("endCityPrompt"));
+        transportChoiceBox.getItems().add(bundle.getString("transportChoiceBoxPrompt"));
+        transportChoiceBox.setValue(bundle.getString("transportChoiceBoxPrompt"));
+
+        planReisButton.setText(bundle.getString("planReisButton"));
+        timeChoiceBox.getItems().setAll(
+                bundle.getString("timeChoiceBoxDeparture"),
+                bundle.getString("timeChoiceBoxArrival")
+        );
+        // Update other UI elements with text from the resource bundle
     }
 
     private String convertTime(String selectedTime) {

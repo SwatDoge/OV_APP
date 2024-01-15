@@ -116,7 +116,6 @@ ScrollPane > .scroll-bar:vertical{
 /* Sidebar */
 #sidebar {
     -fx-background-color: white;
-    -fx-background-radius: 5px;
 }
 
 #sidebar .titled-pane {
