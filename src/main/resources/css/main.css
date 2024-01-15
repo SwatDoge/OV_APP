@@ -108,10 +108,15 @@ ScrollPane > .scroll-bar:vertical{
 
 /* Search results */
 .selection-border {
-    -fx-border-width: 4;
-    -fx-border-color: red;
-    -fx-border-style: solid;
+    -fx-border-width: 2;
+    -fx-border-color: #BF1441;
+    -fx-border-radius: 6;
+    -fx-effect: dropshadow(gaussian, #BF1441, 40, 0, 0, 0);
+    -fx-background-color: transparent;
 }
+
+
+
 
 /* Sidebar */
 #sidebar {

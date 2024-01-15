@@ -134,12 +134,14 @@ public class SearchResultController implements Initializable{
         // Voeg de event handlers toe
         route1.setOnAction(event -> handleRouteButtonClick(1));
         route2.setOnAction(event -> handleRouteButtonClick(2));
+        route3.setOnAction(event -> handleRouteButtonClick(3));
+        route4.setOnAction(event -> handleRouteButtonClick(4));
+        route5.setOnAction(event -> handleRouteButtonClick(5));
+        route6.setOnAction(event -> handleRouteButtonClick(6));
 
         stop_details_pane.setPadding(new Insets(5, 0, -10, 5));
 
         stops_details.setMaxHeight(Double.MAX_VALUE);
-
-
     }
 
     private void handleRouteButtonClick(int routeNumber) {
@@ -160,6 +162,14 @@ public class SearchResultController implements Initializable{
                 return route1;
             case 2:
                 return route2;
+            case 3:
+                return route3;
+            case 4:
+                return route4;
+            case 5:
+                return route5;
+            case 6:
+                return route6;
             default:
                 return null;
         }
