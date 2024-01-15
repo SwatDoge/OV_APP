@@ -296,7 +296,7 @@ public class SearchResultController implements Initializable{
                     detailsText.append("Aankomst Perron: ").append(leg.destination.plannedTrack).append("\n");
                     detailsText.append(leg.destination.getFormattedExit()).append(" uitstappen").append("\n");
 
-                    detailsText.append("\n\n"); // Extra lege regel tussen trips
+                    detailsText.append("\n"); // Extra lege regel tussen trips
                 }
 
                 stops_details.setText(detailsText.toString());
