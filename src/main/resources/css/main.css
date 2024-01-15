@@ -107,10 +107,9 @@ ScrollPane > .scroll-bar:vertical{
 }
 
 /* Search results */
-.search-item {
-    -fx-background-color: white;
-    -fx-border-width: 1;
-    -fx-border-color: #BF1441;
+.selection-border {
+    -fx-border-width: 4;
+    -fx-border-color: red;
     -fx-border-style: solid;
 }
 

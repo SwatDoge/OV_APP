@@ -27,9 +27,6 @@ public class SearchResultController implements Initializable{
 
     private Button lastClickedButton;
 
-    private void setButtonStyle(Button button) {
-        button.setStyle("-fx-background-color: white; -fx-border-color: transparent; -fx-border-width: 0px;");
-    }
     @FXML
     private ScrollPane scrollPaneMain;
 
@@ -131,8 +128,6 @@ public class SearchResultController implements Initializable{
     private NSApiRoot currentApiResult;
 
     public void initialize(URL url, ResourceBundle rb) {
-        setButtonStyle(route1);
-        setButtonStyle(route2);
         // Voeg de event handlers toe
         route1.setOnAction(event -> handleRouteButtonClick(1));
         route2.setOnAction(event -> handleRouteButtonClick(2));
@@ -140,11 +135,11 @@ public class SearchResultController implements Initializable{
 
     private void handleRouteButtonClick(int routeNumber) {
         if (lastClickedButton != null) {
-            lastClickedButton.setStyle("-fx-background-color: white; -fx-border-color: transparent; -fx-border-width: 2px;");
+            lastClickedButton.getStyleClass().remove("selection-border");
         }
 
         Button clickedButton = getRouteButton(routeNumber);
-        clickedButton.setStyle("-fx-background-color: white; -fx-border-color: red; -fx-border-width: 4px;");
+        clickedButton.getStyleClass().add("selection-border");
 
         updateDetails(routeNumber);
 
