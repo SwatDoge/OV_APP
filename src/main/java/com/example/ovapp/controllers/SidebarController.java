@@ -116,6 +116,8 @@ public class SidebarController {
     private void onFavouriteButtonPressed() {
         // Handle Favourite button press
         System.out.println("Favourite button pressed");
+
+        Page.navigateTo(EPage.SEARCHHISTORY);
         sidebar.setVisible(false);
     }
 }

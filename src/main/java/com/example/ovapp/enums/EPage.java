@@ -7,4 +7,5 @@ public enum EPage {
     PROFILE,
     SEARCHRESULT,
     SIDEBAR,
+    SEARCHHISTORY,
 }
