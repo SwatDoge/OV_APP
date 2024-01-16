@@ -52,7 +52,8 @@ public class HomeController {
 
     @FXML
     private ChoiceBox<String> timeChoiceBox;
-
+    @FXML
+    private Button switch_button;
     @FXML
     private Button planReisButton;
     private final ResourceBundle bundle = ResourceBundle.getBundle("messages", Locale.getDefault());
@@ -96,6 +97,15 @@ public class HomeController {
             e.printStackTrace();
         }
     }
+
+    private void switchStations() {
+        String startCity = startCityTextField.getText();
+        String endCity = endCityTextField.getText();
+
+        startCityTextField.setText(endCity);
+        endCityTextField.setText(startCity);
+    }
+
 
     private void updateUITranslations() {
         startCityTextField.setPromptText(bundle.getString("startCityPrompt"));
@@ -152,6 +162,15 @@ public class HomeController {
         timeChoiceBox.setValue("Vertrek");
 
         transportChoiceBox.setValue("Geen Voorkeur");
+
+        switch_button.setOnAction(event -> {
+            String startCity = startCityTextField.getText();
+            String endCity = endCityTextField.getText();
+
+            startCityTextField.setText(endCity);
+            endCityTextField.setText(startCity);
+        });
+
     }
 
     private void setDefaultDateInDatePicker() {

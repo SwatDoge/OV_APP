@@ -79,6 +79,15 @@
                </children>
             </HBox>
                 <fx:include fx:id="sidebar" source="sidebar-view.fxml" />
+                <Button fx:id="switch_button" layoutX="265.0" layoutY="124.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="73.0">
+                    <graphic>
+                        <ImageView fitHeight="19.0" fitWidth="27.0">
+                            <image>
+                                <Image url="@../../../assets/icons/switch_icon.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
             </children>
         </AnchorPane>
     </children>
