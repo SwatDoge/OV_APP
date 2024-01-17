@@ -1,5 +1,9 @@
 package com.example.ovapp.controllers;
 
-public class TravelHistoryController {
+import javafx.event.ActionEvent;
 
+public class TravelHistoryController {
+    public void onBoekButtonClick(ActionEvent actionEvent) {
+
+    }
 }

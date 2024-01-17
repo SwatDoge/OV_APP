@@ -257,7 +257,7 @@
                         </ScrollPane>
                         <HBox alignment="CENTER" prefHeight="48.0" prefWidth="288.0">
                            <children>
-                              <Button mnemonicParsing="false" prefWidth="96.0" style="-fx-background-color: #385194;" text="Boek">
+                              <Button  mnemonicParsing="false" prefWidth="96.0" onAction="onBoekButtonClick" style="-fx-background-color: #385194;" text="Boek">
                                  <HBox.margin>
                                     <Insets left="-5.0" right="30.0" />
                                  </HBox.margin>
