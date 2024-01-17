@@ -3,6 +3,7 @@ module com.example.ovapp {
     requires javafx.fxml;
     requires java.desktop;
     requires com.google.gson;
+    requires com.fasterxml.jackson.databind;
 
 
     opens com.example.ovapp to javafx.fxml;

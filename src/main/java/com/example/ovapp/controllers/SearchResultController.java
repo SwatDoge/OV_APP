@@ -4,6 +4,7 @@ import com.example.ovapp.TimeUtils;
 import com.example.ovapp.enums.EPage;
 import com.example.ovapp.models.nsapi.*;
 import com.example.ovapp.tools.Page;
+import com.example.ovapp.tools.TripDetails;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,10 +14,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.geometry.Insets;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.ovapp.tools.TripDetails;
 
 
 import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ResourceBundle;
 
 import com.example.ovapp.enums.EPage;
@@ -127,6 +134,8 @@ public class SearchResultController implements Initializable{
     private Label stops_details;
     @FXML
     private Pane stop_details_pane;
+    @FXML
+    private Button book_trip;
 
     private NSApiRoot currentApiResult;
 
@@ -325,10 +334,28 @@ public class SearchResultController implements Initializable{
 
                 stops_details.setText(detailsText.toString());
             });
+
+
+            TripDetails tripDetails = new TripDetails();
+            tripDetails.setTransfers(transfer_details.getText());
+
+
+            String jsonData = convertToJson(tripDetails);
+
+            if (jsonData != null) {
+                try {
+                    // Specificeer het pad naar je JSON-bestand
+                    String filePath = "src/main/resources/json/users.json";
+
+                    // Schrijf JSON-data naar het bestand
+                    Files.write(Paths.get(filePath), jsonData.getBytes(), StandardOpenOption.CREATE);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
     }
-
-
     public void handleRoute1ButtonClick(ActionEvent actionEvent) {
         updateDetails(1);
     }
@@ -355,5 +382,18 @@ public class SearchResultController implements Initializable{
 
     public void onBackButtonPressed() {
         Page.navigateTo(EPage.HOME);
+    }
+
+    public void ClickBookTrip(ActionEvent actionEvent) {
+
+    }
+    private String convertToJson(TripDetails tripDetails) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.writeValueAsString(tripDetails);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
