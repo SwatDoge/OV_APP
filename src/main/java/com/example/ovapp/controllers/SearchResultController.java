@@ -337,8 +337,11 @@ public class SearchResultController implements Initializable{
 
 
             TripDetails tripDetails = new TripDetails();
+            tripDetails.setDepartureTime(departure_details.getText());
+            tripDetails.setArrivalTime(arrival_details.getText());
+            tripDetails.setDuration(during_details.getText());
             tripDetails.setTransfers(transfer_details.getText());
-
+            tripDetails.stopsDetails(stops_details.getText());
 
             String jsonData = convertToJson(tripDetails);
 
@@ -353,7 +356,6 @@ public class SearchResultController implements Initializable{
                     e.printStackTrace();
                 }
             }
-
         }
     }
     public void handleRoute1ButtonClick(ActionEvent actionEvent) {
