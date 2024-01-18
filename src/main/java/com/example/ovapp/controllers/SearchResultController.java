@@ -341,7 +341,7 @@ public class SearchResultController implements Initializable{
             tripDetails.setArrivalTime(arrival_details.getText());
             tripDetails.setDuration(during_details.getText());
             tripDetails.setTransfers(transfer_details.getText());
-            tripDetails.stopsDetails(stops_details.getText());
+            tripDetails.setStopsDetails(stops_details.getText());
 
             String jsonData = convertToJson(tripDetails);
 

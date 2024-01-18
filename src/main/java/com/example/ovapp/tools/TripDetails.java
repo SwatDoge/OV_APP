@@ -82,7 +82,4 @@ public class TripDetails {
             return "";
         }
     }
-
-    public void stopsDetails(String text) {
-    }
 }
