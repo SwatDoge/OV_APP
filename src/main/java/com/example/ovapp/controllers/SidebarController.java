@@ -115,7 +115,7 @@ public class SidebarController {
     @FXML
     private void onFavouriteButtonPressed() {
         // Handle Favourite button press
-        System.out.println("Travel History button pressed");
-        Page.navigateTo(EPage.TRAVEL_HISTORY);
+        System.out.println("Favourite button pressed");
         sidebar.setVisible(false);
-    } }
+    }
+}
