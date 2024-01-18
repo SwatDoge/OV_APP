@@ -348,7 +348,7 @@ public class SearchResultController implements Initializable{
             if (jsonData != null) {
                 try {
                     // Specificeer het pad naar je JSON-bestand
-                    String filePath = "src/main/resources/json/users.json";
+                    String filePath = "src/main/resources/json/history.json";
 
                     // Schrijf JSON-data naar het bestand
                     Files.write(Paths.get(filePath), jsonData.getBytes(), StandardOpenOption.CREATE);
