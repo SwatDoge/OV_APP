@@ -10,14 +10,16 @@ import java.util.HashMap;
 import static com.example.ovapp.Main.currentStage;
 
 public class Page {
-    private static HashMap<EPage, PageInfo> PageLoaderMap = new HashMap<EPage, PageInfo>() {{
-        put(EPage.HOME, new PageInfo("/com/example/ovapp/home-view.fxml"));
-        put(EPage.LOGIN, new PageInfo("/com/example/ovapp/login-view.fxml"));
-        put(EPage.REGISTER, new PageInfo("/com/example/ovapp/register-view.fxml"));
-        put(EPage.PROFILE, new PageInfo("/com/example/ovapp/profile-view.fxml"));
-        put(EPage.SEARCHRESULT, new PageInfo("/com/example/ovapp/search-result-view.fxml"));
-        put(EPage.SIDEBAR, new PageInfo("/com/example/ovapp/sidebar-view.fxml"));
-    }};
+    private static HashMap<EPage, PageInfo> PageLoaderMap = new HashMap<EPage, PageInfo>() {
+        {
+            put(EPage.HOME, new PageInfo("/com/example/ovapp/home-view.fxml"));
+            put(EPage.LOGIN, new PageInfo("/com/example/ovapp/login-view.fxml"));
+            put(EPage.REGISTER, new PageInfo("/com/example/ovapp/register-view.fxml"));
+            put(EPage.PROFILE, new PageInfo("/com/example/ovapp/profile-view.fxml"));
+            put(EPage.SEARCHRESULT, new PageInfo("/com/example/ovapp/search-result-view.fxml"));
+            put(EPage.SIDEBAR, new PageInfo("/com/example/ovapp/sidebar-view.fxml"));
+            put(EPage.TRAVEL_HISTORY, new PageInfo("/com/example/ovapp/travel-history-view.fxml"));
+            }};
 
     //Gets a PageInfo class from the given page.
     public static PageInfo getPageInfo(EPage page) {

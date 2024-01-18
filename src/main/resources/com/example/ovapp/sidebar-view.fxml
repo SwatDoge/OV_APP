@@ -66,7 +66,7 @@
                                     <Image url="@../../../assets/icons/heart.png" />
                                  </image>
                               </ImageView>
-                              <Button fx:id="favouriteButton" alignment="CENTER" mnemonicParsing="false" onAction="#onFavouriteButtonPressed" text="Favorieten" />
+                              <Button fx:id="favouriteButton" alignment="CENTER" mnemonicParsing="false" onAction="#onFavouriteButtonPressed" text="Reishistorie" />
                            </children>
                         </HBox>
                      </children>
