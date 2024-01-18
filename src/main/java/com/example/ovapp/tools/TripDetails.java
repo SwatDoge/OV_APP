@@ -71,6 +71,7 @@ public class TripDetails {
         // Voeg hier andere velden toe die je nodig hebt
     }
 
+
     private String determineTrackOrLine(Trip selectedTrip) {
         if (selectedTrip.legs.get(0).origin.actualTrack != null && !selectedTrip.legs.get(0).origin.actualTrack.isEmpty()) {
             return "Spoor " + selectedTrip.legs.get(0).origin.actualTrack;
