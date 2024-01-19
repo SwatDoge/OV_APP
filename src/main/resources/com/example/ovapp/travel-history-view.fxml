@@ -27,7 +27,7 @@
                         <Image url="@../../../assets/brand/train.png" />
                      </image>
                   </ImageView>
-                  <Label style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Reishistory">
+                  <Label style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Reishistorie">
                      <font>
                         <Font name="Verdana" size="31.0" />
                      </font>
