@@ -17,6 +17,7 @@ public class Page {
         put(EPage.PROFILE, new PageInfo("/com/example/ovapp/profile-view.fxml"));
         put(EPage.SEARCHRESULT, new PageInfo("/com/example/ovapp/search-result-view.fxml"));
         put(EPage.SIDEBAR, new PageInfo("/com/example/ovapp/sidebar-view.fxml"));
+        put(EPage.FAVORIET, new PageInfo("/com/example/ovapp/travel-history-view.fxml"));
     }};
 
     //Gets a PageInfo class from the given page.

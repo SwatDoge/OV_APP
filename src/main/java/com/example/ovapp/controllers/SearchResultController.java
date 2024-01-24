@@ -337,15 +337,18 @@ public class SearchResultController implements Initializable{
 
 
             TripDetails tripDetails = new TripDetails();
+            tripDetails.setDepartureTime(departure_details.getText());
+            tripDetails.setArrivalTime(arrival_details.getText());
+            tripDetails.setDuration(during_details.getText());
             tripDetails.setTransfers(transfer_details.getText());
-
+            tripDetails.setStopsDetails(stops_details.getText());
 
             String jsonData = convertToJson(tripDetails);
 
             if (jsonData != null) {
                 try {
                     // Specificeer het pad naar je JSON-bestand
-                    String filePath = "src/main/resources/json/users.json";
+                    String filePath = "src/main/resources/json/history.json";
 
                     // Schrijf JSON-data naar het bestand
                     Files.write(Paths.get(filePath), jsonData.getBytes(), StandardOpenOption.CREATE);
@@ -353,7 +356,6 @@ public class SearchResultController implements Initializable{
                     e.printStackTrace();
                 }
             }
-
         }
     }
     public void handleRoute1ButtonClick(ActionEvent actionEvent) {
