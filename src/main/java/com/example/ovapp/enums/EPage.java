@@ -6,5 +6,5 @@ public enum EPage {
     REGISTER,
     PROFILE,
     SEARCHRESULT,
-    SIDEBAR,
+    SIDEBAR, FAVROTIET, FAVORIET,
 }

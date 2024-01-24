@@ -4,6 +4,7 @@ import com.example.ovapp.TimeUtils;
 import com.example.ovapp.enums.EPage;
 import com.example.ovapp.models.nsapi.*;
 import com.example.ovapp.tools.Page;
+import com.example.ovapp.tools.TripDetails;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,8 +13,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
+import javafx.geometry.Insets;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.ovapp.tools.TripDetails;
 
+
+import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ResourceBundle;
 
 import com.example.ovapp.enums.EPage;
@@ -27,9 +37,6 @@ public class SearchResultController implements Initializable{
 
     private Button lastClickedButton;
 
-    private void setButtonStyle(Button button) {
-        button.setStyle("-fx-background-color: white; -fx-border-color: transparent; -fx-border-width: 0px;");
-    }
     @FXML
     private ScrollPane scrollPaneMain;
 
@@ -127,24 +134,32 @@ public class SearchResultController implements Initializable{
     private Label stops_details;
     @FXML
     private Pane stop_details_pane;
+    @FXML
+    private Button book_trip;
 
     private NSApiRoot currentApiResult;
 
     public void initialize(URL url, ResourceBundle rb) {
-        setButtonStyle(route1);
-        setButtonStyle(route2);
         // Voeg de event handlers toe
         route1.setOnAction(event -> handleRouteButtonClick(1));
         route2.setOnAction(event -> handleRouteButtonClick(2));
+        route3.setOnAction(event -> handleRouteButtonClick(3));
+        route4.setOnAction(event -> handleRouteButtonClick(4));
+        route5.setOnAction(event -> handleRouteButtonClick(5));
+        route6.setOnAction(event -> handleRouteButtonClick(6));
+
+        stop_details_pane.setPadding(new Insets(5, 0, -10, 5));
+
+        stops_details.setMaxHeight(Double.MAX_VALUE);
     }
 
     private void handleRouteButtonClick(int routeNumber) {
         if (lastClickedButton != null) {
-            lastClickedButton.setStyle("-fx-background-color: white; -fx-border-color: transparent; -fx-border-width: 2px;");
+            lastClickedButton.getStyleClass().remove("selection-border");
         }
 
         Button clickedButton = getRouteButton(routeNumber);
-        clickedButton.setStyle("-fx-background-color: white; -fx-border-color: red; -fx-border-width: 4px;");
+        clickedButton.getStyleClass().add("selection-border");
 
         updateDetails(routeNumber);
 
@@ -156,6 +171,14 @@ public class SearchResultController implements Initializable{
                 return route1;
             case 2:
                 return route2;
+            case 3:
+                return route3;
+            case 4:
+                return route4;
+            case 5:
+                return route5;
+            case 6:
+                return route6;
             default:
                 return null;
         }
@@ -286,25 +309,55 @@ public class SearchResultController implements Initializable{
 
                     detailsText.append("Vertrek:\n");
                     detailsText.append(leg.origin.getFormattedTime()).append(" - ").append(leg.origin.name).append("\n");
-                    detailsText.append("Vertrek Perron: ").append(leg.origin.plannedTrack).append("\n\n");
+                    detailsText.append("Vertrek ")
+                            .append((leg.origin.actualTrack != null && !leg.origin.actualTrack.isEmpty())
+                                    ? "Spoor: " + leg.origin.actualTrack
+                                    : (leg.origin.plannedTrack != null && !leg.origin.plannedTrack.isEmpty())
+                                    ? "Perron: " + leg.origin.plannedTrack
+                                    : (leg.product.number != null)
+                                    ? "Lijn: " + leg.product.number
+                                    : "")
+                            .append("\n\n");
 
                     int numberOfStops = (leg.stops != null) ? leg.stops.size() : 0;
                     detailsText.append(numberOfStops).append("x Stops\n\n");
 
                     detailsText.append("Bestemming:\n");
                     detailsText.append(leg.destination.getFormattedTime()).append(" - ").append(leg.destination.name).append("\n");
-                    detailsText.append("Aankomst Perron: ").append(leg.destination.plannedTrack).append("\n");
+                    if (leg.destination.plannedTrack != null) {
+                        detailsText.append("Aankomst Perron: ").append(leg.destination.plannedTrack).append("\n");
+                    }
                     detailsText.append(leg.destination.getFormattedExit()).append(" uitstappen").append("\n");
 
-                    detailsText.append("\n\n"); // Extra lege regel tussen trips
+                    detailsText.append("\n"); // Extra lege regel tussen trips
                 }
 
                 stops_details.setText(detailsText.toString());
             });
+
+
+            TripDetails tripDetails = new TripDetails();
+            tripDetails.setDepartureTime(departure_details.getText());
+            tripDetails.setArrivalTime(arrival_details.getText());
+            tripDetails.setDuration(during_details.getText());
+            tripDetails.setTransfers(transfer_details.getText());
+            tripDetails.setStopsDetails(stops_details.getText());
+
+            String jsonData = convertToJson(tripDetails);
+
+            if (jsonData != null) {
+                try {
+                    // Specificeer het pad naar je JSON-bestand
+                    String filePath = "src/main/resources/json/history.json";
+
+                    // Schrijf JSON-data naar het bestand
+                    Files.write(Paths.get(filePath), jsonData.getBytes(), StandardOpenOption.CREATE);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
-
-
     public void handleRoute1ButtonClick(ActionEvent actionEvent) {
         updateDetails(1);
     }
@@ -331,5 +384,18 @@ public class SearchResultController implements Initializable{
 
     public void onBackButtonPressed() {
         Page.navigateTo(EPage.HOME);
+    }
+
+    public void ClickBookTrip(ActionEvent actionEvent) {
+
+    }
+    private String convertToJson(TripDetails tripDetails) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.writeValueAsString(tripDetails);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

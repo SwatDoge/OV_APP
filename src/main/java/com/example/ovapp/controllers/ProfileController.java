@@ -30,19 +30,10 @@ public class ProfileController {
     private Label title;
 
     @FXML
-    private PasswordField newPasswordField;
-
-    @FXML
-    private PasswordField currentPasswordField;
+    private PasswordField passwordField;
 
     @FXML
     private TextField usernameField;
-
-    @FXML
-    private Button changePasswordButton;
-
-    @FXML
-    private Button deleteAccountButton;
 
     // Event handler voor de terugknop
     @FXML
@@ -51,7 +42,10 @@ public class ProfileController {
 
     // Event handler voor het wijzigen van het wachtwoord
     @FXML
-    private void changePassword() {
+    private void saveDetails() {
+        Users.getInstance().currentUser.username = usernameField.getText();
+        Users.getInstance().currentUser.password = passwordField.getText();
+        Users.getInstance().saveUsers();
     }
 
     // Event handler voor het verwijderen van het account
@@ -80,5 +74,6 @@ public class ProfileController {
     void updateDetails() {
         title.setText("Goedendag, " + Users.getInstance().currentUser.username);
         usernameField.setText(Users.getInstance().currentUser.username);
+        passwordField.setText(Users.getInstance().currentUser.password);
     }
 }
