@@ -52,7 +52,7 @@ public class ProfileController {
     @FXML
     private void deleteAccount() {
         Users.getInstance().deleteCurrentUser();
-        Page.navigateTo(EPage.REGISTER);
+        Page.navigateTo(EPage.HOME);
         sidebar.setVisible(false);
     }
 
