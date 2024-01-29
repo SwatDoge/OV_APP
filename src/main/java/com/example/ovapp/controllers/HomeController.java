@@ -18,6 +18,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Popup;
 import javafx.stage.Window;
+
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -64,12 +66,31 @@ public class HomeController {
     @FXML
     private ChoiceBox<String> timeSelectionBox;
 
-
-        @FXML
+    @FXML
     private void onPlanReisButtonClick(ActionEvent event) {
         try {
             String fromStation = startCityTextField.getText();
             String toStation = endCityTextField.getText();
+
+            // Voeg hier validatie toe om te controleren of beide velden zijn ingevuld
+            if (fromStation.isEmpty() || toStation.isEmpty()) {
+                // Toon een waarschuwing of neem andere passende acties
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Incompleet formulier");
+                alert.setHeaderText(null);
+                alert.setContentText("Vul zowel het vertrek- als het eindstation in.");
+                alert.showAndWait();
+                return;
+            }
+
+            if (fromStation.equalsIgnoreCase(toStation)) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Ongeldige invoer");
+                alert.setHeaderText(null);
+                alert.setContentText("Kies verschillende stations voor vertrek en aankomst.");
+                alert.showAndWait();
+                return;
+            }
 
             String transportType = getTransportTypeFromChoiceBox();
 
@@ -78,8 +99,17 @@ public class HomeController {
             String selectedTime = timeSelectionBox.getValue();
             String formattedTime = convertTime(selectedTime);
 
-
             LocalDate selectedDate = startDatePicker.getValue();
+
+            if (selectedDate == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Incompleet formulier");
+                alert.setHeaderText(null);
+                alert.setContentText("Selecteer een datum.");
+                alert.showAndWait();
+                return;
+            }
+
             String formattedDate = selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
             NSApiRoot nsApiRoot = sendApiRequest(fromStation, toStation, transportType, searchForArrival, formattedTime, formattedDate);
@@ -93,8 +123,15 @@ public class HomeController {
             Scene scene = new Scene(searchResultParent);
             currentStage.setScene(scene);
             currentStage.show();
+        } catch (UnknownHostException e) {
+            // Toon een melding aan de gebruiker dat er geen internetverbinding is of dat de API niet beschikbaar is
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Verbindingsfout");
+            alert.setHeaderText(null);
+            alert.setContentText("Geen internetverbinding of de API is niet beschikbaar. Probeer het later opnieuw.");
+            alert.showAndWait();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

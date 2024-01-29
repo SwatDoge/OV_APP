@@ -40,20 +40,22 @@ public class SidebarController {
         // Initialize with the default language (e.g., Dutch)
         setLanguage("nl");
 
-        // Update text every time the sidebar becomes visible.
-        sidebar.visibleProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (newValue) {
-                    loginLabel.setText(resourceBundle.getString("loginLabelText"));
-                    if (Users.getInstance().isSomeUserLoggedIn()) {
+        sidebar.visibleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                loginLabel.setText(resourceBundle.getString("loginLabelText"));
+                if (Users.getInstance().isSomeUserLoggedIn()) {
+                    // Controleer of de sleutel aanwezig is voordat je deze ophaalt
+                    if (resourceBundle.containsKey("logoutLabelText")) {
                         loginLabel.setText(resourceBundle.getString("logoutLabelText"));
+                    } else {
+                        // Voeg hier eventueel een standaardtekst in als de sleutel ontbreekt
+                        loginLabel.setText("Uitloggen");
                     }
                 }
             }
         });
     }
-
+        // Update text every time the sidebar becomes visible.
     private void setLanguage(String languageCode) {
         Locale locale = new Locale(languageCode);
         resourceBundle = ResourceBundle.getBundle("messages", locale);
