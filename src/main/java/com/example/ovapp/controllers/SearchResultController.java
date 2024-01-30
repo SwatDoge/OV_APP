@@ -1,44 +1,11 @@
 package com.example.ovapp.controllers;
-
-import com.example.ovapp.TimeUtils;
-import com.example.ovapp.enums.EPage;
-import com.example.ovapp.models.nsapi.*;
-import com.example.ovapp.tools.Page;
-import com.example.ovapp.tools.TripDetails;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Pane;
-import javafx.geometry.Insets;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.example.ovapp.tools.TripDetails;
-
-
-import java.awt.*;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.ResourceBundle;
-
-import com.example.ovapp.enums.EPage;
-import com.example.ovapp.tools.Page;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Pane;
-
-public class SearchResultController implements Initializable{
-
+import com.example.ovapp.TimeUtils; import com.example.ovapp.enums.EPage; import com.example.ovapp.models.nsapi.*; import com.example.ovapp.tools.Page; import com.example.ovapp.tools.TripDetails; import javafx.application.Platform; import javafx.event.ActionEvent; import javafx.fxml.FXML; import javafx.fxml.Initializable; import javafx.scene.control.Button; import javafx.scene.control.Label; import javafx.scene.control.ScrollPane; import javafx.scene.layout.Pane; import javafx.geometry.Insets; import com.fasterxml.jackson.databind.ObjectMapper; import com.example.ovapp.tools.TripDetails;  import java.awt.*; import java.io.IOException; import java.net.URL; import java.nio.file.Files; import java.nio.file.Paths; import java.nio.file.StandardOpenOption; import java.util.ResourceBundle;  import com.example.ovapp.enums.EPage; import com.example.ovapp.tools.Page; import javafx.fxml.FXML; import javafx.fxml.Initializable; import javafx.scene.control.ScrollPane; import javafx.scene.layout.Pane;  public class SearchResultController implements Initializable{
     private Button lastClickedButton;
 
     @FXML
     private ScrollPane scrollPaneMain;
+
+    private TripDetails currentTripDetails;
 
     @FXML
     private Pane sidebar;
@@ -50,7 +17,7 @@ public class SearchResultController implements Initializable{
 
 
     //Dit zijn alle labels die ik nu aanpas
-    //<editor-fold desc="Elements">
+//<editor-fold desc="Elements">
     @FXML
     private Label arrival_route1;
     @FXML
@@ -335,30 +302,16 @@ public class SearchResultController implements Initializable{
                 stops_details.setText(detailsText.toString());
             });
 
+            currentTripDetails = new TripDetails();
+            currentTripDetails.setDepartureTime(departure_details.getText());
+            currentTripDetails.setArrivalTime(arrival_details.getText());
+            currentTripDetails.setDuration(during_details.getText());
+            currentTripDetails.setTransfers(transfer_details.getText());
+            currentTripDetails.setStopsDetails(stops_details.getText());
 
-            TripDetails tripDetails = new TripDetails();
-            tripDetails.setDepartureTime(departure_details.getText());
-            tripDetails.setArrivalTime(arrival_details.getText());
-            tripDetails.setDuration(during_details.getText());
-            tripDetails.setTransfers(transfer_details.getText());
-            tripDetails.setStopsDetails(stops_details.getText());
-
-            String jsonData = convertToJson(tripDetails);
-
-            if (jsonData != null) {
-                try {
-                    // Specificeer het pad naar je JSON-bestand
-                    String filePath = "src/main/resources/json/history.json";
-
-                    // Schrijf JSON-data naar het bestand
-                    Files.write(Paths.get(filePath), jsonData.getBytes(), StandardOpenOption.CREATE);
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
-        }
-    }
-    public void handleRoute1ButtonClick(ActionEvent actionEvent) {
+            public void handleRoute1ButtonClick(ActionEvent actionEvent) {
         updateDetails(1);
     }
 
@@ -387,7 +340,21 @@ public class SearchResultController implements Initializable{
     }
 
     public void ClickBookTrip(ActionEvent actionEvent) {
+        if (currentTripDetails != null) {
+            String jsonData = convertToJson(currentTripDetails);
 
+            if (jsonData != null) {
+                try {
+                    // Specify the path to your JSON file
+                    String filePath = "C:/Users/Mau/IdeaProjects/OV_APP/src/main/resources/json/history.json";
+
+                    // Write JSON data to the file
+                    Files.write(Paths.get(filePath), jsonData.getBytes(), StandardOpenOption.CREATE);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
     private String convertToJson(TripDetails tripDetails) {
         try {
