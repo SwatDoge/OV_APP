@@ -88,9 +88,9 @@ public class Users {
         String userJson = new Gson().toJson(userList);
         System.out.println(userJson);
         try {
-            Path path = Paths.get(this.getClass().getResource("/json/users.json").toURI());
+            Path path = Paths.get("C:/Users/Mau/IdeaProjects/OV_APP/src/main/resources/json/users.json");
             Files.writeString(path, userJson);
-        } catch (URISyntaxException | IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException("Uw gebruikersdatabase is corrupt, neem contact op met een developer");
         }
     }
