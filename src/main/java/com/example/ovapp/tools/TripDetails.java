@@ -2,15 +2,25 @@ package com.example.ovapp.tools;
 
 import com.example.ovapp.TimeUtils;
 import com.example.ovapp.models.nsapi.Trip;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class TripDetails {
-    private String transfers;
-    private String duration;
-    private String departureTime;
-    private String arrivalTime;
-    private String stopsDetails;
-    // Andere velden...
 
+        @SerializedName("transfers")
+        public String transfers;
+        public String duration;
+        public String departureTime;
+        public String arrivalTime;
+        public String stopsDetails;
+
+        // Nieuwe velden voor reishistorie
+        @SerializedName("origin")
+        public String origin;
+
+        @SerializedName("destination")
+        public String destination;
     public String getTransfers() {
         return transfers;
     }
@@ -22,7 +32,6 @@ public class TripDetails {
     public void setStopsDetails(String stopsDetails) {
         this.stopsDetails = stopsDetails;
     }
-
 
     public void setTransfers(String transfers) {
         this.transfers = transfers;
@@ -52,35 +61,27 @@ public class TripDetails {
         this.arrivalTime = arrivalTime;
     }
 
+    public String getOrigin() {
+        return origin;
+    }
 
-    // Andere setters en getters...
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
 
-    // Nieuwe methode om gegevens in te stellen
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
     public void setFromTrip(Trip selectedTrip) {
         this.transfers = String.format("%dx", selectedTrip.transfers);
         this.duration = selectedTrip.getFormattedDuration();
         this.departureTime = selectedTrip.legs.get(0).origin.getFormattedTime();
-
-        // Voeg hier de nieuwe velden toe
-        this.arrivalTime = TimeUtils.calculateArrivalTime(
-                selectedTrip.legs.get(0).origin.getFormattedTime(),
-                selectedTrip.getFormattedDuration()
-        );
-
-
-        // Voeg hier andere velden toe die je nodig hebt
-    }
-
-
-    private String determineTrackOrLine(Trip selectedTrip) {
-        if (selectedTrip.legs.get(0).origin.actualTrack != null && !selectedTrip.legs.get(0).origin.actualTrack.isEmpty()) {
-            return "Spoor " + selectedTrip.legs.get(0).origin.actualTrack;
-        } else if (selectedTrip.legs.get(0).origin.plannedTrack != null && !selectedTrip.legs.get(0).origin.plannedTrack.isEmpty()) {
-            return "Perron " + selectedTrip.legs.get(0).origin.plannedTrack;
-        } else if (selectedTrip.legs.get(0).product.number != null) {
-            return "Lijn " + selectedTrip.legs.get(0).product.number;
-        } else {
-            return "";
-        }
+        this.origin = selectedTrip.legs.get(0).origin.name;
+        this.destination = selectedTrip.legs.get(selectedTrip.legs.size() - 1).destination.name;
     }
 }

@@ -1,8 +1,12 @@
 package com.example.ovapp.controllers;
 
 import com.example.ovapp.TimeUtils;
+import com.example.ovapp.Users;
 import com.example.ovapp.enums.EPage;
 import com.example.ovapp.models.nsapi.*;
+import com.example.ovapp.models.user.User;
+import com.example.ovapp.Users;
+
 import com.example.ovapp.tools.Page;
 import com.example.ovapp.tools.TripDetails;
 import javafx.application.Platform;
@@ -33,7 +37,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 
-public class SearchResultController implements Initializable{
+public class SearchResultController implements Initializable {
 
     private Button lastClickedButton;
 
@@ -165,6 +169,7 @@ public class SearchResultController implements Initializable{
 
         lastClickedButton = clickedButton;
     }
+
     private Button getRouteButton(int routeNumber) {
         switch (routeNumber) {
             case 1:
@@ -264,7 +269,7 @@ public class SearchResultController implements Initializable{
     private void updateDetails(int routeNumber) {
         if (currentApiResult == null || currentApiResult.trips == null) {
             System.out.println("NSApiRoot or trips is null.");
-            System.out.println(currentApiResult + " " + currentApiResult.trips );
+            System.out.println(currentApiResult + " " + currentApiResult.trips);
             return;
         }
 
@@ -334,30 +339,9 @@ public class SearchResultController implements Initializable{
 
                 stops_details.setText(detailsText.toString());
             });
-
-
-            TripDetails tripDetails = new TripDetails();
-            tripDetails.setDepartureTime(departure_details.getText());
-            tripDetails.setArrivalTime(arrival_details.getText());
-            tripDetails.setDuration(during_details.getText());
-            tripDetails.setTransfers(transfer_details.getText());
-            tripDetails.setStopsDetails(stops_details.getText());
-
-            String jsonData = convertToJson(tripDetails);
-
-            if (jsonData != null) {
-                try {
-                    // Specificeer het pad naar je JSON-bestand
-                    String filePath = "src/main/resources/json/history.json";
-
-                    // Schrijf JSON-data naar het bestand
-                    Files.write(Paths.get(filePath), jsonData.getBytes(), StandardOpenOption.CREATE);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
+
     public void handleRoute1ButtonClick(ActionEvent actionEvent) {
         updateDetails(1);
     }
@@ -387,15 +371,22 @@ public class SearchResultController implements Initializable{
     }
 
     public void ClickBookTrip(ActionEvent actionEvent) {
+        Users users = Users.getInstance();
 
-    }
-    private String convertToJson(TripDetails tripDetails) {
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.writeValueAsString(tripDetails);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+        if (users.isSomeUserLoggedIn()) {
+            // Maak een nieuw TripDetails object en stel de gegevens in
+            TripDetails tripDetails = new TripDetails();
+            tripDetails.setDepartureTime(departure_details.getText());
+            tripDetails.setArrivalTime(arrival_details.getText());
+            tripDetails.setDuration(during_details.getText());
+            tripDetails.setTransfers(transfer_details.getText());
+            tripDetails.setStopsDetails(stops_details.getText());
+
+            // Voeg de reishistorie toe aan de huidige gebruiker
+            users.addTripDetailsToCurrentUser(tripDetails);
+
+            // Voeg hier eventueel logica toe om de gebruiker te informeren dat de trip is opgeslagen.
+            // Bijvoorbeeld: System.out.println("Reisdetails opgeslagen!");
         }
     }
 }

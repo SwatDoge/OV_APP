@@ -1,6 +1,7 @@
 package com.example.ovapp;
 
 import com.example.ovapp.models.user.User;
+import com.example.ovapp.tools.TripDetails;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -31,12 +32,24 @@ public class Users {
         return singleton;
     }
 
+    public void addTripDetailsToCurrentUser(TripDetails tripDetails) {
+        if (currentUser != null) {
+            currentUser.addTripDetails(tripDetails);
+            saveUsers(); // Save the updated user list with the new trip details
+        } else {
+            throw new RuntimeException("No user is currently logged in.");
+        }
+    }
+
     //Load up user list from .json file on initialisation.
     Users() {
         try {
-            userList = new ArrayList<User>(Arrays.asList(new Gson().fromJson(Files.readString(Paths.get(this.getClass().getResource("/json/users.json").toURI())), User[].class)));
-        }
-        catch (Exception e) {
+            String jsonContent = String.join("", Files.readAllLines(Paths.get("src/main/resources/json/users.json")));
+            System.out.println("JSON Content: " + jsonContent); // Voeg deze regel toe
+
+            userList = new ArrayList<>(Arrays.asList(new Gson().fromJson(jsonContent, User[].class)));
+        } catch (Exception e) {
+            e.printStackTrace(); // Voeg deze regel toe om de fout af te drukken
             throw new RuntimeException("Uw gebruikersdatabase is corrupt, neem contact op met een developer");
         }
     }
@@ -88,7 +101,7 @@ public class Users {
         String userJson = new Gson().toJson(userList);
         System.out.println(userJson);
         try {
-            Path path = Paths.get("C:/Users/Mau/IdeaProjects/OV_APP/src/main/resources/json/users.json");
+            Path path = Paths.get("src/main/resources/json/users.json");
             Files.writeString(path, userJson);
         } catch (IOException e) {
             throw new RuntimeException("Uw gebruikersdatabase is corrupt, neem contact op met een developer");
