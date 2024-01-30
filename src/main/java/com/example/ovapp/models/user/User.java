@@ -16,6 +16,10 @@ public class User {
         this.tripDetails = new ArrayList<>();
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public void addTripDetails(TripDetails historyItem) {
         this.tripDetails.add(historyItem);
     }

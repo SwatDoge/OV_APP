@@ -18,6 +18,8 @@ public class Users {
     private final int MIN_USERNAME_LENGTH = 2;
     private final int MAX_USERNAME_LENGTH = 30;
     private final int MIN_PASSWORD_LENGTH = 8;
+    private static final int MAX_ROUTES_HISTORY = 100;
+
 
     private static Users singleton;
     private List<User> userList;
@@ -32,10 +34,19 @@ public class Users {
         return singleton;
     }
 
+
+
     public void addTripDetailsToCurrentUser(TripDetails tripDetails) {
         if (currentUser != null) {
-            currentUser.addTripDetails(tripDetails);
-            saveUsers(); // Save the updated user list with the new trip details
+            List<TripDetails> userTripHistory = currentUser.getTripDetails();
+
+            // Controleer of het maximum aantal routes nog niet is bereikt
+            if (userTripHistory.size() < MAX_ROUTES_HISTORY) {
+                userTripHistory.add(tripDetails);
+                saveUsers(); // Save the updated user list with the new trip details
+            } else {
+                throw new RuntimeException("Maximaal aantal opgeslagen routes bereikt.");
+            }
         } else {
             throw new RuntimeException("No user is currently logged in.");
         }
@@ -66,17 +77,13 @@ public class Users {
     public void createUser(String username, String password) {
         if (isUsernameDuplicate(username)) {
             throw new RuntimeException("Deze gebruikersnaam word al gebruikt.");
-        }
-        else if (username.length() < MIN_USERNAME_LENGTH) {
+        } else if (username.length() < MIN_USERNAME_LENGTH) {
             throw new RuntimeException("Gebruikersnaam is te kort. (Minstens " + MIN_USERNAME_LENGTH + " karakters)");
-        }
-        else if (username.length() > MAX_USERNAME_LENGTH) {
+        } else if (username.length() > MAX_USERNAME_LENGTH) {
             throw new RuntimeException("Gebruikersnaam is te lang. (Maximaal " + MAX_USERNAME_LENGTH + " karakters)");
-        }
-        else if (password.length() < MIN_PASSWORD_LENGTH) {
+        } else if (password.length() < MIN_PASSWORD_LENGTH) {
             throw new RuntimeException("Wachtwoord is te kort. (Minstens " + MIN_PASSWORD_LENGTH + " karakters)");
-        }
-        else if (username.contains(" ")) {
+        } else if (username.contains(" ")) {
             throw new RuntimeException("Je mag geen spatie gebruiken in je gebruikersnaam.");
         }
 
@@ -122,7 +129,17 @@ public class Users {
     public boolean isSomeUserLoggedIn() {
         return currentUser != null;
     }
+
     public void logoutCurrentUser() {
-        currentUser = null;
+        if (currentUser != null) {
+            // Voer hier andere acties uit bij het uitloggen
+            System.out.println("Uitloggen van gebruiker: " + currentUser.getUsername());
+
+            // Stel currentUser in op null
+            currentUser = null;
+
+            // Sla de gebruikerslijst onmiddellijk op
+            saveUsers();
+        }
     }
 }

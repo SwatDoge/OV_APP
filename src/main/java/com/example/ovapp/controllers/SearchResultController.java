@@ -6,16 +6,17 @@ import com.example.ovapp.enums.EPage;
 import com.example.ovapp.models.nsapi.*;
 import com.example.ovapp.models.user.User;
 import com.example.ovapp.Users;
+import com.example.ovapp.tools.TripDetails;
+
 
 import com.example.ovapp.tools.Page;
-import com.example.ovapp.tools.TripDetails;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.geometry.Insets;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -374,19 +375,27 @@ public class SearchResultController implements Initializable {
         Users users = Users.getInstance();
 
         if (users.isSomeUserLoggedIn()) {
-            // Maak een nieuw TripDetails object en stel de gegevens in
             TripDetails tripDetails = new TripDetails();
             tripDetails.setDepartureTime(departure_details.getText());
             tripDetails.setArrivalTime(arrival_details.getText());
             tripDetails.setDuration(during_details.getText());
             tripDetails.setTransfers(transfer_details.getText());
             tripDetails.setStopsDetails(stops_details.getText());
+            tripDetails.setTrackOrLine(track_details.getText());
 
             // Voeg de reishistorie toe aan de huidige gebruiker
             users.addTripDetailsToCurrentUser(tripDetails);
 
-            // Voeg hier eventueel logica toe om de gebruiker te informeren dat de trip is opgeslagen.
-            // Bijvoorbeeld: System.out.println("Reisdetails opgeslagen!");
+            // Toon een melding dat de route is opgeslagen
+            showAlert("Succes", "Reisdetails opgeslagen!", Alert.AlertType.INFORMATION);
         }
+    }
+
+    private void showAlert(String title, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }
