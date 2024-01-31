@@ -23,7 +23,6 @@ import javafx.scene.layout.Region;
 
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.List;
 
 public class TravelHistoryController {
