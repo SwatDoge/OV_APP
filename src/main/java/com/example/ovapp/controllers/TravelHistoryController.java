@@ -10,7 +10,9 @@ import com.google.gson.reflect.TypeToken;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -121,6 +123,9 @@ public class TravelHistoryController {
     @FXML
     private Label stops_details_history;
 
+
+
+
     @FXML
     private void toggleSideBar() {
         sidebar.setVisible(true);
@@ -195,16 +200,32 @@ public class TravelHistoryController {
                 updateDetailsForRoute(currentRouteNumber);
 
                 // Vernieuw het scherm of voer andere benodigde acties uit
-                refreshScreen();
 
                 // Werk de JSON-opslag bij (schrijf terug naar het bestand)
                 updateJsonFile(currentUser);
 
                 // Laat het bericht zien nadat alles is bijgewerkt
                 showAlert("Succes", "Route succesvol verwijderd.", Alert.AlertType.INFORMATION);
+
+                // Refresh the UI immediately
+                refreshUI();
             });
         }
     }
+
+    // Voeg deze methode toe aan TravelHistoryController
+    public void updateUI() {
+        User currentUser = getCurrentUser();
+
+        if (currentUser != null) {
+            for (int i = 0; i < currentUser.getTripDetails().size(); i++) {
+                TripDetails tripDetails = currentUser.getTripDetails().get(i);
+                setLabelsForRoute(tripDetails, i + 1);
+            }
+        }
+    }
+
+
 
     private void showAlert(String title, String content, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
@@ -242,6 +263,10 @@ public class TravelHistoryController {
 
     private User getCurrentUser() {
         return Users.getInstance().currentUser;
+    }
+
+    public void setCurrentUser(User user) {
+        Users.getInstance().currentUser = user;
     }
 
     @FXML
@@ -318,6 +343,29 @@ public class TravelHistoryController {
         }
     }
 
+    public void refreshUI() {
+        // Reinitialize the controller to refresh the UI
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ovapp/travel-history-view.fxml"));
+                Parent root = loader.load();
+                TravelHistoryController controller = loader.getController();
+
+
+                // Set the updated user data
+                User currentUser = getCurrentUser();
+                controller.setCurrentUser(currentUser);
+
+                // Replace the current scene with the updated one
+                historyAnchorPane.getScene().setRoot(root);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+
+
     private void updateJsonFile(User currentUser) {
         try {
             File file = new File("src/main/resources/json/users.json");
@@ -344,9 +392,7 @@ public class TravelHistoryController {
         }
     }
 
-    private void refreshScreen() {
-        Page.navigateTo(EPage.HOME);
-    }
+
 
     @FXML
     public void onBackButtonPressed() {

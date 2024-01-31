@@ -6,17 +6,19 @@ import com.example.ovapp.enums.EPage;
 import com.example.ovapp.models.nsapi.*;
 import com.example.ovapp.models.user.User;
 import com.example.ovapp.Users;
-import com.example.ovapp.tools.TripDetails;
+import com.example.ovapp.tools.*;
+import com.example.ovapp.controllers.TravelHistoryController;
 
 
-import com.example.ovapp.tools.Page;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.geometry.Insets;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,6 +39,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import com.example.ovapp.tools.RouteSavedEvent;
+
+
 
 public class SearchResultController implements Initializable {
 
@@ -156,6 +163,7 @@ public class SearchResultController implements Initializable {
         stop_details_pane.setPadding(new Insets(5, 0, -10, 5));
 
         stops_details.setMaxHeight(Double.MAX_VALUE);
+
     }
 
     private void handleRouteButtonClick(int routeNumber) {
@@ -170,6 +178,7 @@ public class SearchResultController implements Initializable {
 
         lastClickedButton = clickedButton;
     }
+
 
     private Button getRouteButton(int routeNumber) {
         switch (routeNumber) {
@@ -371,6 +380,7 @@ public class SearchResultController implements Initializable {
         Page.navigateTo(EPage.HOME);
     }
 
+
     public void ClickBookTrip(ActionEvent actionEvent) {
         Users users = Users.getInstance();
 
@@ -388,6 +398,8 @@ public class SearchResultController implements Initializable {
 
             // Toon een melding dat de route is opgeslagen
             showAlert("Succes", "U heeft deze route opgeslagen in reishistorie!", Alert.AlertType.INFORMATION);
+
+
         } else {
             showAlert("Fout", "U moet ingelogd zijn om een reisdetails op te slaan.", Alert.AlertType.ERROR);
             Page.navigateTo(EPage.LOGIN);

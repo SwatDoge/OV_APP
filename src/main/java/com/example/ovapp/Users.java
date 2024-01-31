@@ -3,6 +3,8 @@ package com.example.ovapp;
 import com.example.ovapp.models.user.User;
 import com.example.ovapp.tools.TripDetails;
 import com.google.gson.Gson;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
 import java.io.IOException;
@@ -21,8 +23,6 @@ public class Users {
     private final int MIN_PASSWORD_LENGTH = 8;
     private static final int MAX_ROUTES_HISTORY = 100;
     private static final int MAX_ROUTES_FAVORITE = 100;
-
-
 
     private static Users singleton;
     private List<User> userList;
