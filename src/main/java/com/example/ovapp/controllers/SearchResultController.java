@@ -387,8 +387,10 @@ public class SearchResultController implements Initializable {
             users.addTripDetailsToCurrentUser(tripDetails);
 
             // Toon een melding dat de route is opgeslagen
-            showAlert("Succes", "Reisdetails opgeslagen!", Alert.AlertType.INFORMATION);
-
+            showAlert("Succes", "U heeft deze route opgeslagen in reishistorie!", Alert.AlertType.INFORMATION);
+        } else {
+            showAlert("Fout", "U moet ingelogd zijn om een reisdetails op te slaan.", Alert.AlertType.ERROR);
+            Page.navigateTo(EPage.LOGIN);
         }
     }
 
@@ -405,10 +407,14 @@ public class SearchResultController implements Initializable {
             tripDetails.setTrackOrLine(track_details.getText());
 
             // Voeg de reishistorie toe aan de huidige gebruiker
-            users.addTripDetailsToCurrentUser(tripDetails);
+            users.addFavoriteTripToCurrentUser(tripDetails);
+
 
             // Toon een melding dat de route is opgeslagen
-            showAlert("Succes", "Reisdetails opgeslagen!", Alert.AlertType.INFORMATION);
+            showAlert("Succes", "U heeft deze route opgeslagen in favoriet!", Alert.AlertType.INFORMATION);
+        } else {
+            showAlert("Fout", "U moet ingelogd zijn om een reisdetails op te slaan.", Alert.AlertType.ERROR);
+            Page.navigateTo(EPage.LOGIN);
         }
     }
 

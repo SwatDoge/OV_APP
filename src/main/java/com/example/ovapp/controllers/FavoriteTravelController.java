@@ -18,82 +18,78 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.fxml.FXML;
-import javafx.scene.layout.Region;
-
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.List;
 
-public class TravelHistoryController {
+public class FavoriteTravelController {
 
     @FXML
-    private Button history1;
+    private Button favorite1;
     @FXML
-    private Button history2;
+    private Button favorite2;
     @FXML
-    private Button history3;
+    private Button favorite3;
     @FXML
-    private Button history4;
+    private Button favorite4;
     @FXML
-    private Button history5;
+    private Button favorite5;
     @FXML
-    private Button history6;
+    private Button favorite6;
 
     @FXML
-    private Label arrival_history1;
+    private Label arrival_favorite1;
     @FXML
-    private Label departure_history1;
+    private Label departure_favorite1;
     @FXML
-    private Label during_history1;
+    private Label during_favorite1;
     @FXML
-    private Label transfer_history1;
+    private Label transfer_favorite1;
 
     @FXML
-    private Label arrival_history2;
+    private Label arrival_favorite2;
     @FXML
-    private Label departure_history2;
+    private Label departure_favorite2;
     @FXML
-    private Label during_history2;
+    private Label during_favorite2;
     @FXML
-    private Label transfer_history2;
+    private Label transfer_favorite2;
 
     @FXML
-    private Label arrival_history3;
+    private Label arrival_favorite3;
     @FXML
-    private Label departure_history3;
+    private Label departure_favorite3;
     @FXML
-    private Label during_history3;
+    private Label during_favorite3;
     @FXML
-    private Label transfer_history3;
+    private Label transfer_favorite3;
 
     @FXML
-    private Label arrival_history4;
+    private Label arrival_favorite4;
     @FXML
-    private Label departure_history4;
+    private Label departure_favorite4;
     @FXML
-    private Label during_history4;
+    private Label during_favorite4;
     @FXML
-    private Label transfer_history4;
+    private Label transfer_favorite4;
 
     @FXML
-    private Label arrival_history5;
+    private Label arrival_favorite5;
     @FXML
-    private Label departure_history5;
+    private Label departure_favorite5;
     @FXML
-    private Label during_history5;
+    private Label during_favorite5;
     @FXML
-    private Label transfer_history5;
+    private Label transfer_favorite5;
 
     @FXML
-    private Label arrival_history6;
+    private Label arrival_favorite6;
     @FXML
-    private Label departure_history6;
+    private Label departure_favorite6;
     @FXML
-    private Label during_history6;
+    private Label during_favorite6;
     @FXML
-    private Label transfer_history6;
+    private Label transfer_favorite6;
 
     @FXML
     private Pane sidebar;
@@ -110,17 +106,17 @@ public class TravelHistoryController {
     private Pane stop_details_pane;
 
     @FXML
-    private Label departure_details_history;
+    private Label departure_details_favorite;
     @FXML
-    private Label during_details_history;
+    private Label during_details_favorite;
     @FXML
-    private Label arrival_details_history;
+    private Label arrival_details_favorite;
     @FXML
-    private Label track_details_history;
+    private Label track_details_favorite;
     @FXML
-    private Label transfer_details_history;
+    private Label transfer_details_favorite;
     @FXML
-    private Label stops_details_history;
+    private Label stops_details_favorite;
 
     @FXML
     private void toggleSideBar() {
@@ -131,10 +127,10 @@ public class TravelHistoryController {
 
     public void initialize() {
 
-        System.out.println("Initializing TravelHistoryController...");
+        System.out.println("Initializing FavoriteTravelController...");
 
         stop_details_pane.setPadding(new Insets(5, 0, -10, 5));
-        stops_details_history.setMaxHeight(Double.MAX_VALUE);
+        stops_details_favorite.setMaxHeight(Double.MAX_VALUE);
 
         currentRouteNumber = 1;
 
@@ -162,10 +158,10 @@ public class TravelHistoryController {
                                 .findFirst()
                                 .orElse(null);
 
-                        if (loggedInUser != null && !loggedInUser.getTripDetails().isEmpty()) {
-                            for (int i = 0; i < loggedInUser.getTripDetails().size(); i++) {
-                                TripDetails tripDetails = loggedInUser.getTripDetails().get(i);
-                                setLabelsForRoute(tripDetails, i + 1);
+                        if (loggedInUser != null && !loggedInUser.getFavoriteTrips().isEmpty()) {
+                            for (int i = 0; i < loggedInUser.getFavoriteTrips().size(); i++) {
+                                TripDetails favoriteTrip = loggedInUser.getFavoriteTrips().get(i);
+                                setLabelsForRoute(favoriteTrip, i + 1);
                             }
                         }
                     }
@@ -179,7 +175,7 @@ public class TravelHistoryController {
     // Roep deze methode aan wanneer u de inhoud van de VBox bijwerkt
 
     @FXML
-    public void deleteRoute(ActionEvent actionEvent) {
+    public void deleteRouteButtonfavorite(ActionEvent actionEvent) {
         System.out.println("Delete route button clicked");
 
         // Krijg de huidige gebruiker
@@ -189,7 +185,7 @@ public class TravelHistoryController {
             System.out.println("Current user found");
 
             // Verwijder de huidige route
-            currentUser.getTripDetails().remove(currentRouteNumber - 1);
+            currentUser.getFavoriteTrips().remove(currentRouteNumber - 1);
 
             Platform.runLater(() -> {
                 // Update de UI met de verwijderde route
@@ -215,11 +211,11 @@ public class TravelHistoryController {
         alert.showAndWait();
     }
 
-    private void setLabelsForRoute(TripDetails tripDetails, int routeNumber) {
-        String arrivalLabel = "arrival_history" + routeNumber;
-        String departureLabel = "departure_history" + routeNumber;
-        String duringLabel = "during_history" + routeNumber;
-        String transferLabel = "transfer_history" + routeNumber;
+    private void setLabelsForRoute(TripDetails favoriteTrip, int routeNumber) {
+        String arrivalLabel = "arrival_favorite" + routeNumber;
+        String departureLabel = "departure_favorite" + routeNumber;
+        String duringLabel = "during_favorite" + routeNumber;
+        String transferLabel = "transfer_favorite" + routeNumber;
 
         // Gebruik reflection om de juiste labels te krijgen op basis van het routenummer
         try {
@@ -228,14 +224,14 @@ public class TravelHistoryController {
             Label duringLabelField = (Label) getClass().getDeclaredField(duringLabel).get(this);
             Label transferLabelField = (Label) getClass().getDeclaredField(transferLabel).get(this);
 
-            // Update de labels met de gegevens van de tripDetails
-        Platform.runLater(() -> {
-            System.out.println("update labels with tripdetails data");
-            arrivalLabelField.setText(tripDetails.getArrivalTime());
-            departureLabelField.setText(tripDetails.getDepartureTime());
-            duringLabelField.setText(tripDetails.getDuration());
-            transferLabelField.setText(tripDetails.getTransfers());
-        });
+            // Update de labels met de gegevens van de favoriteTrip
+            Platform.runLater(() -> {
+                System.out.println("update labels with favoriteTrip data");
+                arrivalLabelField.setText(favoriteTrip.getArrivalTime());
+                departureLabelField.setText(favoriteTrip.getDepartureTime());
+                duringLabelField.setText(favoriteTrip.getDuration());
+                transferLabelField.setText(favoriteTrip.getTransfers());
+            });
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
@@ -246,32 +242,32 @@ public class TravelHistoryController {
     }
 
     @FXML
-    public void history_handleRoute1ButtonClick(ActionEvent actionEvent) {
+    public void favorite_handleRoute1ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(1);
     }
 
     @FXML
-    public void history_handleRoute2ButtonClick(ActionEvent actionEvent) {
+    public void favorite_handleRoute2ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(2);
     }
 
     @FXML
-    public void history_handleRoute3ButtonClick(ActionEvent actionEvent) {
+    public void favorite_handleRoute3ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(3);
     }
 
     @FXML
-    public void history_handleRoute4ButtonClick(ActionEvent actionEvent) {
+    public void favorite_handleRoute4ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(4);
     }
 
     @FXML
-    public void history_handleRoute5ButtonClick(ActionEvent actionEvent) {
+    public void favorite_handleRoute5ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(5);
     }
 
     @FXML
-    public void history_handleRoute6ButtonClick(ActionEvent actionEvent) {
+    public void favorite_handleRoute6ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(6);
     }
 
@@ -293,17 +289,17 @@ public class TravelHistoryController {
                                 .findFirst()
                                 .orElse(null);
 
-                        if (loggedInUser != null && !loggedInUser.getTripDetails().isEmpty()) {
-                            TripDetails selectedTrip = loggedInUser.getTripDetails().get(routeNumber - 1);
+                        if (loggedInUser != null && !loggedInUser.getFavoriteTrips().isEmpty()) {
+                            TripDetails selectedTrip = loggedInUser.getFavoriteTrips().get(routeNumber - 1);
 
                             Platform.runLater(() -> {
                                 // Update de labels met de gegevens van de geselecteerde route
-                                departure_details_history.setText(selectedTrip.getDepartureTime());
-                                during_details_history.setText(selectedTrip.getDuration());
-                                arrival_details_history.setText(selectedTrip.getArrivalTime());
-                                track_details_history.setText((selectedTrip.getTrackOrLine()));
-                                transfer_details_history.setText(String.format(selectedTrip.getTransfers()));
-                                stops_details_history.setText(selectedTrip.getStopsDetails());
+                                departure_details_favorite.setText(selectedTrip.getDepartureTime());
+                                during_details_favorite.setText(selectedTrip.getDuration());
+                                arrival_details_favorite.setText(selectedTrip.getArrivalTime());
+                                track_details_favorite.setText((selectedTrip.getTrackOrLine()));
+                                transfer_details_favorite.setText(String.format(selectedTrip.getTransfers()));
+                                stops_details_favorite.setText(selectedTrip.getStopsDetails());
 
                                 // Voeg hier logica toe om de overige labels bij te werken
                                 // bijvoorbeeld: track_details_history.setText(selectedTrip.getTrackOrLine());
@@ -332,7 +328,7 @@ public class TravelHistoryController {
                     // Zoek de gebruiker en werk de gegevens bij
                     userList.stream()
                             .filter(user -> user.getUsername().equals(currentUser.getUsername()))
-                            .forEach(user -> user.setTripDetails(currentUser.getTripDetails()));
+                            .forEach(user -> user.setFavoriteTrips(currentUser.getFavoriteTrips()));
 
                     // Schrijf de bijgewerkte lijst terug naar het bestand
                     try (FileWriter writer = new FileWriter(file)) {

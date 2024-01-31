@@ -20,6 +20,8 @@ public class Users {
     private final int MAX_USERNAME_LENGTH = 30;
     private final int MIN_PASSWORD_LENGTH = 8;
     private static final int MAX_ROUTES_HISTORY = 100;
+    private static final int MAX_ROUTES_FAVORITE = 100;
+
 
 
     private static Users singleton;
@@ -35,7 +37,12 @@ public class Users {
         return singleton;
     }
 
-
+    public void addFavoriteTripToCurrentUser(TripDetails favoriteTrip) {
+        if (currentUser != null) {
+            currentUser.addFavoriteTrip(favoriteTrip);
+            saveUsers(); // Sla de gebruikerslijst op na het toevoegen van het favoriete reisdetail
+        }
+    }
 
     public void addTripDetailsToCurrentUser(TripDetails tripDetails) {
         if (currentUser != null) {
