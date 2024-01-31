@@ -20,8 +20,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.fxml.FXML;
-import javafx.scene.layout.Region;
 
 
 import java.io.*;
@@ -99,7 +97,7 @@ public class TravelHistoryController {
     @FXML
     private Pane sidebar;
     @FXML
-    private AnchorPane historyAnchorPane;
+    public static AnchorPane historyAnchorPane;
 
     @FXML
     private ScrollPane historyScrollPane;
@@ -122,9 +120,6 @@ public class TravelHistoryController {
     private Label transfer_details_history;
     @FXML
     private Label stops_details_history;
-
-
-
 
     @FXML
     private void toggleSideBar() {
@@ -180,8 +175,6 @@ public class TravelHistoryController {
         }
     }
 
-    // Roep deze methode aan wanneer u de inhoud van de VBox bijwerkt
-
     @FXML
     public void deleteRoute(ActionEvent actionEvent) {
         System.out.println("Delete route button clicked");
@@ -225,8 +218,6 @@ public class TravelHistoryController {
         }
     }
 
-
-
     private void showAlert(String title, String content, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -261,7 +252,7 @@ public class TravelHistoryController {
         }
     }
 
-    private User getCurrentUser() {
+    public static User getCurrentUser() {
         return Users.getInstance().currentUser;
     }
 
@@ -358,13 +349,14 @@ public class TravelHistoryController {
 
                 // Replace the current scene with the updated one
                 historyAnchorPane.getScene().setRoot(root);
+
+                System.out.println("UI refreshed!");
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
     }
-
-
 
     private void updateJsonFile(User currentUser) {
         try {
@@ -391,8 +383,6 @@ public class TravelHistoryController {
             e.printStackTrace();
         }
     }
-
-
 
     @FXML
     public void onBackButtonPressed() {

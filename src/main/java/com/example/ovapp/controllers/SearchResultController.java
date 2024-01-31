@@ -12,16 +12,13 @@ import com.example.ovapp.controllers.TravelHistoryController;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventTarget;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.*;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.geometry.Insets;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.example.ovapp.tools.TripDetails;
 
 
@@ -424,11 +421,14 @@ public class SearchResultController implements Initializable {
 
             // Toon een melding dat de route is opgeslagen
             showAlert("Succes", "U heeft deze route opgeslagen in favoriet!", Alert.AlertType.INFORMATION);
+
         } else {
             showAlert("Fout", "U moet ingelogd zijn om een reisdetails op te slaan.", Alert.AlertType.ERROR);
             Page.navigateTo(EPage.LOGIN);
         }
     }
+
+
 
     private void showAlert(String title, String content, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
