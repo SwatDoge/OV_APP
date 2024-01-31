@@ -3,6 +3,7 @@ package com.example.ovapp;
 import com.example.ovapp.models.user.User;
 import com.example.ovapp.tools.TripDetails;
 import com.google.gson.Gson;
+import javafx.scene.control.Alert;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -56,13 +57,22 @@ public class Users {
     Users() {
         try {
             String jsonContent = String.join("", Files.readAllLines(Paths.get("src/main/resources/json/users.json")));
-            System.out.println("JSON Content: " + jsonContent); // Voeg deze regel toe
+            System.out.println("JSON Content: " + jsonContent); // Laat deze regel staan voor debugging
 
             userList = new ArrayList<>(Arrays.asList(new Gson().fromJson(jsonContent, User[].class)));
         } catch (Exception e) {
-            e.printStackTrace(); // Voeg deze regel toe om de fout af te drukken
+            e.printStackTrace(); // Laat deze regel staan voor debugging
+            showAlertError("Fout bij laden gebruikersdatabase", "Uw gebruikersdatabase is corrupt. Neem contact op met een developer.");
             throw new RuntimeException("Uw gebruikersdatabase is corrupt, neem contact op met een developer");
         }
+    }
+
+    private void showAlertError(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     //CRUD users
@@ -106,14 +116,27 @@ public class Users {
 
     public void saveUsers() {
         String userJson = new Gson().toJson(userList);
-        System.out.println(userJson);
         try {
             Path path = Paths.get("src/main/resources/json/users.json");
             Files.writeString(path, userJson);
         } catch (IOException e) {
-            throw new RuntimeException("Uw gebruikersdatabase is corrupt, neem contact op met een developer");
+            e.printStackTrace();
+            showErrorAlert("Fout bij opslaan gebruikersdatabase", "Uw gebruikersdatabase kon niet worden opgeslagen. Neem contact op met een developer.");
+            throw new RuntimeException("Uw gebruikersdatabase kon niet worden opgeslagen, neem contact op met een developer");
         }
     }
+
+
+
+    // Voeg deze methode toe om een foutmelding te tonen
+    private void showErrorAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
 
     // Login logic
     public void logIntoUser(String username, String password) {
@@ -140,6 +163,17 @@ public class Users {
 
             // Sla de gebruikerslijst onmiddellijk op
             saveUsers();
+
+            showAlertLogOut("Uitloggen voltooid", "U bent succesvol uitgelogd.");
+
         }
     }
+    private void showAlertLogOut(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
 }

@@ -15,7 +15,9 @@ public class User {
         this.password = password;
         this.tripDetails = new ArrayList<>();
     }
-
+    public void setTripDetails(List<TripDetails> tripDetails) {
+        this.tripDetails = tripDetails;
+    }
     public String getUsername() {
         return username;
     }

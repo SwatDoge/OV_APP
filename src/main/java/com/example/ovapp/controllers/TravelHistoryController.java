@@ -5,22 +5,25 @@ import com.example.ovapp.enums.EPage;
 import com.example.ovapp.models.user.User;
 import com.example.ovapp.tools.Page;
 import com.example.ovapp.tools.TripDetails;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.fxml.FXML;
+import javafx.scene.layout.Region;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.Type;
+
+import java.io.*;
+import java.util.Arrays;
 import java.util.List;
 
 public class TravelHistoryController {
@@ -93,6 +96,20 @@ public class TravelHistoryController {
     private Label transfer_history6;
 
     @FXML
+    private Pane sidebar;
+    @FXML
+    private AnchorPane historyAnchorPane;
+
+    @FXML
+    private ScrollPane historyScrollPane;
+
+    @FXML
+    private VBox historyVBox;
+
+    @FXML
+    private Pane stop_details_pane;
+
+    @FXML
     private Label departure_details_history;
     @FXML
     private Label during_details_history;
@@ -102,38 +119,41 @@ public class TravelHistoryController {
     private Label track_details_history;
     @FXML
     private Label transfer_details_history;
-
     @FXML
     private Label stops_details_history;
-    @FXML
-    private Pane sidebar;
-    @FXML
-    private Pane stop_details_pane;
-
 
     @FXML
     private void toggleSideBar() {
         sidebar.setVisible(true);
     }
 
+    private int currentRouteNumber; // Houdt het huidige routenummer bij
 
     public void initialize() {
-            System.out.println("Initializing TravelHistoryController...");
-            stop_details_pane.setPadding(new Insets(5, 0, -10, 5));
-            stops_details_history.setMaxHeight(Double.MAX_VALUE);
 
-            User currentUser = getCurrentUser();
+        System.out.println("Initializing TravelHistoryController...");
 
-            if (currentUser != null) {
-                try {
-                    System.out.println("Reading JSON file...");
+        stop_details_pane.setPadding(new Insets(5, 0, -10, 5));
+        stops_details_history.setMaxHeight(Double.MAX_VALUE);
 
-                    File file = new File("src/main/resources/json/users.json");
+        currentRouteNumber = 1;
 
-                    // Gebruik Gson om JSON naar object te deserialiseren
+        updateDetailsForRoute(currentRouteNumber);
+
+
+        User currentUser = getCurrentUser();
+
+        if (currentUser != null) {
+            try {
+                System.out.println("Reading JSON file...");
+
+                File file = new File("src/main/resources/json/users.json");
+
+                // Gebruik Gson om JSON naar object te deserialiseren
+                try (Reader reader = new FileReader(file)) {
                     Gson gson = new Gson();
-                    Type type = new TypeToken<List<User>>() {}.getType();
-                    List<User> userList = gson.fromJson(new FileReader(file), type);
+                    TypeToken<List<User>> typeToken = new TypeToken<List<User>>() {};
+                    List<User> userList = gson.fromJson(reader, typeToken.getType());
 
                     if (!userList.isEmpty()) {
                         // Zoek de ingelogde gebruiker op basis van de gebruikersnaam
@@ -143,51 +163,192 @@ public class TravelHistoryController {
                                 .orElse(null);
 
                         if (loggedInUser != null && !loggedInUser.getTripDetails().isEmpty()) {
-                            TripDetails tripDetails = loggedInUser.getTripDetails().get(0);
-
-                            arrival_history1.setText(tripDetails.getArrivalTime());
-                            departure_history1.setText(tripDetails.getDepartureTime());
-                            during_history1.setText(tripDetails.getDuration());
-                            transfer_history1.setText(tripDetails.getTransfers());
-                            departure_details_history.setText(tripDetails.getDepartureTime());
-                            during_details_history.setText(tripDetails.getDuration());
-                            arrival_details_history.setText(tripDetails.getArrivalTime());
-                            transfer_details_history.setText(tripDetails.getTransfers());
-                            stops_details_history.setText(tripDetails.getStopsDetails());
-                            track_details_history.setText(tripDetails.getTrackOrLine());
+                            for (int i = 0; i < loggedInUser.getTripDetails().size(); i++) {
+                                TripDetails tripDetails = loggedInUser.getTripDetails().get(i);
+                                setLabelsForRoute(tripDetails, i + 1);
+                            }
                         }
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
+    }
 
+    // Roep deze methode aan wanneer u de inhoud van de VBox bijwerkt
+
+    @FXML
+    public void deleteRoute(ActionEvent actionEvent) {
+        System.out.println("Delete route button clicked");
+
+        // Krijg de huidige gebruiker
+        User currentUser = getCurrentUser();
+
+        if (currentUser != null) {
+            System.out.println("Current user found");
+
+            // Verwijder de huidige route
+            currentUser.getTripDetails().remove(currentRouteNumber - 1);
+
+            Platform.runLater(() -> {
+                // Update de UI met de verwijderde route
+                updateDetailsForRoute(currentRouteNumber);
+
+                // Vernieuw het scherm of voer andere benodigde acties uit
+                refreshScreen();
+
+                // Werk de JSON-opslag bij (schrijf terug naar het bestand)
+                updateJsonFile(currentUser);
+
+                // Laat het bericht zien nadat alles is bijgewerkt
+                showAlert("Succes", "Route succesvol verwijderd.", Alert.AlertType.INFORMATION);
+            });
+        }
+    }
+
+    private void showAlert(String title, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    private void setLabelsForRoute(TripDetails tripDetails, int routeNumber) {
+        String arrivalLabel = "arrival_history" + routeNumber;
+        String departureLabel = "departure_history" + routeNumber;
+        String duringLabel = "during_history" + routeNumber;
+        String transferLabel = "transfer_history" + routeNumber;
+
+        // Gebruik reflection om de juiste labels te krijgen op basis van het routenummer
+        try {
+            Label arrivalLabelField = (Label) getClass().getDeclaredField(arrivalLabel).get(this);
+            Label departureLabelField = (Label) getClass().getDeclaredField(departureLabel).get(this);
+            Label duringLabelField = (Label) getClass().getDeclaredField(duringLabel).get(this);
+            Label transferLabelField = (Label) getClass().getDeclaredField(transferLabel).get(this);
+
+            // Update de labels met de gegevens van de tripDetails
+        Platform.runLater(() -> {
+            System.out.println("update labels with tripdetails data");
+            arrivalLabelField.setText(tripDetails.getArrivalTime());
+            departureLabelField.setText(tripDetails.getDepartureTime());
+            duringLabelField.setText(tripDetails.getDuration());
+            transferLabelField.setText(tripDetails.getTransfers());
+        });
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
 
     private User getCurrentUser() {
         return Users.getInstance().currentUser;
     }
 
-
-
+    @FXML
     public void history_handleRoute1ButtonClick(ActionEvent actionEvent) {
+        updateDetailsForRoute(1);
     }
 
+    @FXML
     public void history_handleRoute2ButtonClick(ActionEvent actionEvent) {
+        updateDetailsForRoute(2);
     }
 
+    @FXML
     public void history_handleRoute3ButtonClick(ActionEvent actionEvent) {
+        updateDetailsForRoute(3);
     }
 
+    @FXML
     public void history_handleRoute4ButtonClick(ActionEvent actionEvent) {
+        updateDetailsForRoute(4);
     }
 
+    @FXML
     public void history_handleRoute5ButtonClick(ActionEvent actionEvent) {
+        updateDetailsForRoute(5);
     }
 
+    @FXML
     public void history_handleRoute6ButtonClick(ActionEvent actionEvent) {
+        updateDetailsForRoute(6);
     }
 
+    private void updateDetailsForRoute(int routeNumber) {
+        User currentUser = getCurrentUser();
+
+        if (currentUser != null) {
+            try {
+                File file = new File("src/main/resources/json/users.json");
+
+                try (Reader reader = new FileReader(file)) {
+                    Gson gson = new Gson();
+                    TypeToken<List<User>> typeToken = new TypeToken<List<User>>() {};
+                    List<User> userList = gson.fromJson(reader, typeToken.getType());
+
+                    if (!userList.isEmpty()) {
+                        User loggedInUser = userList.stream()
+                                .filter(user -> user.getUsername().equals(currentUser.getUsername()))
+                                .findFirst()
+                                .orElse(null);
+
+                        if (loggedInUser != null && !loggedInUser.getTripDetails().isEmpty()) {
+                            TripDetails selectedTrip = loggedInUser.getTripDetails().get(routeNumber - 1);
+
+                            Platform.runLater(() -> {
+                                // Update de labels met de gegevens van de geselecteerde route
+                                departure_details_history.setText(selectedTrip.getDepartureTime());
+                                during_details_history.setText(selectedTrip.getDuration());
+                                arrival_details_history.setText(selectedTrip.getArrivalTime());
+                                track_details_history.setText((selectedTrip.getTrackOrLine()));
+                                transfer_details_history.setText(String.format(selectedTrip.getTransfers()));
+                                stops_details_history.setText(selectedTrip.getStopsDetails());
+
+                                // Voeg hier logica toe om de overige labels bij te werken
+                                // bijvoorbeeld: track_details_history.setText(selectedTrip.getTrackOrLine());
+                                // transfer_details_history.setText(String.format("%dx", selectedTrip.getTransfers()));
+                                // stops_details_history.setText(selectedTrip.getStopsDetails());
+                            });
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void updateJsonFile(User currentUser) {
+        try {
+            File file = new File("src/main/resources/json/users.json");
+
+            try (Reader reader = new FileReader(file)) {
+                Gson gson = new Gson();
+                TypeToken<List<User>> typeToken = new TypeToken<List<User>>() {};
+                List<User> userList = gson.fromJson(reader, typeToken.getType());
+
+                if (userList != null) {
+                    // Zoek de gebruiker en werk de gegevens bij
+                    userList.stream()
+                            .filter(user -> user.getUsername().equals(currentUser.getUsername()))
+                            .forEach(user -> user.setTripDetails(currentUser.getTripDetails()));
+
+                    // Schrijf de bijgewerkte lijst terug naar het bestand
+                    try (FileWriter writer = new FileWriter(file)) {
+                        gson.toJson(userList, writer);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void refreshScreen() {
+        Page.navigateTo(EPage.HISTORY);
+    }
+    @FXML
     public void onBackButtonPressed() {
         Page.navigateTo(EPage.HOME);
     }

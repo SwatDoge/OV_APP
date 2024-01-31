@@ -5,10 +5,12 @@ import java.util.ResourceBundle;
 
 import com.example.ovapp.Users;
 import com.example.ovapp.enums.EPage;
+import com.example.ovapp.models.user.User;
 import com.example.ovapp.tools.Page;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Pane;
@@ -55,7 +57,8 @@ public class SidebarController {
             }
         });
     }
-        // Update text every time the sidebar becomes visible.
+
+    // Update text every time the sidebar becomes visible.
     private void setLanguage(String languageCode) {
         Locale locale = new Locale(languageCode);
         resourceBundle = ResourceBundle.getBundle("messages", locale);
@@ -94,10 +97,9 @@ public class SidebarController {
     private void onProfileButtonPressed() {
         // Handle Profile button press
         System.out.println("Profile button pressed");
-        if(Users.getInstance().isSomeUserLoggedIn()) {
+        if (Users.getInstance().isSomeUserLoggedIn()) {
             Page.navigateTo(EPage.PROFILE);
-        }
-        else {
+        } else {
             Page.navigateTo(EPage.LOGIN);
         }
         sidebar.setVisible(false);
@@ -106,7 +108,7 @@ public class SidebarController {
     @FXML
     private void onLoginButtonPressed() {
         // Handle Login button press
-        if(Users.getInstance().isSomeUserLoggedIn()) {
+        if (Users.getInstance().isSomeUserLoggedIn()) {
             Users.getInstance().logoutCurrentUser();
         }
 
@@ -118,12 +120,26 @@ public class SidebarController {
     private void onFavouriteButtonPressed() {
         // Handle Favourite button press
         System.out.println("Travel history button pressed");
-        if(Users.getInstance().isSomeUserLoggedIn()) {
-            Page.navigateTo(EPage.FAVORIET);
-        }
-        else {
+
+        User currentUser = Users.getInstance().currentUser;
+
+        if (currentUser != null && !currentUser.getTripDetails().isEmpty()) {
+            Page.navigateTo(EPage.HISTORY);
+        } else if (Users.getInstance().isSomeUserLoggedIn()) {
+            showNoRoutesMessage();
+            Page.navigateTo(EPage.HOME);
+        } else {
             Page.navigateTo(EPage.LOGIN);
         }
+
         sidebar.setVisible(false);
+    }
+
+    private void showNoRoutesMessage() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Geen opgeslagen routes");
+        alert.setHeaderText(null);
+        alert.setContentText("U heeft geen opgeslagen routes. Ga naar HOME om een reis te plannen.");
+        alert.showAndWait();
     }
 }

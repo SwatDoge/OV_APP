@@ -388,6 +388,27 @@ public class SearchResultController implements Initializable {
 
             // Toon een melding dat de route is opgeslagen
             showAlert("Succes", "Reisdetails opgeslagen!", Alert.AlertType.INFORMATION);
+
+        }
+    }
+
+    public void ClickSaveTrip(ActionEvent actionEvent){
+        Users users = Users.getInstance();
+
+        if (users.isSomeUserLoggedIn()) {
+            TripDetails tripDetails = new TripDetails();
+            tripDetails.setDepartureTime(departure_details.getText());
+            tripDetails.setArrivalTime(arrival_details.getText());
+            tripDetails.setDuration(during_details.getText());
+            tripDetails.setTransfers(transfer_details.getText());
+            tripDetails.setStopsDetails(stops_details.getText());
+            tripDetails.setTrackOrLine(track_details.getText());
+
+            // Voeg de reishistorie toe aan de huidige gebruiker
+            users.addTripDetailsToCurrentUser(tripDetails);
+
+            // Toon een melding dat de route is opgeslagen
+            showAlert("Succes", "Reisdetails opgeslagen!", Alert.AlertType.INFORMATION);
         }
     }
 
