@@ -182,30 +182,70 @@ public class TravelHistoryController {
     public void deleteRoute(ActionEvent actionEvent) {
         System.out.println("Delete route button clicked");
 
-        // Krijg de huidige gebruiker
+        // Get the current user
         User currentUser = getCurrentUser();
 
         if (currentUser != null) {
             System.out.println("Current user found");
 
-            // Verwijder de huidige route
+            // Remove the current route
             currentUser.getTripDetails().remove(currentRouteNumber - 1);
 
             Platform.runLater(() -> {
-                // Update de UI met de verwijderde route
-                updateDetailsForRoute(currentRouteNumber);
-
-                // Vernieuw het scherm of voer andere benodigde acties uit
-                refreshScreen();
-
-                // Werk de JSON-opslag bij (schrijf terug naar het bestand)
+                // Update the JSON storage (write back to the file)
                 updateJsonFile(currentUser);
 
-                // Laat het bericht zien nadat alles is bijgewerkt
-                showAlert("Succes", "Route succesvol verwijderd.", Alert.AlertType.INFORMATION);
+                // Refresh the routes
+                refreshRoutes();
+
+                // Show the message after everything is updated
+                showAlert("Success", "Route successfully deleted.", Alert.AlertType.INFORMATION);
+
+                // Navigate to HOME page
+                Page.navigateTo(EPage.HOME);
             });
         }
     }
+
+    private void refreshRoutes() {
+        User currentUser = getCurrentUser();
+
+        if (currentUser != null) {
+            try {
+                File file = new File("src/main/resources/json/users.json");
+
+                try (Reader reader = new FileReader(file)) {
+                    Gson gson = new Gson();
+                    TypeToken<List<User>> typeToken = new TypeToken<List<User>>() {};
+                    List<User> userList = gson.fromJson(reader, typeToken.getType());
+
+                    if (!userList.isEmpty()) {
+                        User loggedInUser = userList.stream()
+                                .filter(user -> user.getUsername().equals(currentUser.getUsername()))
+                                .findFirst()
+                                .orElse(null);
+
+                        if (loggedInUser != null && !loggedInUser.getTripDetails().isEmpty()) {
+                            for (int i = 0; i < loggedInUser.getTripDetails().size(); i++) {
+                                TripDetails tripDetails = loggedInUser.getTripDetails().get(i);
+                                setLabelsForRoute(tripDetails, i + 1);
+                            }
+
+                            // If the deleted route was the currently selected route, select a new route
+                            if (currentRouteNumber > loggedInUser.getTripDetails().size()) {
+                                currentRouteNumber = loggedInUser.getTripDetails().isEmpty() ? 0 : 1;
+                                updateDetailsForRoute(currentRouteNumber);
+                            }
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 
     private void showAlert(String title, String content, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
@@ -343,10 +383,6 @@ public class TravelHistoryController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void refreshScreen() {
-        Page.navigateTo(EPage.HISTORY);
     }
     @FXML
     public void onBackButtonPressed() {
