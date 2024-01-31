@@ -287,6 +287,6 @@
             </Hyperlink>
          </children>
       </AnchorPane>
-      <fx:include fx:id="sidebar" source="sidebar-view.fxml" />
+      <fx:include fx:id="sidebar" source="layout/sidebar-view.fxml" />
    </children>
 </AnchorPane>

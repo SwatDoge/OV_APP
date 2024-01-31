@@ -1,7 +1,6 @@
 package com.example.ovapp.tools;
 
 import com.example.ovapp.enums.EPage;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.IOException;
@@ -16,7 +15,7 @@ public class Page {
         put(EPage.REGISTER, new PageInfo("/com/example/ovapp/register-view.fxml"));
         put(EPage.PROFILE, new PageInfo("/com/example/ovapp/profile-view.fxml"));
         put(EPage.SEARCHRESULT, new PageInfo("/com/example/ovapp/search-result-view.fxml"));
-        put(EPage.SIDEBAR, new PageInfo("/com/example/ovapp/sidebar-view.fxml"));
+        put(EPage.SIDEBAR, new PageInfo("/com/example/ovapp/layout/sidebar-view.fxml"));
         put(EPage.FAVORIET, new PageInfo("/com/example/ovapp/travel-history-view.fxml"));
     }};
 

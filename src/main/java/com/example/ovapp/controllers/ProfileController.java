@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 public class ProfileController {
@@ -19,11 +20,11 @@ public class ProfileController {
     private AnchorPane base;
 
     @FXML
-    private Pane sidebar;
+    private HBox sidebarContainer;
 
     @FXML
     private void toggleSideBar() {
-        sidebar.setVisible(true);
+        sidebarContainer.setVisible(true);
     }
 
     @FXML
@@ -53,7 +54,7 @@ public class ProfileController {
     private void deleteAccount() {
         Users.getInstance().deleteCurrentUser();
         Page.navigateTo(EPage.REGISTER);
-        sidebar.setVisible(false);
+        sidebarContainer.setVisible(false);
     }
 
     @FXML

@@ -1,7 +1,6 @@
 /* Standard helper classes*/
 #background {
     -fx-background-color: #BF1441;
-    -fx-padding: 5px;
 }
 
 #header {
@@ -108,17 +107,15 @@ ScrollPane > .scroll-bar:vertical{
 
 /* Search results */
 .selection-border {
-    -fx-border-width: 2;
     -fx-border-color: #BF1441;
-    -fx-border-radius: 6;
     -fx-effect: dropshadow(gaussian, #BF1441, 40, 0, 0, 0);
-    -fx-background-color: transparent;
 }
 
-
-
-
 /* Sidebar */
+#sidebarContainer {
+    -fx-background-color: rgba(0, 0, 0, 0.2);
+}
+
 #sidebar {
     -fx-background-color: white;
 }
@@ -148,16 +145,8 @@ ScrollPane > .scroll-bar:vertical{
     -fx-shape: "";
 }
 
-#sidebar > AnchorPane {
-    background-color: green;
-}
-
-#sidebar > AnchorPane > VBox > AnchorPane > HBox, #sidebar .titled-pane > .content HBox {
+#sidebar > VBox > HBox {
     -fx-cursor: hand;
-}
-
-#sidebar > AnchorPane > VBox > AnchorPane {
-    -fx-pref-height: 50;
 }
 
 #sidebar .titled-pane {

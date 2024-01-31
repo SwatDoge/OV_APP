@@ -15,7 +15,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 import javafx.stage.Window;
 import java.util.ArrayList;
@@ -37,7 +39,6 @@ import static com.example.ovapp.tools.Request.sendApiRequest;
 
 
 public class HomeController {
-
     @FXML
     private TextField startCityTextField;
 
@@ -59,7 +60,7 @@ public class HomeController {
     private final ResourceBundle bundle = ResourceBundle.getBundle("messages", Locale.getDefault());
 
     @FXML
-    private Pane sidebar;
+    private HBox sidebarContainer;
 
     @FXML
     private ChoiceBox<String> timeSelectionBox;
@@ -139,7 +140,7 @@ public class HomeController {
 
     @FXML
     private void toggleSideBar() {
-        sidebar.setVisible(true);
+        sidebarContainer.setVisible(true);
     }
 
     @FXML

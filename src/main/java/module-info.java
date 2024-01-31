@@ -17,4 +17,6 @@ module com.example.ovapp {
     opens com.example.ovapp.tools to javafx.fxml;
     exports com.example.ovapp.models.user;
     opens com.example.ovapp.models.user to javafx.fxml;
+    exports com.example.ovapp.controllers.layout;
+    opens com.example.ovapp.controllers.layout to javafx.fxml;
 }

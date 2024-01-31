@@ -24,7 +24,6 @@ public class Main extends Application {
         Scene scene = new Scene(root, 600, 400);
 
         stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/assets/brand/logo.png")));
-        stage.setResizable(false);
         stage.setTitle("Hollandse Baan");
 
         stage.setScene(scene);
