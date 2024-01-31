@@ -33,7 +33,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import static com.example.ovapp.Main.currentStage;
+import static com.example.ovapp.Main.layoutController;
 import static com.example.ovapp.tools.Request.sendApiRequest;
 
 
@@ -91,9 +91,9 @@ public class HomeController {
             SearchResultController searchResultController = loader.getController();
             searchResultController.updateResultsDisplay(nsApiRoot);
 
-            Scene scene = new Scene(searchResultParent);
-            currentStage.setScene(scene);
-            currentStage.show();
+//            Scene scene = new Scene(searchResultParent);
+//            currentStage.setScene(scene);
+//            currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

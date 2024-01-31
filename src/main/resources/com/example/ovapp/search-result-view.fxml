@@ -8,35 +8,6 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BF1441;" stylesheets="@../../../css/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ovapp.controllers.SearchResultController">
    <children>
-      <HBox fx:id="header" prefHeight="75.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <ImageView fitWidth="40.0" onMouseClicked="#toggleSideBar" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../assets/icons/more.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </VBox>
-            <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
-               <children>
-
-                  <ImageView fitHeight="90.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../assets/brand/train.png" />
-                     </image>
-                  </ImageView>
-                  <Label style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Reisplanner">
-                     <font>
-                        <Font name="Verdana" size="31.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" />
-         </children>
-      </HBox>
       <HBox alignment="CENTER_LEFT" layoutY="113.0" prefHeight="272.0" prefWidth="570.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="113.0">
          <children>
             <VBox prefHeight="272.0" prefWidth="253.0">
@@ -287,6 +258,5 @@
             </Hyperlink>
          </children>
       </AnchorPane>
-      <fx:include fx:id="sidebar" source="layout/sidebar-view.fxml" />
    </children>
 </AnchorPane>

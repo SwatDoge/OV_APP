@@ -10,24 +10,6 @@
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane prefWidth="600.0" VBox.vgrow="NEVER">
-               <children>
-                  <HBox id="header" alignment="CENTER" layoutX="187.0" prefHeight="75.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-
-                        <ImageView fitHeight="90.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../assets/brand/train.png" />
-                           </image>
-                        </ImageView>
-                        <Label style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Inlogpagina">
-                           <font>
-                              <Font name="Verdana" size="31.0" />
-                           </font>
-                        </Label>
-                     </children></HBox>
-               </children>
-            </AnchorPane>
             <AnchorPane VBox.vgrow="NEVER">
                <children>
                   <Hyperlink onAction="#onBackButtonPressed" text="Terug naar hoofdmenu" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />

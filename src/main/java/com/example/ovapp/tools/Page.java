@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import java.io.IOException;
 import java.util.HashMap;
 
-import static com.example.ovapp.Main.currentStage;
+import static com.example.ovapp.Main.layoutController;
 
 public class Page {
     private static HashMap<EPage, PageInfo> PageLoaderMap = new HashMap<EPage, PageInfo>() {{
@@ -41,7 +41,13 @@ public class Page {
         }
 
         //If the scene exists, set it to the correct scene.
-        currentStage.setScene(scene);
+//        currentStage.setScene(scene);
+        try {
+            layoutController.setContent(pageInfo.getParent());
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
 
         //Find an `onSwitchToPage` method on the next page, and invoke it if it exists.
         try {

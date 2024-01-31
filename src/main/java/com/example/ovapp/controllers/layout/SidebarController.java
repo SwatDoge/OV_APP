@@ -103,7 +103,6 @@ public class SidebarController {
         // Handle Home button press
         System.out.println("Home button pressed");
         Page.navigateTo(EPage.HOME);
-        hide();
     }
 
     @FXML
@@ -116,7 +115,6 @@ public class SidebarController {
         else {
             Page.navigateTo(EPage.LOGIN);
         }
-        show();
     }
 
     @FXML
@@ -127,7 +125,6 @@ public class SidebarController {
         }
 
         Page.navigateTo(EPage.LOGIN);
-        hide();
     }
 
     @FXML
@@ -135,6 +132,5 @@ public class SidebarController {
         // Handle Favourite button press
         System.out.println("Home button pressed");
         Page.navigateTo(EPage.FAVORIET);
-        show();
     }
 }
