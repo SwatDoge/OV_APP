@@ -97,7 +97,7 @@ public class TravelHistoryController {
     @FXML
     private Pane sidebar;
     @FXML
-    public static AnchorPane historyAnchorPane;
+    private AnchorPane historyAnchorPane;
 
     @FXML
     private ScrollPane historyScrollPane;
@@ -252,7 +252,7 @@ public class TravelHistoryController {
         }
     }
 
-    public static User getCurrentUser() {
+    private User getCurrentUser() {
         return Users.getInstance().currentUser;
     }
 
