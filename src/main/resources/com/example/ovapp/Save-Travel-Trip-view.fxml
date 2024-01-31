@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BF1441;" stylesheets="@../../../css/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ovapp.controllers.SearchResultController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BF1441;" stylesheets="@../../../css/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ovapp.controllers.TravelHistoryController">
    <children>
       <HBox fx:id="header" prefHeight="75.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -27,7 +27,7 @@
                         <Image url="@../../../assets/brand/train.png" />
                      </image>
                   </ImageView>
-                  <Label style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Reisplanner">
+                  <Label style="-fx-text-fill: #F4F3EE; -fx-font-weight: bold; -fx-font-family: 'Verdana'; -fx-font-size: 19;" text="Reishistorie">
                      <font>
                         <Font name="Verdana" size="31.0" />
                      </font>
@@ -45,7 +45,7 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="415.0" prefWidth="228.0">
                            <children>
-                              <Button fx:id="route1" layoutX="7.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleRoute1ButtonClick" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #F4F3EE; -fx-text-fill: #252422; -fx-background-radius: 10 10 10 10;" styleClass="no_scaling">
+                              <Button fx:id="history1" layoutX="7.0" layoutY="7.0" mnemonicParsing="false" onAction="#history_handleRoute1ButtonClick" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #F4F3EE; -fx-text-fill: #252422; -fx-background-radius: 10 10 10 10;" styleClass="no_scaling">
                               <graphic>
                                  <HBox spacing="5" />
                               </graphic>
@@ -65,12 +65,12 @@
                                     <Image url="@../../../assets/icons/arrow_icon.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="arrival_route1" alignment="TOP_RIGHT" layoutX="155.0" layoutY="14.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="departure_route1" alignment="TOP_LEFT" layoutX="19.0" layoutY="15.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="during_route1" alignment="TOP_LEFT" layoutX="40.0" layoutY="44.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="transfer_route1" alignment="TOP_RIGHT" layoutX="163.0" layoutY="46.0" prefHeight="19.0" prefWidth="35.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="arrival_history1" alignment="TOP_RIGHT" layoutX="155.0" layoutY="14.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="departure_history1" alignment="TOP_LEFT" layoutX="19.0" layoutY="15.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="during_history1" alignment="TOP_LEFT" layoutX="40.0" layoutY="44.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="transfer_history1" alignment="TOP_RIGHT" layoutX="163.0" layoutY="46.0" prefHeight="19.0" prefWidth="35.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
 
-                              <Button fx:id="route2" layoutX="7.0" layoutY="75.0" mnemonicParsing="false" onAction="#handleRoute2ButtonClick" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #F4F3EE; -fx-text-fill: #252422; -fx-background-radius: 10 10 10 10;" styleClass="no_scaling">
+                              <Button fx:id="history2" layoutX="7.0" layoutY="75.0" mnemonicParsing="false" onAction="#history_handleRoute2ButtonClick" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #F4F3EE; -fx-text-fill: #252422; -fx-background-radius: 10 10 10 10;" styleClass="no_scaling">
                                  <graphic>
                                     <HBox spacing="5" />
                                  </graphic>
@@ -90,12 +90,12 @@
                                     <Image url="@../../../assets/icons/arrow_icon.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="arrival_route2" alignment="TOP_RIGHT" layoutX="155.0" layoutY="82.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="departure_route2" alignment="TOP_LEFT" layoutX="19.0" layoutY="83.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="during_route2" alignment="TOP_LEFT" layoutX="40.0" layoutY="112.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="transfer_route2" alignment="TOP_RIGHT" layoutX="163.0" layoutY="114.0" prefHeight="19.0" prefWidth="35.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="arrival_history2" alignment="TOP_RIGHT" layoutX="155.0" layoutY="82.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="departure_history2" alignment="TOP_LEFT" layoutX="19.0" layoutY="83.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="during_history2" alignment="TOP_LEFT" layoutX="40.0" layoutY="112.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="transfer_history2" alignment="TOP_RIGHT" layoutX="163.0" layoutY="114.0" prefHeight="19.0" prefWidth="35.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
 
-                              <Button fx:id="route3" layoutX="7.0" layoutY="143.0" mnemonicParsing="false" onAction="#handleRoute3ButtonClick" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #F4F3EE; -fx-text-fill: #252422; -fx-background-radius: 10 10 10 10;" styleClass="no_scaling">
+                              <Button fx:id="history3" layoutX="7.0" layoutY="143.0" mnemonicParsing="false" onAction="#history_handleRoute3ButtonClick" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #F4F3EE; -fx-text-fill: #252422; -fx-background-radius: 10 10 10 10;" styleClass="no_scaling">
                                  <graphic>
                                     <HBox spacing="5" />
                                  </graphic>
@@ -115,12 +115,12 @@
                                     <Image url="@../../../assets/icons/arrow_icon.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="arrival_route3" alignment="TOP_RIGHT" layoutX="155.0" layoutY="150.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="departure_route3" alignment="TOP_LEFT" layoutX="19.0" layoutY="151.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="during_route3" alignment="TOP_LEFT" layoutX="40.0" layoutY="180.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="transfer_route3" alignment="TOP_RIGHT" layoutX="163.0" layoutY="182.0" prefHeight="19.0" prefWidth="35.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="arrival_history3" alignment="TOP_RIGHT" layoutX="155.0" layoutY="150.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="departure_history3" alignment="TOP_LEFT" layoutX="19.0" layoutY="151.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="during_history3" alignment="TOP_LEFT" layoutX="40.0" layoutY="180.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="transfer_history3" alignment="TOP_RIGHT" layoutX="163.0" layoutY="182.0" prefHeight="19.0" prefWidth="35.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
 
-                              <Button fx:id="route4" layoutX="7.0" layoutY="211.0" mnemonicParsing="false" onAction="#handleRoute4ButtonClick" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #F4F3EE; -fx-text-fill: #252422; -fx-background-radius: 10 10 10 10;" styleClass="no_scaling">
+                              <Button fx:id="history4" layoutX="7.0" layoutY="211.0" mnemonicParsing="false" onAction="#history_handleRoute4ButtonClick" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #F4F3EE; -fx-text-fill: #252422; -fx-background-radius: 10 10 10 10;" styleClass="no_scaling">
                                  <graphic>
                                     <HBox spacing="5" />
                                  </graphic>
@@ -140,12 +140,12 @@
                                     <Image url="@../../../assets/icons/arrow_icon.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="arrival_route4" alignment="TOP_RIGHT" layoutX="155.0" layoutY="218.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="departure_route4" alignment="TOP_LEFT" layoutX="19.0" layoutY="219.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="during_route4" alignment="TOP_LEFT" layoutX="40.0" layoutY="248.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="transfer_route4" alignment="TOP_RIGHT" layoutX="163.0" layoutY="250.0" prefHeight="19.0" prefWidth="35.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="arrival_history4" alignment="TOP_RIGHT" layoutX="155.0" layoutY="218.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="departure_history4" alignment="TOP_LEFT" layoutX="19.0" layoutY="219.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="during_history4" alignment="TOP_LEFT" layoutX="40.0" layoutY="248.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="transfer_history4" alignment="TOP_RIGHT" layoutX="163.0" layoutY="250.0" prefHeight="19.0" prefWidth="35.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
 
-                              <Button fx:id="route5" layoutX="7.0" layoutY="279.0" mnemonicParsing="false" onAction="#handleRoute5ButtonClick" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #F4F3EE; -fx-text-fill: #252422; -fx-background-radius: 10 10 10 10;" styleClass="no_scaling">
+                              <Button fx:id="history5" layoutX="7.0" layoutY="279.0" mnemonicParsing="false" onAction="#history_handleRoute5ButtonClick" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #F4F3EE; -fx-text-fill: #252422; -fx-background-radius: 10 10 10 10;" styleClass="no_scaling">
                               <graphic>
                                  <HBox spacing="5" />
                               </graphic>
@@ -165,12 +165,12 @@
                                     <Image url="@../../../assets/icons/arrow_icon.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="arrival_route5" alignment="TOP_RIGHT" layoutX="155.0" layoutY="287.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="departure_route5" alignment="TOP_LEFT" layoutX="19.0" layoutY="287.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="during_route5" alignment="TOP_LEFT" layoutX="40.0" layoutY="316.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="transfer_route5" alignment="TOP_RIGHT" layoutX="163.0" layoutY="318.0" prefHeight="19.0" prefWidth="35.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="arrival_history5" alignment="TOP_RIGHT" layoutX="155.0" layoutY="287.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="departure_history5" alignment="TOP_LEFT" layoutX="19.0" layoutY="287.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="during_history5" alignment="TOP_LEFT" layoutX="40.0" layoutY="316.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="transfer_history5" alignment="TOP_RIGHT" layoutX="163.0" layoutY="318.0" prefHeight="19.0" prefWidth="35.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
 
-                              <Button fx:id="route6" layoutX="7.0" layoutY="347.0" mnemonicParsing="false" onAction="#handleRoute6ButtonClick" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #F4F3EE; -fx-text-fill: #252422; -fx-background-radius: 10 10 10 10;" styleClass="no_scaling">
+                              <Button fx:id="history6" layoutX="7.0" layoutY="347.0" mnemonicParsing="false" onAction="#history_handleRoute6ButtonClick" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #F4F3EE; -fx-text-fill: #252422; -fx-background-radius: 10 10 10 10;" styleClass="no_scaling">
                                  <graphic>
                                     <HBox spacing="5" />
                                  </graphic>
@@ -190,10 +190,10 @@
                                     <Image url="@../../../assets/icons/arrow_icon.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="arrival_route6" alignment="TOP_RIGHT" layoutX="155.0" layoutY="355.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="departure_route6" alignment="TOP_LEFT" layoutX="19.0" layoutY="355.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="during_route6" alignment="TOP_LEFT" layoutX="40.0" layoutY="384.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
-                              <Label fx:id="transfer_route6" alignment="TOP_RIGHT" layoutX="163.0" layoutY="386.0" prefHeight="19.0" prefWidth="35.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="arrival_history6" alignment="TOP_RIGHT" layoutX="155.0" layoutY="355.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="departure_history6" alignment="TOP_LEFT" layoutX="19.0" layoutY="355.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="during_history6" alignment="TOP_LEFT" layoutX="40.0" layoutY="384.0" prefHeight="19.0" prefWidth="54.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
+                              <Label fx:id="transfer_history6" alignment="TOP_RIGHT" layoutX="163.0" layoutY="386.0" prefHeight="19.0" prefWidth="35.0" style="-fx-text-fill: black; -fx-font-size: 15px;" textAlignment="CENTER" />
 
                            </children>
                         </AnchorPane>
@@ -220,11 +220,11 @@
                                           <Image url="@../../../assets/icons/clock_icon.png" />
                                        </image>
                                     </ImageView>
-                                    <Label fx:id="departure_details" layoutX="10.0" layoutY="5.0" prefHeight="19.0" prefWidth="52.0" style="-fx-text-fill: black; -fx-font-size: 15.0;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
-                                    <Label fx:id="during_details" layoutX="225.0" layoutY="5.0" prefHeight="19.0" prefWidth="52.0" style="-fx-text-fill: black; -fx-font-size: 15.0;" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="5.0" />
-                                    <Label fx:id="arrival_details" layoutX="136.0" layoutY="5.0" prefHeight="19.0" prefWidth="52.0" style="-fx-text-fill: black; -fx-font-size: 15.0;" AnchorPane.leftAnchor="136.0" AnchorPane.topAnchor="5.0" />
-                                    <Label fx:id="track_details" layoutX="188.0" layoutY="28.0" prefHeight="19.0" prefWidth="96.0" style="-fx-text-fill: black; -fx-font-size: 15.0;" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="28.0" />
-                                    <Label fx:id="transfer_details" layoutX="30.0" layoutY="29.0" prefHeight="19.0" prefWidth="141.0" style="-fx-text-fill: black; -fx-font-size: 15.0;" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="29.0" />
+                                    <Label fx:id="departure_details_history" layoutX="10.0" layoutY="5.0" prefHeight="19.0" prefWidth="52.0" style="-fx-text-fill: black; -fx-font-size: 15.0;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                                    <Label fx:id="during_details_history" layoutX="225.0" layoutY="5.0" prefHeight="19.0" prefWidth="52.0" style="-fx-text-fill: black; -fx-font-size: 15.0;" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="5.0" />
+                                    <Label fx:id="arrival_details_history" layoutX="136.0" layoutY="5.0" prefHeight="19.0" prefWidth="52.0" style="-fx-text-fill: black; -fx-font-size: 15.0;" AnchorPane.leftAnchor="136.0" AnchorPane.topAnchor="5.0" />
+                                    <Label fx:id="track_details_history" layoutX="188.0" layoutY="28.0" prefHeight="19.0" prefWidth="96.0" style="-fx-text-fill: black; -fx-font-size: 15.0;" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="28.0" />
+                                    <Label fx:id="transfer_details_history" layoutX="30.0" layoutY="29.0" prefHeight="19.0" prefWidth="141.0" style="-fx-text-fill: black; -fx-font-size: 15.0;" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="29.0" />
 
                                     <ImageView fitHeight="19.0" fitWidth="52.0" layoutX="71.0" layoutY="5.0">
                                        <image>
@@ -248,7 +248,7 @@
                         <ScrollPane prefHeight="147.0" prefWidth="288.0">
                            <content>
                               <VBox fx:id="stop_details_pane" minHeight="0.0" minWidth="0.0" prefWidth="254.0" spacing="10">
-                                 <Label fx:id="stops_details" prefWidth="242.0" style="-fx-text-fill: white; -fx-font-size: 15.0;" wrapText="true" />
+                                 <Label fx:id="stops_details_history" prefWidth="242.0" style="-fx-text-fill: white; -fx-font-size: 15.0;" wrapText="true" />
                               </VBox>
                            </content>
                            <VBox.margin>
@@ -257,7 +257,7 @@
                         </ScrollPane>
                         <HBox alignment="CENTER" prefHeight="48.0" prefWidth="288.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#ClickBookTrip" prefWidth="96.0" style="-fx-background-color: #385194;" text="Boek">
+                              <Button fx:id="deleteRouteButton" onAction="#deleteRoute" mnemonicParsing="false" prefWidth="96.0" style="-fx-background-color: #FF0000;" text="Verw.">
                                  <HBox.margin>
                                     <Insets left="-5.0" right="30.0" />
                                  </HBox.margin>
@@ -265,7 +265,7 @@
                                     <Font size="8.0" />
                                  </font>
                               </Button>
-                              <Button onAction="#ClickSaveTrip" mnemonicParsing="false" style="-fx-background-color: E6C042;" text="Favoriet">
+                              <Button  mnemonicParsing="false" style="-fx-background-color: #E6C042;" text="Favoriet" >
                                  <HBox.margin>
                                     <Insets left="30.0" />
                                  </HBox.margin>
