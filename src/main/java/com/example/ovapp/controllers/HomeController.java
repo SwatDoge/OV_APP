@@ -1,6 +1,9 @@
 package com.example.ovapp.controllers;
 
+import com.example.ovapp.enums.EPage;
 import com.example.ovapp.models.nsapi.NSApiRoot;
+import com.example.ovapp.tools.Page;
+import com.example.ovapp.tools.PageInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -85,11 +88,9 @@ public class HomeController {
 
             NSApiRoot nsApiRoot = sendApiRequest(fromStation, toStation, transportType, searchForArrival, formattedTime, formattedDate);
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ovapp/search-result-view.fxml"));
-            Parent searchResultParent = loader.load();
-
-            SearchResultController searchResultController = loader.getController();
-            searchResultController.updateResultsDisplay(nsApiRoot);
+            PageInfo pageInfo = Page.getPageInfo(EPage.SEARCHRESULT);
+            ((SearchResultController) pageInfo.getController()).updateResultsDisplay(nsApiRoot);
+            Page.navigateTo(EPage.SEARCHRESULT);
 
 //            Scene scene = new Scene(searchResultParent);
 //            currentStage.setScene(scene);

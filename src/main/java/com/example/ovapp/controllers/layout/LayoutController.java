@@ -21,7 +21,7 @@ public class LayoutController {
     //Set the content window of the layout
     public void setContent(Parent parent) {
         sidebar.setVisible(false);
-        System.out.println("A");
+
         // Waarom werkt dit?!!?
         javafx.collections.ObservableList<javafx.scene.Node> contentChildren = content.getChildren();
         VBox.setVgrow(parent, Priority.ALWAYS);
