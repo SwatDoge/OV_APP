@@ -196,6 +196,7 @@ public class TravelHistoryController {
                         currentRouteNumber = currentUser.getTripDetails().size();
                     }
 
+
                     // Update de UI met de verwijderde route
                     updateDetailsForRoute(currentRouteNumber);
 
@@ -248,6 +249,9 @@ public class TravelHistoryController {
                                 .orElse(null);
 
                         if (loggedInUser != null && !loggedInUser.getTripDetails().isEmpty()) {
+                            // Clear all labels first
+                            clearAllLabels();
+
                             for (int i = 0; i < loggedInUser.getTripDetails().size(); i++) {
                                 TripDetails tripDetails = loggedInUser.getTripDetails().get(i);
                                 setLabelsForRoute(tripDetails, i + 1);
@@ -260,6 +264,14 @@ public class TravelHistoryController {
             }
         }
     }
+
+    private void clearAllLabels() {
+        for (int i = 1; i <= 6; i++) {
+            setLabelsForRoute(new TripDetails(), i);
+        }
+    }
+
+
 
 
     private void setLabelsForRoute(TripDetails tripDetails, int routeNumber) {
@@ -356,22 +368,23 @@ public class TravelHistoryController {
                                 .orElse(null);
 
                         if (loggedInUser != null && !loggedInUser.getTripDetails().isEmpty()) {
-                            TripDetails selectedTrip = loggedInUser.getTripDetails().get(routeNumber - 1);
+                            // Voeg een controle toe om te voorkomen dat je toegang probeert te krijgen tot een ongeldige index
+                            int indexToAccess = routeNumber - 1;
+                            if (indexToAccess >= 0 && indexToAccess < loggedInUser.getTripDetails().size()) {
+                                TripDetails selectedTrip = loggedInUser.getTripDetails().get(indexToAccess);
 
-                            Platform.runLater(() -> {
-                                // Update de labels met de gegevens van de geselecteerde route
-                                departure_details_history.setText(selectedTrip.getDepartureTime());
-                                during_details_history.setText(selectedTrip.getDuration());
-                                arrival_details_history.setText(selectedTrip.getArrivalTime());
-                                track_details_history.setText((selectedTrip.getTrackOrLine()));
-                                transfer_details_history.setText(String.format(selectedTrip.getTransfers()));
-                                stops_details_history.setText(selectedTrip.getStopsDetails());
-
-                                // Voeg hier logica toe om de overige labels bij te werken
-                                // bijvoorbeeld: track_details_history.setText(selectedTrip.getTrackOrLine());
-                                // transfer_details_history.setText(String.format("%dx", selectedTrip.getTransfers()));
-                                // stops_details_history.setText(selectedTrip.getStopsDetails());
-                            });
+                                Platform.runLater(() -> {
+                                    // Update de labels met de gegevens van de geselecteerde route
+                                    departure_details_history.setText(selectedTrip.getDepartureTime());
+                                    during_details_history.setText(selectedTrip.getDuration());
+                                    arrival_details_history.setText(selectedTrip.getArrivalTime());
+                                    track_details_history.setText((selectedTrip.getTrackOrLine()));
+                                    transfer_details_history.setText(String.format(selectedTrip.getTransfers()));
+                                    stops_details_history.setText(selectedTrip.getStopsDetails());
+                                });
+                            } else {
+                                System.out.println("Invalid route number");
+                            }
                         }
                     }
                 }
@@ -380,6 +393,7 @@ public class TravelHistoryController {
             }
         }
     }
+
 
     private void updateJsonFile(User currentUser) {
         try {
@@ -409,8 +423,14 @@ public class TravelHistoryController {
 
     @FXML
     public void refreshpage() {
+        // Reset alle labels voor alle routes
+        for (int i = 1; i <= 6; i++) {
+            updateDetailsForRoute(i);
+        }
+
         Page.navigateTo(EPage.HISTORY);
     }
+
 
     @FXML
     public void onBackButtonPressed() {
