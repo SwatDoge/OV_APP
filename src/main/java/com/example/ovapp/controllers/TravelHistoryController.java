@@ -271,9 +271,6 @@ public class TravelHistoryController {
         }
     }
 
-
-
-
     private void setLabelsForRoute(TripDetails tripDetails, int routeNumber) {
         System.out.println("setLabelsForRoute called for route " + routeNumber);
         String arrivalLabel = "arrival_history" + routeNumber;

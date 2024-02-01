@@ -161,7 +161,7 @@ public class FavoriteTravelController {
                         if (loggedInUser != null && !loggedInUser.getFavoriteTrips().isEmpty()) {
                             for (int i = 0; i < loggedInUser.getFavoriteTrips().size(); i++) {
                                 TripDetails favoriteTrip = loggedInUser.getFavoriteTrips().get(i);
-                                setLabelsForRoute(favoriteTrip, i + 1);
+                                setLabelsForFavoriteRoute(favoriteTrip, i + 1);
                             }
                         }
                     }
@@ -173,6 +173,7 @@ public class FavoriteTravelController {
     }
 
     // Roep deze methode aan wanneer u de inhoud van de VBox bijwerkt
+
 
     @FXML
     public void deleteRouteButtonfavorite(ActionEvent actionEvent) {
@@ -203,6 +204,7 @@ public class FavoriteTravelController {
         }
     }
 
+
     private void showAlert(String title, String content, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -211,7 +213,50 @@ public class FavoriteTravelController {
         alert.showAndWait();
     }
 
-    private void setLabelsForRoute(TripDetails favoriteTrip, int routeNumber) {
+    public void onSwitchToPage() {
+        System.out.println("onswitchtopage called");
+        // Call the setLabelsForRoute method for all routes
+        User currentUser = getCurrentUser();
+
+        if (currentUser != null) {
+            try {
+                File file = new File("src/main/resources/json/users.json");
+
+                try (Reader reader = new FileReader(file)) {
+                    Gson gson = new Gson();
+                    TypeToken<List<User>> typeToken = new TypeToken<List<User>>() {};
+                    List<User> userList = gson.fromJson(reader, typeToken.getType());
+
+                    if (!userList.isEmpty()) {
+                        User loggedInUser = userList.stream()
+                                .filter(user -> user.getUsername().equals(currentUser.getUsername()))
+                                .findFirst()
+                                .orElse(null);
+
+                        if (loggedInUser != null && !loggedInUser.getFavoriteTrips().isEmpty()) {
+                            // Clear all labels first for favorite trips
+                            clearAllLabelsForFavorites();
+
+                            for (int i = 0; i < loggedInUser.getFavoriteTrips().size(); i++) {
+                                TripDetails favoriteTrip = loggedInUser.getFavoriteTrips().get(i);
+                                setLabelsForFavoriteRoute(favoriteTrip, i + 1);
+                            }
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void clearAllLabelsForFavorites() {
+        for (int i = 1; i <= 6; i++) {
+            setLabelsForFavoriteRoute(new TripDetails(), i);
+        }
+    }
+
+    private void setLabelsForFavoriteRoute(TripDetails favoriteTrip, int routeNumber) {
         String arrivalLabel = "arrival_favorite" + routeNumber;
         String departureLabel = "departure_favorite" + routeNumber;
         String duringLabel = "during_favorite" + routeNumber;
@@ -342,7 +387,7 @@ public class FavoriteTravelController {
     }
 
     private void refreshScreen() {
-        Page.navigateTo(EPage.HOME);
+        Page.navigateTo(EPage.FAVORITE);
     }
 
     @FXML
