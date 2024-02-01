@@ -257,18 +257,13 @@
                         </ScrollPane>
                         <HBox alignment="CENTER" prefHeight="48.0" prefWidth="288.0">
                            <children>
-                              <Button fx:id="deleteRouteButton" onAction="#deleteRoute" mnemonicParsing="false" prefWidth="96.0" style="-fx-background-color: #FF0000;" text="Verw.">
+                              <Button fx:id="deleteRouteButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#deleteRoute" prefHeight="35.0" prefWidth="137.0" style="-fx-background-color: #FF0000;" text="verwijderen">
                                  <HBox.margin>
                                     <Insets left="-5.0" right="30.0" />
                                  </HBox.margin>
                                  <font>
                                     <Font size="8.0" />
                                  </font>
-                              </Button>
-                              <Button  mnemonicParsing="false" style="-fx-background-color: #E6C042;" text="Favoriet" >
-                                 <HBox.margin>
-                                    <Insets left="30.0" />
-                                 </HBox.margin>
                               </Button>
                            </children>
                         </HBox>
