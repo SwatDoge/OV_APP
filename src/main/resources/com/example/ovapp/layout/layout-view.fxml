@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<StackPane id="background" fx:id="background" minHeight="400.0" minWidth="600.0" stylesheets="@../../../../css/main.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ovapp.controllers.layout.LayoutController">
+   <children>
+      <VBox>
+          <fx:include fx:id="navbar" source="navbar-view.fxml" StackPane.alignment="TOP_CENTER" />
+         <VBox fx:id="content" style="-fx-background-color: orange;" VBox.vgrow="ALWAYS">
+            <children>
+                <fx:include source="../home-view.fxml" StackPane.alignment="TOP_CENTER" VBox.vgrow="ALWAYS" />
+            </children>
+         </VBox>
+      </VBox>
+       <fx:include fx:id="sidebar" source="sidebar-view.fxml" StackPane.alignment="TOP_LEFT" />
+   </children>
+</StackPane>

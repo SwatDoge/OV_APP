@@ -1,6 +1,9 @@
 package com.example.ovapp.controllers;
 
+import com.example.ovapp.enums.EPage;
 import com.example.ovapp.models.nsapi.NSApiRoot;
+import com.example.ovapp.tools.Page;
+import com.example.ovapp.tools.PageInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -15,7 +18,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 import javafx.stage.Window;
 import java.util.ArrayList;
@@ -31,13 +36,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import static com.example.ovapp.Main.currentStage;
+import static com.example.ovapp.Main.layoutController;
 import static com.example.ovapp.tools.Request.sendApiRequest;
 
 
 
 public class HomeController {
-
     @FXML
     private TextField startCityTextField;
 
@@ -59,7 +63,7 @@ public class HomeController {
     private final ResourceBundle bundle = ResourceBundle.getBundle("messages", Locale.getDefault());
 
     @FXML
-    private Pane sidebar;
+    private HBox sidebarContainer;
 
     @FXML
     private ChoiceBox<String> timeSelectionBox;
@@ -84,15 +88,13 @@ public class HomeController {
 
             NSApiRoot nsApiRoot = sendApiRequest(fromStation, toStation, transportType, searchForArrival, formattedTime, formattedDate);
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ovapp/search-result-view.fxml"));
-            Parent searchResultParent = loader.load();
+            PageInfo pageInfo = Page.getPageInfo(EPage.SEARCHRESULT);
+            ((SearchResultController) pageInfo.getController()).updateResultsDisplay(nsApiRoot);
+            Page.navigateTo(EPage.SEARCHRESULT);
 
-            SearchResultController searchResultController = loader.getController();
-            searchResultController.updateResultsDisplay(nsApiRoot);
-
-            Scene scene = new Scene(searchResultParent);
-            currentStage.setScene(scene);
-            currentStage.show();
+//            Scene scene = new Scene(searchResultParent);
+//            currentStage.setScene(scene);
+//            currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -139,7 +141,7 @@ public class HomeController {
 
     @FXML
     private void toggleSideBar() {
-        sidebar.setVisible(true);
+        sidebarContainer.setVisible(true);
     }
 
     @FXML

@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import java.io.File;
@@ -97,13 +98,13 @@ public class TravelHistoryController {
     @FXML
     private Label stops_details_history;
     @FXML
-    private Pane sidebar;
+    private HBox sidebarContainer;
     @FXML
     private Pane stop_details_pane;
 
     @FXML
     private void toggleSideBar() {
-        sidebar.setVisible(true);
+        sidebarContainer.setVisible(true);
     }
     public void initialize() {
 

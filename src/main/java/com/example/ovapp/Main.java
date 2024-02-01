@@ -1,5 +1,6 @@
 package com.example.ovapp;
 
+import com.example.ovapp.controllers.layout.LayoutController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,18 +14,16 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    public static Stage currentStage;
+
+    public static LayoutController layoutController;
 
     @Override
     public void start(Stage stage) throws Exception {
-        currentStage = stage;
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/ovapp/home-view.fxml")));
-
-
-        Scene scene = new Scene(root, 600, 400);
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/example/ovapp/layout/layout-view.fxml"));
+        Scene scene = new Scene(loader.load(), 600, 400);
+        layoutController = loader.getController();
 
         stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/assets/brand/logo.png")));
-        stage.setResizable(false);
         stage.setTitle("Hollandse Baan");
 
         stage.setScene(scene);

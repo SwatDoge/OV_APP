@@ -1,4 +1,4 @@
-package com.example.ovapp.controllers;
+package com.example.ovapp.controllers.layout;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -11,9 +11,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 public class SidebarController {
+
+    @FXML
+    private HBox sidebarContainer;
 
     @FXML
     private Pane sidebar;
@@ -45,13 +50,26 @@ public class SidebarController {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    loginLabel.setText(resourceBundle.getString("loginLabelText"));
+                    loginLabel.setText("Inloggen");
                     if (Users.getInstance().isSomeUserLoggedIn()) {
-                        loginLabel.setText(resourceBundle.getString("logoutLabelText"));
+                        loginLabel.setText("Uitloggen");
                     }
                 }
             }
         });
+    }
+
+    public void show() {
+        sidebarContainer.setVisible(true);
+    }
+
+    public void hide() {
+        sidebarContainer.setVisible(false);
+    }
+
+    @FXML
+    private void onClickedOutOfContext() {
+        hide();
     }
 
     private void setLanguage(String languageCode) {
@@ -85,7 +103,6 @@ public class SidebarController {
         // Handle Home button press
         System.out.println("Home button pressed");
         Page.navigateTo(EPage.HOME);
-        sidebar.setVisible(false);
     }
 
     @FXML
@@ -98,7 +115,6 @@ public class SidebarController {
         else {
             Page.navigateTo(EPage.LOGIN);
         }
-        sidebar.setVisible(false);
     }
 
     @FXML
@@ -109,7 +125,6 @@ public class SidebarController {
         }
 
         Page.navigateTo(EPage.LOGIN);
-        sidebar.setVisible(false);
     }
 
     @FXML
@@ -117,8 +132,5 @@ public class SidebarController {
         // Handle Favourite button press
         System.out.println("Home button pressed");
         Page.navigateTo(EPage.FAVORIET);
-        sidebar.setVisible(false);
-
-
     }
 }

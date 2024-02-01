@@ -1,13 +1,12 @@
 package com.example.ovapp.tools;
 
 import com.example.ovapp.enums.EPage;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.IOException;
 import java.util.HashMap;
 
-import static com.example.ovapp.Main.currentStage;
+import static com.example.ovapp.Main.layoutController;
 
 public class Page {
     private static HashMap<EPage, PageInfo> PageLoaderMap = new HashMap<EPage, PageInfo>() {{
@@ -16,7 +15,7 @@ public class Page {
         put(EPage.REGISTER, new PageInfo("/com/example/ovapp/register-view.fxml"));
         put(EPage.PROFILE, new PageInfo("/com/example/ovapp/profile-view.fxml"));
         put(EPage.SEARCHRESULT, new PageInfo("/com/example/ovapp/search-result-view.fxml"));
-        put(EPage.SIDEBAR, new PageInfo("/com/example/ovapp/sidebar-view.fxml"));
+        put(EPage.SIDEBAR, new PageInfo("/com/example/ovapp/layout/sidebar-view.fxml"));
         put(EPage.FAVORIET, new PageInfo("/com/example/ovapp/travel-history-view.fxml"));
     }};
 
@@ -42,7 +41,13 @@ public class Page {
         }
 
         //If the scene exists, set it to the correct scene.
-        currentStage.setScene(scene);
+//        currentStage.setScene(scene);
+        try {
+            layoutController.setContent(pageInfo.getParent());
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
 
         //Find an `onSwitchToPage` method on the next page, and invoke it if it exists.
         try {
