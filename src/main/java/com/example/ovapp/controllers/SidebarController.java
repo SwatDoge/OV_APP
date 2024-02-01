@@ -33,57 +33,21 @@ public class SidebarController {
     private Button favouriteButton;
 
     @FXML
-    private TitledPane languageTitledPane;
+    private Button historyButton; // Geschiedenisknop toegevoegd
 
-    private ResourceBundle resourceBundle;
 
     @FXML
     protected void initialize() {
         // Initialize with the default language (e.g., Dutch)
-        setLanguage("nl");
 
-        sidebar.visibleProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                loginLabel.setText(resourceBundle.getString("loginLabelText"));
-                if (Users.getInstance().isSomeUserLoggedIn()) {
-                    // Controleer of de sleutel aanwezig is voordat je deze ophaalt
-                    if (resourceBundle.containsKey("logoutLabelText")) {
-                        loginLabel.setText(resourceBundle.getString("logoutLabelText"));
-                    } else {
-                        // Voeg hier eventueel een standaardtekst in als de sleutel ontbreekt
-                        loginLabel.setText("Uitloggen");
-                    }
-                }
-            }
-        });
+        loginLabel.setText("Inloggen");
+        homeButton.setText("Home");
+        profileButton.setText("Profiel");
+        favouriteButton.setText("Favorieten");
+        historyButton.setText("Reishistorie"); // Tekst voor geschiedenisknop
     }
 
-    // Update text every time the sidebar becomes visible.
-    private void setLanguage(String languageCode) {
-        Locale locale = new Locale(languageCode);
-        resourceBundle = ResourceBundle.getBundle("messages", locale);
-
-        // Set text for buttons based on the current language
-        loginLabel.setText(resourceBundle.getString("loginLabelText"));
-        homeButton.setText(resourceBundle.getString("homeButton"));
-        profileButton.setText(resourceBundle.getString("profileButton"));
-        favouriteButton.setText(resourceBundle.getString("favouriteButton"));
-
-        // Set text for elements inside TitledPane
-
-        // Print a message for debugging (you can remove this in production)
-        System.out.println("System language changed to " + languageCode);
-    }
-
-    @FXML
-    private void onDutchLanguageButtonPressed() {
-        setLanguage("nl");
-    }
-
-    @FXML
-    private void onEnglishLanguageButtonPressed() {
-        setLanguage("en");
-    }
+    // Update text every time the sidebar becomes visible
 
     @FXML
     private void onHomeButtonPressed() {
@@ -119,12 +83,12 @@ public class SidebarController {
     @FXML
     private void onFavouriteButtonPressed() {
         // Handle Favourite button press
-        System.out.println("Travel history button pressed");
+        System.out.println("Favorite history button pressed");
 
         User currentUser = Users.getInstance().currentUser;
 
         if (currentUser != null && !currentUser.getTripDetails().isEmpty()) {
-            Page.navigateTo(EPage.HISTORY);
+            Page.navigateTo(EPage.FAVORITE);
         } else if (Users.getInstance().isSomeUserLoggedIn()) {
             showNoRoutesMessage();
             Page.navigateTo(EPage.HOME);
@@ -132,6 +96,13 @@ public class SidebarController {
             Page.navigateTo(EPage.LOGIN);
         }
 
+        sidebar.setVisible(false);
+    }
+
+    @FXML
+    private void onHistoryButtonPressed() {
+        System.out.println("History button pressed");
+        Page.navigateTo(EPage.HISTORY);
         sidebar.setVisible(false);
     }
 

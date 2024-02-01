@@ -71,64 +71,16 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane layoutX="12.0" layoutY="116.0" prefHeight="200.0" prefWidth="200.0"> <!-- Aangepaste layoutY waarde -->
                      <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" smooth="false" HBox.hgrow="ALWAYS">
-                                 <viewport>
-                                    <Rectangle2D height="55.0" minX="5.0" minY="5.0" width="50.0" />
-                                 </viewport>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
                                  <image>
-                                    <Image url="@../../../assets/icons/globe.png" />
+                                    <Image url="@../../../assets/icons/clock.png" />
                                  </image>
                               </ImageView>
-                            <TitledPane animated="false" expanded="false" prefHeight="101.0" prefWidth="148.0" text="NL/ENG" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <content>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
-                                       <children>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
-                                             <children>
-                                                <ImageView fitHeight="25.0" pickOnBounds="true" preserveRatio="true" smooth="false" HBox.hgrow="ALWAYS">
-                                                   <viewport>
-                                                      <Rectangle2D />
-                                                   </viewport>
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                   <image>
-                                                      <Image url="@../../../assets/flags/netherlands.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Button alignment="CENTER" mnemonicParsing="false" onAction="#onDutchLanguageButtonPressed" style="-fx-font-size: 19px;" text="Nederlands" textOverrun="CLIP" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="20.0" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
-                                             <children>
-                                                <ImageView fitHeight="25.0" pickOnBounds="true" preserveRatio="true" smooth="false" HBox.hgrow="ALWAYS">
-                                                   <viewport>
-                                                      <Rectangle2D />
-                                                   </viewport>
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                   <image>
-                                                      <Image url="@../../../assets/flags/united-kingdom.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Button alignment="CENTER" mnemonicParsing="false" onAction="#onEnglishLanguageButtonPressed" text="Engels" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-                                       </padding>
-                                    </VBox>
-                                 </content>
-                            </TitledPane>
+                              <Button fx:id="historyButton" alignment="CENTER" mnemonicParsing="false" onAction="#onHistoryButtonPressed" text="Reishistorie" />
                            </children>
                         </HBox>
                      </children>
