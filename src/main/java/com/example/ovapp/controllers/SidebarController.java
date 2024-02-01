@@ -101,8 +101,19 @@ public class SidebarController {
 
     @FXML
     private void onHistoryButtonPressed() {
-        System.out.println("History button pressed");
-        Page.navigateTo(EPage.HISTORY);
+        System.out.println("History history button pressed");
+
+        User currentUser = Users.getInstance().currentUser;
+
+        if (currentUser != null && !currentUser.getTripDetails().isEmpty()) {
+            Page.navigateTo(EPage.HISTORY);
+        } else if (Users.getInstance().isSomeUserLoggedIn()) {
+            showNoRoutesMessage();
+            Page.navigateTo(EPage.HOME);
+        } else {
+            Page.navigateTo(EPage.LOGIN);
+        }
+
         sidebar.setVisible(false);
     }
 
