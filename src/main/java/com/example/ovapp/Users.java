@@ -22,7 +22,7 @@ public class Users {
     private final int MAX_USERNAME_LENGTH = 30;
     private final int MIN_PASSWORD_LENGTH = 8;
     private static final int MAX_ROUTES_HISTORY = 6;
-    private static final int MAX_ROUTES_FAVORITE = 100;
+    private static final int MAX_FAVORITE_ROUTES = 6;
 
     private static Users singleton;
     private List<User> userList;
@@ -39,8 +39,15 @@ public class Users {
 
     public void addFavoriteTripToCurrentUser(TripDetails favoriteTrip) {
         if (currentUser != null) {
-            currentUser.addFavoriteTrip(favoriteTrip);
-            saveUsers(); // Sla de gebruikerslijst op na het toevoegen van het favoriete reisdetail
+            List<TripDetails> userFavoriteTrips = currentUser.getFavoriteTrips();
+
+            // Controleer of het maximum aantal favoriete routes nog niet is bereikt
+            if (userFavoriteTrips.size() < MAX_FAVORITE_ROUTES) {
+                userFavoriteTrips.add(favoriteTrip);
+                saveUsers(); // Sla de gebruikerslijst op na het toevoegen van het favoriete reisdetail
+            } else {
+                showAlert("Limiet bereikt", "Je hebt het maximumaantal favoriete routes bereikt. Verwijder eerst een route om er een nieuwe toe te voegen.", Alert.AlertType.WARNING);
+            }
         }
     }
 
@@ -53,11 +60,19 @@ public class Users {
                 userTripHistory.add(tripDetails);
                 saveUsers(); // Save the updated user list with the new trip details
             } else {
-                throw new RuntimeException("Maximaal aantal opgeslagen routes bereikt.");
+                showAlert("Limiet bereikt", "Je hebt het maximumaantal opgeslagen routes bereikt. Verwijder eerst een route om er een nieuwe toe te voegen.", Alert.AlertType.WARNING);
             }
         } else {
             throw new RuntimeException("No user is currently logged in.");
         }
+    }
+
+    private void showAlert(String title, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     //Load up user list from .json file on initialisation.
