@@ -207,16 +207,6 @@ public class TravelHistoryController {
     }
 
     // Voeg deze methode toe aan TravelHistoryController
-    public void updateUI() {
-        User currentUser = getCurrentUser();
-
-        if (currentUser != null) {
-            for (int i = 0; i < currentUser.getTripDetails().size(); i++) {
-                TripDetails tripDetails = currentUser.getTripDetails().get(i);
-                setLabelsForRoute(tripDetails, i + 1);
-            }
-        }
-    }
 
     private void showAlert(String title, String content, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
@@ -226,7 +216,41 @@ public class TravelHistoryController {
         alert.showAndWait();
     }
 
+    public void onSwitchToPage() {
+        // Call the setLabelsForRoute method with the appropriate parameters
+        User currentUser = getCurrentUser();
+
+        if (currentUser != null) {
+            try {
+                File file = new File("src/main/resources/json/users.json");
+
+                try (Reader reader = new FileReader(file)) {
+                    Gson gson = new Gson();
+                    TypeToken<List<User>> typeToken = new TypeToken<List<User>>() {};
+                    List<User> userList = gson.fromJson(reader, typeToken.getType());
+
+                    if (!userList.isEmpty()) {
+                        User loggedInUser = userList.stream()
+                                .filter(user -> user.getUsername().equals(currentUser.getUsername()))
+                                .findFirst()
+                                .orElse(null);
+
+                        if (loggedInUser != null && !loggedInUser.getTripDetails().isEmpty()) {
+                            TripDetails selectedTrip = loggedInUser.getTripDetails().get(currentRouteNumber - 1);
+
+                            // Call setLabelsForRoute directly without Platform.runLater
+                            setLabelsForRoute(selectedTrip, currentRouteNumber);
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private void setLabelsForRoute(TripDetails tripDetails, int routeNumber) {
+        System.out.println("setLabelsForRoute called for route " + routeNumber);
         String arrivalLabel = "arrival_history" + routeNumber;
         String departureLabel = "departure_history" + routeNumber;
         String duringLabel = "during_history" + routeNumber;
@@ -240,17 +264,15 @@ public class TravelHistoryController {
             Label transferLabelField = (Label) getClass().getDeclaredField(transferLabel).get(this);
 
             // Update de labels met de gegevens van de tripDetails
-        Platform.runLater(() -> {
-            System.out.println("update labels with tripdetails data");
             arrivalLabelField.setText(tripDetails.getArrivalTime());
             departureLabelField.setText(tripDetails.getDepartureTime());
             duringLabelField.setText(tripDetails.getDuration());
             transferLabelField.setText(tripDetails.getTransfers());
-        });
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (NoSuchFieldException | IllegalAccessException ex) {
+            throw new RuntimeException(ex);
         }
     }
+
 
     private User getCurrentUser() {
         return Users.getInstance().currentUser;

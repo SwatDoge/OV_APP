@@ -21,7 +21,7 @@ public class Users {
     private final int MIN_USERNAME_LENGTH = 2;
     private final int MAX_USERNAME_LENGTH = 30;
     private final int MIN_PASSWORD_LENGTH = 8;
-    private static final int MAX_ROUTES_HISTORY = 100;
+    private static final int MAX_ROUTES_HISTORY = 6;
     private static final int MAX_ROUTES_FAVORITE = 100;
 
     private static Users singleton;
