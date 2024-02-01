@@ -394,11 +394,11 @@ public class SearchResultController implements Initializable {
             users.addTripDetailsToCurrentUser(tripDetails);
 
             // Toon een melding dat de route is opgeslagen
-            showAlert("Succes", "U heeft deze route opgeslagen in reishistorie!", Alert.AlertType.INFORMATION);
+            showAlert("Succes", "Route toegevoegd aan reishistorie!", Alert.AlertType.INFORMATION);
 
 
         } else {
-            showAlert("Fout", "U moet ingelogd zijn om een reisdetails op te slaan.", Alert.AlertType.ERROR);
+            showAlert("Fout", "U moet ingelogd zijn om reisdetails op te slaan.", Alert.AlertType.ERROR);
             Page.navigateTo(EPage.LOGIN);
         }
     }
@@ -420,10 +420,10 @@ public class SearchResultController implements Initializable {
 
 
             // Toon een melding dat de route is opgeslagen
-            showAlert("Succes", "U heeft deze route opgeslagen in favoriet!", Alert.AlertType.INFORMATION);
+            showAlert("Succes", "Route toegevoegd aan favorieten!", Alert.AlertType.INFORMATION);
 
         } else {
-            showAlert("Fout", "U moet ingelogd zijn om een reisdetails op te slaan.", Alert.AlertType.ERROR);
+            showAlert("Fout", "U moet ingelogd zijn om reisdetails op te slaan.", Alert.AlertType.ERROR);
             Page.navigateTo(EPage.LOGIN);
         }
     }
