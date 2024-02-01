@@ -217,7 +217,8 @@ public class TravelHistoryController {
     }
 
     public void onSwitchToPage() {
-        // Call the setLabelsForRoute method with the appropriate parameters
+        System.out.println("onswitchtopage called");
+        // Call the setLabelsForRoute method for all routes
         User currentUser = getCurrentUser();
 
         if (currentUser != null) {
@@ -236,10 +237,10 @@ public class TravelHistoryController {
                                 .orElse(null);
 
                         if (loggedInUser != null && !loggedInUser.getTripDetails().isEmpty()) {
-                            TripDetails selectedTrip = loggedInUser.getTripDetails().get(currentRouteNumber - 1);
-
-                            // Call setLabelsForRoute directly without Platform.runLater
-                            setLabelsForRoute(selectedTrip, currentRouteNumber);
+                            for (int i = 0; i < loggedInUser.getTripDetails().size(); i++) {
+                                TripDetails tripDetails = loggedInUser.getTripDetails().get(i);
+                                setLabelsForRoute(tripDetails, i + 1);
+                            }
                         }
                     }
                 }
@@ -248,6 +249,7 @@ public class TravelHistoryController {
             }
         }
     }
+
 
     private void setLabelsForRoute(TripDetails tripDetails, int routeNumber) {
         System.out.println("setLabelsForRoute called for route " + routeNumber);
