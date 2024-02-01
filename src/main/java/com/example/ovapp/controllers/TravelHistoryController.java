@@ -185,26 +185,37 @@ public class TravelHistoryController {
         if (currentUser != null) {
             System.out.println("Current user found");
 
-            // Verwijder de huidige route
-            currentUser.getTripDetails().remove(currentRouteNumber - 1);
+            // Verwijder de geselecteerde route
+            int indexToRemove = currentRouteNumber - 1;
+            if (indexToRemove >= 0 && indexToRemove < currentUser.getTripDetails().size()) {
+                currentUser.getTripDetails().remove(indexToRemove);
 
-            Platform.runLater(() -> {
-                // Update de UI met de verwijderde route
-                updateDetailsForRoute(currentRouteNumber);
+                Platform.runLater(() -> {
+                    // Werk currentRouteNumber bij als deze groter is dan de nieuwe grootte
+                    if (currentRouteNumber > currentUser.getTripDetails().size()) {
+                        currentRouteNumber = currentUser.getTripDetails().size();
+                    }
 
-                // Vernieuw het scherm of voer andere benodigde acties uit
+                    // Update de UI met de verwijderde route
+                    updateDetailsForRoute(currentRouteNumber);
 
-                // Werk de JSON-opslag bij (schrijf terug naar het bestand)
-                updateJsonFile(currentUser);
+                    // Vernieuw het scherm of voer andere benodigde acties uit
 
-                // Laat het bericht zien nadat alles is bijgewerkt
-                showAlert("Succes", "Route succesvol verwijderd.", Alert.AlertType.INFORMATION);
+                    // Werk de JSON-opslag bij (schrijf terug naar het bestand)
+                    updateJsonFile(currentUser);
 
-                // Refresh the UI immediately
-                refreshUI();
-            });
+                    // Laat het bericht zien nadat alles is bijgewerkt
+                    showAlert("Succes", "Route succesvol verwijderd.", Alert.AlertType.INFORMATION);
+
+                    // Refresh the UI immediately
+                    refreshpage();
+                });
+            } else {
+                System.out.println("Invalid route number");
+            }
         }
     }
+
 
     // Voeg deze methode toe aan TravelHistoryController
 
@@ -287,31 +298,43 @@ public class TravelHistoryController {
     @FXML
     public void history_handleRoute1ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(1);
+        currentRouteNumber = 1;
+
     }
 
     @FXML
     public void history_handleRoute2ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(2);
+        currentRouteNumber = 2;
+
     }
 
     @FXML
     public void history_handleRoute3ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(3);
+        currentRouteNumber = 3;
+
     }
 
     @FXML
     public void history_handleRoute4ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(4);
+        currentRouteNumber = 4;
+
     }
 
     @FXML
     public void history_handleRoute5ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(5);
+        currentRouteNumber = 5;
+
     }
 
     @FXML
     public void history_handleRoute6ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(6);
+        currentRouteNumber = 6;
+
     }
 
     private void updateDetailsForRoute(int routeNumber) {
@@ -358,30 +381,6 @@ public class TravelHistoryController {
         }
     }
 
-    public void refreshUI() {
-        // Reinitialize the controller to refresh the UI
-        Platform.runLater(() -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ovapp/travel-history-view.fxml"));
-                Parent root = loader.load();
-                TravelHistoryController controller = loader.getController();
-
-
-                // Set the updated user data
-                User currentUser = getCurrentUser();
-                controller.setCurrentUser(currentUser);
-
-                // Replace the current scene with the updated one
-                historyAnchorPane.getScene().setRoot(root);
-
-                System.out.println("UI refreshed!");
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
     private void updateJsonFile(User currentUser) {
         try {
             File file = new File("src/main/resources/json/users.json");
@@ -406,6 +405,11 @@ public class TravelHistoryController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void refreshpage() {
+        Page.navigateTo(EPage.HISTORY);
     }
 
     @FXML
