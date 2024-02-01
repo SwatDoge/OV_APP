@@ -10,9 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,8 +19,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-
 import java.io.*;
+import java.util.Arrays;
 import java.util.List;
 
 public class TravelHistoryController {
@@ -139,7 +137,6 @@ public class TravelHistoryController {
 
         updateDetailsForRoute(currentRouteNumber);
 
-
         User currentUser = getCurrentUser();
 
         if (currentUser != null) {
@@ -175,6 +172,28 @@ public class TravelHistoryController {
         }
     }
 
+    private void styleButton(Button button) {
+        button.getStyleClass().add("selection-border");
+    }
+
+    private void clearSelectedButtonStyle(Button selectedButton) {
+        if (selectedButton != null) {
+            selectedButton.getStyleClass().remove("selection-border-history");
+        } else {
+            System.out.println("Selected button is null");
+        }
+    }
+
+    private void styleSelectedButton(Button selectedButton) {
+        List<Button> allButtons = Arrays.asList(history1, history2, history3, history4, history5, history6);
+
+        // Clear styling for all buttons
+        allButtons.forEach(button -> button.getStyleClass().remove("selection-border-history"));
+
+        // Style the selected button
+        selectedButton.getStyleClass().add("selection-border-history");
+    }
+
     @FXML
     public void deleteRoute(ActionEvent actionEvent) {
         System.out.println("Delete route button clicked");
@@ -196,11 +215,12 @@ public class TravelHistoryController {
                         currentRouteNumber = currentUser.getTripDetails().size();
                     }
 
+                    // Clear styling for all buttons
+                    List<Button> allButtons = Arrays.asList(history1, history2, history3, history4, history5, history6);
+                    allButtons.forEach(button -> button.getStyleClass().remove("selection-border-history"));
 
                     // Update de UI met de verwijderde route
                     updateDetailsForRoute(currentRouteNumber);
-
-                    // Vernieuw het scherm of voer andere benodigde acties uit
 
                     // Werk de JSON-opslag bij (schrijf terug naar het bestand)
                     updateJsonFile(currentUser);
@@ -217,8 +237,25 @@ public class TravelHistoryController {
         }
     }
 
-
-    // Voeg deze methode toe aan TravelHistoryController
+    private Button getSelectedButton() {
+        switch (currentRouteNumber) {
+            case 1:
+                return history1;
+            case 2:
+                return history2;
+            case 3:
+                return history3;
+            case 4:
+                return history4;
+            case 5:
+                return history5;
+            case 6:
+                return history6;
+            default:
+                System.out.println("Invalid route number");
+                return null;
+        }
+    }
 
     private void showAlert(String title, String content, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
@@ -308,42 +345,42 @@ public class TravelHistoryController {
     public void history_handleRoute1ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(1);
         currentRouteNumber = 1;
-
+        styleSelectedButton(history1);
     }
 
     @FXML
     public void history_handleRoute2ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(2);
         currentRouteNumber = 2;
-
+        styleSelectedButton(history2);
     }
 
     @FXML
     public void history_handleRoute3ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(3);
         currentRouteNumber = 3;
-
+        styleSelectedButton(history3);
     }
 
     @FXML
     public void history_handleRoute4ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(4);
         currentRouteNumber = 4;
-
+        styleSelectedButton(history4);
     }
 
     @FXML
     public void history_handleRoute5ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(5);
         currentRouteNumber = 5;
-
+        styleSelectedButton(history5);
     }
 
     @FXML
     public void history_handleRoute6ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(6);
         currentRouteNumber = 6;
-
+        styleSelectedButton(history6);
     }
 
     private void updateDetailsForRoute(int routeNumber) {
@@ -419,15 +456,47 @@ public class TravelHistoryController {
     }
 
     @FXML
+    public void favoriteFromHistoryButtonClick(ActionEvent actionEvent) {
+        // Get the selected trip details
+        User currentUser = getCurrentUser();
+
+        if (currentUser != null) {
+            // Check if the currentRouteNumber is within a valid range
+            if (currentRouteNumber >= 1 && currentRouteNumber <= currentUser.getTripDetails().size()) {
+                TripDetails selectedTrip = currentUser.getTripDetails().get(currentRouteNumber - 1);
+
+                // Add the selected trip to the favorites
+                currentUser.addFavoriteTrip(selectedTrip);
+
+                // Update the JSON file
+                updateJsonFile(currentUser);
+
+                // Show a success message
+                showAlert("Success", "Route successfully added to Favorites.", Alert.AlertType.INFORMATION);
+            } else {
+                System.out.println("Invalid route number");
+            }
+        }
+    }
+
+
+    @FXML
     public void refreshpage() {
         // Reset alle labels voor alle routes
         for (int i = 1; i <= 6; i++) {
             updateDetailsForRoute(i);
         }
 
-        Page.navigateTo(EPage.HISTORY);
-    }
+        User currentUser = getCurrentUser();
 
+        if (currentUser != null && currentUser.getTripDetails().isEmpty()) {
+            // If there are no more routes, navigate to the home page
+            Page.navigateTo(EPage.HOME);
+        } else {
+            // If there are still routes, navigate to the history page
+            Page.navigateTo(EPage.HISTORY);
+        }
+    }
 
     @FXML
     public void onBackButtonPressed() {

@@ -265,7 +265,7 @@
                                     <Font size="8.0" />
                                  </font>
                               </Button>
-                              <Button onAction="#ClickSaveTrip" mnemonicParsing="false" style="-fx-background-color: E6C042;" text="Favoriet">
+                              <Button onAction="#ClickSaveTrip" mnemonicParsing="false" style="-fx-background-color: #E6C042;" text="Favoriet">
                                  <HBox.margin>
                                     <Insets left="30.0" />
                                  </HBox.margin>

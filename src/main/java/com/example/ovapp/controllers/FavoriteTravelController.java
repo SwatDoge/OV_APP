@@ -20,6 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.List;
 
 public class FavoriteTravelController {
@@ -172,37 +173,90 @@ public class FavoriteTravelController {
         }
     }
 
-    // Roep deze methode aan wanneer u de inhoud van de VBox bijwerkt
+    private void clearSelectedButtonStyle(Button selectedButton) {
+        if (selectedButton != null) {
+            selectedButton.getStyleClass().remove("selection-border-favorite");
+        } else {
+            System.out.println("Selected button is null");
+        }
+    }
+
+    private void styleSelectedButton(Button selectedButton) {
+        List<Button> allButtons = Arrays.asList(favorite1, favorite2, favorite3, favorite4, favorite5, favorite6);
+
+        // Clear styling for all buttons
+        allButtons.forEach(button -> button.getStyleClass().remove("selection-border-favorite"));
+
+        // Style the selected button
+        selectedButton.getStyleClass().add("selection-border-favorite");
+    }
 
 
     @FXML
     public void deleteRouteButtonfavorite(ActionEvent actionEvent) {
         System.out.println("Delete route button clicked");
 
-        // Krijg de huidige gebruiker
         User currentUser = getCurrentUser();
 
         if (currentUser != null) {
             System.out.println("Current user found");
 
-            // Verwijder de huidige route
-            currentUser.getFavoriteTrips().remove(currentRouteNumber - 1);
+            // Verwijder de geselecteerde route
+            int indexToRemove = currentRouteNumber - 1;
+            if (indexToRemove >= 0 && indexToRemove < currentUser.getFavoriteTrips().size()) {
+                currentUser.getFavoriteTrips().remove(indexToRemove);
 
-            Platform.runLater(() -> {
-                // Update de UI met de verwijderde route
-                updateDetailsForRoute(currentRouteNumber);
+                Platform.runLater(() -> {
+                    // Werk currentRouteNumber bij als deze groter is dan de nieuwe grootte
+                    if (currentRouteNumber > currentUser.getFavoriteTrips().size()) {
+                        currentRouteNumber = currentUser.getFavoriteTrips().size();
+                    }
 
-                // Vernieuw het scherm of voer andere benodigde acties uit
-                refreshScreen();
+                    List<Button> allButtons = Arrays.asList(favorite1, favorite2, favorite3, favorite4, favorite5, favorite6);
+                    allButtons.forEach(button -> button.getStyleClass().remove("selection-border-favorite"));
 
-                // Werk de JSON-opslag bij (schrijf terug naar het bestand)
-                updateJsonFile(currentUser);
+                    // Update de UI met de verwijderde route
+                    updateDetailsForRoute(currentRouteNumber);
 
-                // Laat het bericht zien nadat alles is bijgewerkt
-                showAlert("Succes", "Route succesvol verwijderd.", Alert.AlertType.INFORMATION);
-            });
+
+                    // Werk de JSON-opslag bij (schrijf terug naar het bestand)
+                    updateJsonFile(currentUser);
+
+                    // Laat het bericht zien nadat alles is bijgewerkt
+                    showAlert("Succes", "Route succesvol verwijderd.", Alert.AlertType.INFORMATION);
+
+                    // Refresh the UI immediately
+                    refreshScreen();
+
+
+                });
+            } else {
+                System.out.println("Invalid route number");
+            }
         }
     }
+
+    // Voeg deze methode toe aan FavoriteTravelController
+    private Button getSelectedButtonFavorite() {
+        switch (currentRouteNumber) {
+            case 1:
+                return favorite1;
+            case 2:
+                return favorite2;
+            case 3:
+                return favorite3;
+            case 4:
+                return favorite4;
+            case 5:
+                return favorite5;
+            case 6:
+                return favorite6;
+            default:
+                System.out.println("Invalid route number");
+                return null;
+        }
+    }
+
 
 
     private void showAlert(String title, String content, Alert.AlertType alertType) {
@@ -289,31 +343,43 @@ public class FavoriteTravelController {
     @FXML
     public void favorite_handleRoute1ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(1);
+        currentRouteNumber = 1;
+        styleSelectedButton(favorite1);
     }
 
     @FXML
     public void favorite_handleRoute2ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(2);
+        currentRouteNumber = 2;
+        styleSelectedButton(favorite2);
     }
 
     @FXML
     public void favorite_handleRoute3ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(3);
+        currentRouteNumber = 3;
+        styleSelectedButton(favorite3);
     }
 
     @FXML
     public void favorite_handleRoute4ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(4);
+        currentRouteNumber = 4;
+        styleSelectedButton(favorite4);
     }
 
     @FXML
     public void favorite_handleRoute5ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(5);
+        currentRouteNumber = 5;
+        styleSelectedButton(favorite5);
     }
 
     @FXML
     public void favorite_handleRoute6ButtonClick(ActionEvent actionEvent) {
         updateDetailsForRoute(6);
+        currentRouteNumber = 6;
+        styleSelectedButton(favorite6);
     }
 
     private void updateDetailsForRoute(int routeNumber) {
@@ -335,22 +401,22 @@ public class FavoriteTravelController {
                                 .orElse(null);
 
                         if (loggedInUser != null && !loggedInUser.getFavoriteTrips().isEmpty()) {
-                            TripDetails selectedTrip = loggedInUser.getFavoriteTrips().get(routeNumber - 1);
+                            // Check if routeNumber is within a valid range
+                            if (routeNumber >= 1 && routeNumber <= loggedInUser.getFavoriteTrips().size()) {
+                                TripDetails selectedTrip = loggedInUser.getFavoriteTrips().get(routeNumber - 1);
 
-                            Platform.runLater(() -> {
-                                // Update de labels met de gegevens van de geselecteerde route
-                                departure_details_favorite.setText(selectedTrip.getDepartureTime());
-                                during_details_favorite.setText(selectedTrip.getDuration());
-                                arrival_details_favorite.setText(selectedTrip.getArrivalTime());
-                                track_details_favorite.setText((selectedTrip.getTrackOrLine()));
-                                transfer_details_favorite.setText(String.format(selectedTrip.getTransfers()));
-                                stops_details_favorite.setText(selectedTrip.getStopsDetails());
-
-                                // Voeg hier logica toe om de overige labels bij te werken
-                                // bijvoorbeeld: track_details_history.setText(selectedTrip.getTrackOrLine());
-                                // transfer_details_history.setText(String.format("%dx", selectedTrip.getTransfers()));
-                                // stops_details_history.setText(selectedTrip.getStopsDetails());
-                            });
+                                Platform.runLater(() -> {
+                                    // Update the labels with the data of the selected route
+                                    departure_details_favorite.setText(selectedTrip.getDepartureTime());
+                                    during_details_favorite.setText(selectedTrip.getDuration());
+                                    arrival_details_favorite.setText(selectedTrip.getArrivalTime());
+                                    track_details_favorite.setText((selectedTrip.getTrackOrLine()));
+                                    transfer_details_favorite.setText(String.format(selectedTrip.getTransfers()));
+                                    stops_details_favorite.setText(selectedTrip.getStopsDetails());
+                                });
+                            } else {
+                                System.out.println("Invalid route number");
+                            }
                         }
                     }
                 }
@@ -359,6 +425,7 @@ public class FavoriteTravelController {
             }
         }
     }
+
 
     private void updateJsonFile(User currentUser) {
         try {
@@ -386,8 +453,22 @@ public class FavoriteTravelController {
         }
     }
 
-    private void refreshScreen() {
-        Page.navigateTo(EPage.FAVORITE);
+    @FXML
+    public void refreshScreen() {
+        // Reset alle labels voor alle routes
+        for (int i = 1; i <= 6; i++) {
+            updateDetailsForRoute(i);
+        }
+
+        User currentUser = getCurrentUser();
+
+        if (currentUser != null && currentUser.getFavoriteTrips().isEmpty()) {
+            // If there are no more routes, navigate to the home page
+            Page.navigateTo(EPage.HOME);
+        } else {
+            // If there are still routes, navigate to the history page
+            Page.navigateTo(EPage.FAVORITE);
+        }
     }
 
     @FXML

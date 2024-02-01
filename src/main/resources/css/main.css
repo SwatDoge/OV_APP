@@ -115,6 +115,22 @@ ScrollPane > .scroll-bar:vertical{
     -fx-background-color: transparent;
 }
 
+.selection-border-history {
+    -fx-border-width: 2;
+    -fx-border-color: #385194;
+    -fx-border-radius: 6;
+    -fx-effect: dropshadow(gaussian, #385194, 40, 0, 0, 0);
+    -fx-background-color: transparent;
+}
+
+.selection-border-favorite {
+    -fx-border-width: 2;
+    -fx-border-color: #E6C042;
+    -fx-border-radius: 6;
+    -fx-effect: dropshadow(gaussian, #E6C042, 40, 0, 0, 0);
+    -fx-background-color: transparent;
+}
+
 
 
 

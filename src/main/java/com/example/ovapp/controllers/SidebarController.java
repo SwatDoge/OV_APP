@@ -87,7 +87,7 @@ public class SidebarController {
 
         User currentUser = Users.getInstance().currentUser;
 
-        if (currentUser != null && !currentUser.getTripDetails().isEmpty()) {
+        if (currentUser != null && !currentUser.getFavoriteTrips().isEmpty()) {
             Page.navigateTo(EPage.FAVORITE);
         } else if (Users.getInstance().isSomeUserLoggedIn()) {
             showNoRoutesMessage();
