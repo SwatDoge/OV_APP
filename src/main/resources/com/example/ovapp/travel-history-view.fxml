@@ -257,7 +257,7 @@
                         </ScrollPane>
                         <HBox alignment="CENTER" prefHeight="48.0" prefWidth="288.0">
                            <children>
-                              <Button fx:id="deleteRouteButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#deleteRoute" prefHeight="35.0" prefWidth="137.0" style="-fx-background-color: #FF0000;" text="verwijderen">
+                              <Button fx:id="deleteRouteButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#deleteRoute" prefHeight="35.0" prefWidth="137.0" style="-fx-background-color: #FF0000;" text="Verwijderen">
                                  <HBox.margin>
                                     <Insets left="-5.0" right="30.0" />
                                  </HBox.margin>
